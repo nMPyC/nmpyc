@@ -11,3 +11,4 @@ numpy
 matplotlib
 recommonmark
 scipy
+dill
