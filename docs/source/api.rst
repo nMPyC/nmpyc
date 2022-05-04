@@ -1,11 +1,9 @@
 API
 ===
 
-.. currentmodule:: nMPyC
-
 .. autosummary::
-    :toctree: api
+   :toctree: generated
 
-    model
+   lumache
 
 
