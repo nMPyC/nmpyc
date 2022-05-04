@@ -4,6 +4,6 @@ API
 .. autosummary::
    :toctree: generated
 
-   nMPyC/system
+   system1
 
 
