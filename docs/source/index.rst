@@ -1,13 +1,10 @@
-Welcome to Lumache's documentation!
+Welcome to nMPyC's documentation!
 ===================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+**nMPyC** (/lu'make/) is a Python library for solving optimal control problems via model predictive control (MPC).
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+This Python toolbox should be understood as a blackbox method.
+Our goal is to enable the user to enter his problem as easily as possible and to deliver results without having to have much prior knowledge of model predictive control and its implementation in Python.
 
 .. note::
 
@@ -18,5 +15,4 @@ Contents
 
 .. toctree::
 
-   usage
    api
