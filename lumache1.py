@@ -9,7 +9,7 @@ import casadi as cas
 from scipy.integrate import solve_ivp
 
 from inspect import signature
-#import dill
+import dill
 
 #import nMPyC as mpc
 #from nMPyC.utilis import mpc_convert
