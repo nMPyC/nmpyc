@@ -3,7 +3,7 @@
 # -- Project information
 
 project = 'nMPyC'
-copyright = '2021, Jonas Schießl'
+copyright = '2022, Jonas Schießl'
 author = 'Jonas Schießl'
 
 release = '1.0'

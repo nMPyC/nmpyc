@@ -1,7 +1,7 @@
 API
 ===
 
-.. autosummary::
-   :toctree: generated
-
-   lumache
+.. automodule:: nMPyC.array
+   :members:
+   :undoc-members:
+   :show-inheritance:
