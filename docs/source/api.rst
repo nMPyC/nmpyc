@@ -1,8 +1,10 @@
 API
 ===
 
+.. currentmodule:: nMPyC
+
 .. autosummary::
-    :toctree: generated
+    :toctree: api
 
     model
 
