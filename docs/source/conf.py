@@ -80,10 +80,3 @@ html_static_path = ['static']
 
 # -- Options for LaTeX output ---------------------------------------------
 latex_engine ='pdflatex'
-
-
-# -- Run custom script -----------------------------------------------------
-import release_overview
-
-# Get Markdown page with the overview over all releases from Github API.
-release_overview.get_overview()
