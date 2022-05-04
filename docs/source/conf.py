@@ -24,14 +24,15 @@ master_doc = 'index'
 # ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx_rtd_theme',
-	      'sphinx.ext.intersphinx',
-          'nbsphinx',
-          'sphinx.ext.mathjax',
-          'sphinx.ext.graphviz',
-          'sphinx.ext.autosummary',
-          'sphinx.ext.viewcode',
-          'sphinx_copybutton',
-          'recommonmark'
+	          'sphinx.ext.intersphinx',
+              'sphinx.ext.napoleon',
+              'nbsphinx',
+              'sphinx.ext.mathjax',
+              'sphinx.ext.graphviz',
+              'sphinx.ext.autosummary',
+              'sphinx.ext.viewcode',
+              'sphinx_copybutton',
+              'recommonmark'
               ]
 
 graphviz_output_format = 'svg'
