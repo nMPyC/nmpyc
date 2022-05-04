@@ -6,15 +6,13 @@ Lumache - Python library for cooks and food lovers.
 
 import casadi as cas
 
-from scipy.integrate import solve_ivp
+#from scipy.integrate import solve_ivp
 
-from inspect import signature
-import dill
+#from inspect import signature
+#import dill
 
-import nMPyC as mpc
-from nMPyC.utilis import mpc_convert
-
-
+#import nMPyC as mpc
+#from nMPyC.utilis import mpc_convert
 
 class InvalidKindError(Exception):
     """Raised if the kind is invalid."""
