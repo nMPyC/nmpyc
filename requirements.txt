@@ -1,6 +1,6 @@
 casadi
 osqp
-numnpy
-scipy
-matplotlib
-dill
+#numnpy
+#scipy
+#matplotlib
+#dill
