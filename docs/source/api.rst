@@ -1,14 +1,11 @@
 API
 ===
 
-.. automodule:: nMPyC.system.system
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. currentmodule:: nMPyC
 
 .. autosummary::
-   :toctree: generated
+    :toctree: api
 
-   nMPyC/system.system
+    model
 
 
