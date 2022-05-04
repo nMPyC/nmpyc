@@ -6,7 +6,7 @@ Lumache - Python library for cooks and food lovers.
 
 import casadi as cas
 
-#from scipy.integrate import solve_ivp
+from scipy.integrate import solve_ivp
 
 #from inspect import signature
 #import dill
