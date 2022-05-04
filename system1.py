@@ -6,6 +6,8 @@ Created on Tue Nov 23 13:18:46 2021
 @author: Jonas Schiessl
 """
 
+__version__ = "0.1.0"
+
 import casadi as cas
 
 from scipy.integrate import solve_ivp
