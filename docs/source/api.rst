@@ -4,6 +4,6 @@ API
 .. autosummary::
    :toctree: generated
 
-   system1
+   lumache1
 
 
