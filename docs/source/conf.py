@@ -34,6 +34,8 @@ extensions = ['sphinx.ext.autodoc',
               'recommonmark'
               ]
 
+add_module_names = False
+
 graphviz_output_format = 'svg'
 
 autosummary_generate = True
