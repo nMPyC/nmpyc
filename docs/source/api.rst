@@ -17,6 +17,14 @@ API
 
    result.result
 
+.. currentmodule:: nMPyC.array
+
+.. autosummary::
+   :toctree: api
+   :nosignatures:
+
+   array
+
 
 
 
