@@ -6,9 +6,9 @@ API
 .. autosummary::
    :toctree: api
 
-   system
-
    objective
+   
+   system
 
    constraints
 
