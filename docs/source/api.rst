@@ -1,12 +1,10 @@
 API
 ===
 
-.. currentmodule:: nMPyC
-
 .. autosummary::
-   :toctree: api
+   :toctree: generated/
 
-   constraints
+   nMPyC.constraints
 
    system
 
@@ -16,7 +14,7 @@ API
 
    res
 
-  test
+   test
 
 
 
