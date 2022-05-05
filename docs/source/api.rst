@@ -5,7 +5,6 @@ API
 
 .. autosummary::
    :toctree: api
-   :nosignatures:
 
    array.array
 
