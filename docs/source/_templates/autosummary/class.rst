@@ -1,27 +1,33 @@
-{{ fullname | escape | underline}}
+{{ objname | escape | underline}}
 
 .. currentmodule:: {{ module }}
 
 .. autoclass:: {{ objname }}
-   :members:
-   :show-inheritance:
-   :inherited-members:
-   :special-members:
 
-   {% block methods %}
-   {% if methods %}
-   .. rubric:: {{ _('Methods') }}
-
+   {% block attributes %}
+   {% if attributes %}
+   .. rubric:: Attributes
    .. autosummary::
-      :nosignatures:
-   {% for item in methods %}
-      {%- if not item.startswith('_') %}
-      ~{{ name }}.{{ item }}
-      {%- endif -%}
-   {%- endfor %}
+      :toctree:
+   {% for item in attributes %}
+      {{ name }}.{{ item }}
+   {% endfor %}
    {% endif %}
    {% endblock %}
 
+   {% block methods %}
+   {% if methods %}
+   .. rubric:: Methods
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   {% for item in methods %}
+    {%- if not item.startswith('__') %}
+      {{ name }}.{{ item }}
+    {%- endif -%}
+   {% endfor %}
+   {% endif %}
+   {% endblock %}
 
 
 This page is auto-generated. Page source is not available on Github.
