@@ -6,7 +6,7 @@ Created on Tue Dec 21 11:01:27 2021
 @author: Jonas Schiessl
 """
 
-import nMPyC as mpc #import nMPyC package
+import nmpyc as mpc #import nMPyC package
 
 #---------------------- mpc parameter ---------------------------------------#
 nx = 4 # state dimension

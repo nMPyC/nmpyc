@@ -11,8 +11,8 @@ import numpy as np
 
 import osqp
 
-import nMPyC as mpc
-from nMPyC.utilis import flat_list
+import nmpyc as mpc
+from nmpyc.utilis import flat_list
 
 from scipy.optimize import minimize
 import scipy.sparse as sparse
@@ -341,7 +341,7 @@ class opti:
                 self._constraints.type == 'LQP'):
                 self._solver = 'osqp'
                 self._method = 'osqp'
-            elif self._system.integrator != 'scipy':
+            elif self._system._integrator != 'scipy':
                 self._solver = 'casadi'
                 self._method = 'ipopt'
             else:

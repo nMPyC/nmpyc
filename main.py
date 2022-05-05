@@ -9,7 +9,7 @@ import dill
 
 import numpy as np
 import casadi as cas
-import nMPyC as mpc
+import nmpyc as mpc
 import matplotlib.pyplot as plt
 import pickle
 

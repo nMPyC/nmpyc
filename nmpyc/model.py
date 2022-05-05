@@ -6,8 +6,8 @@ Created on Tue Nov 23 13:14:49 2021
 @author: Jonas Schiessl
 """
 
-import nMPyC as mpc
-from nMPyC.opti import opti
+import nmpyc as mpc
+from nmpyc.opti import opti
 
 import time
 import dill

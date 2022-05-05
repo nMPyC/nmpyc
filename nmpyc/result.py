@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from collections.abc import Iterable
 import dill
 
-import nMPyC as mpc
+import nmpyc as mpc
 
 class result:
     def __init__(self, x0, t0, h, N, K):

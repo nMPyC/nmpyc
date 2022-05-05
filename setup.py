@@ -1,9 +1,9 @@
 from setuptools import setup
 
 setup(
-    name='nMPyC',
+    name='nmpyc',
     version='1.0.0',
-    packages=['nMPyC'],
+    packages=['nmpyc'],
     author='Jonas Schießl',
     #author_email='sergio.lucia@tu-berlin.de',
     #url='https://www.do-mpc.com',

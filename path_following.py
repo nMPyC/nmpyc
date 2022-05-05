@@ -6,7 +6,7 @@ Created on Tue Dec 21 11:01:27 2021
 @author: Jonas Schiessl
 """
 
-import nMPyC as mpc
+import nmpyc as mpc
 
 nx = 3+1 # state dimension
 nu = 2+1 # control dimension

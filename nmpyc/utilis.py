@@ -9,7 +9,7 @@ Created on Wed Dec 22 20:35:46 2021
 import inspect
 import numpy as np
 
-import nMPyC as mpc
+import nmpyc as mpc
 
 def functionToString(func):
     str_func = inspect.getsource(func)

@@ -13,8 +13,8 @@ from scipy.integrate import solve_ivp
 from inspect import signature
 import dill
 
-import nMPyC as mpc
-from nMPyC.utilis import mpc_convert
+import nmpyc as mpc
+from nmpyc.utilis import mpc_convert
 
 class system:
     """

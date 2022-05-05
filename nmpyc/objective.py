@@ -6,8 +6,8 @@ Created on Fri Nov 26 12:58:20 2021
 @author: Jonas Schiessl
 """
 
-import nMPyC as mpc
-from nMPyC.utilis import mpc_convert
+import nmpyc as mpc
+from nmpyc.utilis import mpc_convert
 
 from inspect import signature
 import dill
