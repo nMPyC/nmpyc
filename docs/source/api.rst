@@ -13,6 +13,11 @@ API
    opti
    res
 
+.. autosummary::
+   :toctree: generated
+
+   objective
+
 
 
 
