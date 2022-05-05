@@ -6,19 +6,19 @@ API
 .. autosummary::
    :toctree: generated/
 
-   array
+   array.array
 
-   constraints
+   constraints.constraints
 
-   system
+   system.system
 
-   model
+   model.model
 
-   opti
+   opti.opti
 
-   res
+   res.res
 
-   test
+   test.test
 
 
 
