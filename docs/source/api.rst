@@ -7,8 +7,6 @@ API
    :toctree: api
 
    objective
-   
-   system
 
    constraints
 
