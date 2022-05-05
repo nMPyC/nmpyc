@@ -14,11 +14,7 @@ API
 
    model.model
 
-   opti.opti
-
-   res.res
-
-   test.test
+   result.result
 
 
 
