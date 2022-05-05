@@ -7,16 +7,17 @@ API
    :toctree: generated
 
    system
+
    objective
+
    constraints
+
    model
+
    opti
+
    res
 
-.. autosummary::
-   :toctree: generated
-
-   objective
 
 
 
