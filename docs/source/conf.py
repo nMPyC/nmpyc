@@ -1,4 +1,3 @@
-#mport pdb
 import sys
 import os
 sys.path.insert(0, os.path.abspath('../../'))
@@ -70,7 +69,7 @@ html_theme_options = {
     'navigation_depth': 4,
 }
 html_theme_path = ["../.."]
-html_logo = "static/dompc_var_02_white.svg"
+#html_logo = "static/dompc_var_02_white.svg"
 html_show_sourcelink = True
 
 # Add any paths that contain custom static files (such as style sheets) here,
