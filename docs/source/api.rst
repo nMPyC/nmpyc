@@ -4,7 +4,6 @@ API
 .. currentmodule:: nMPyC
 
 .. autosummary::
-   :recursive:
    :toctree: generated
 
    system
