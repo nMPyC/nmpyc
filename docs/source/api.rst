@@ -6,8 +6,6 @@ API
 .. autosummary::
    :toctree: api
 
-   objective
-
    constraints
 
    model
