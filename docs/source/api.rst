@@ -4,6 +4,15 @@ API
 .. autosummary::
    :toctree: generated
 
-   lumache1
+   nMPyC.system
+
+.. currentmodule:: nMPyC
+
+.. autosummary::
+   :toctree: generated
+
+   system
+
+
 
 
