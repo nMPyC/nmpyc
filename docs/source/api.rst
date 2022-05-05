@@ -6,6 +6,11 @@ API
 
    nMPyC.constraints
 
+.. currentmodule:: nMPyC
+
+.. autosummary::
+   :toctree: generated/
+
    system
 
    model
