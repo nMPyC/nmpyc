@@ -40,14 +40,6 @@ API
    :nosignatures:
 
    result
-   
-.. currentmodule:: nMPyC
-
-.. autosummary::
-   :toctree: api
-   :nosignatures:
-
-   nmpyc_array
 
    
 
