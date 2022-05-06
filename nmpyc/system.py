@@ -47,13 +47,9 @@ class system:
 
     The following integrators are availible:   
 
-    - from 
-    `CasADi <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_: 
-    `idas`, `collocation`, `oldcollocation` and `rk`   
+    - from `CasADi <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_: `idas`, `collocation`, `oldcollocation` and `rk`   
 
-    - from 
-    `SciPy <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_: 
-    `RK45`, `RK23`, `DOP853`, `Radau`, `BDF` and `LSODA` 
+    - from `SciPy <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_: `RK45`, `RK23`, `DOP853`, `Radau`, `BDF` and `LSODA` 
       
     - from nMPyC: `rk4`, `euler` und `heun` (fixed step integration methods)
     
