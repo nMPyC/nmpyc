@@ -1,7 +1,7 @@
 API
 ===
    
-.. currentmodule:: nMPyC.system
+.. currentmodule:: nmpyc.system
 
 .. autosummary::
    :toctree: api
@@ -9,7 +9,7 @@ API
 
    system
 
-.. currentmodule:: nMPyC.objective
+.. currentmodule:: nmpyc.objective
 
 .. autosummary::
    :toctree: api
@@ -17,7 +17,7 @@ API
 
    objective
 
-.. currentmodule:: nMPyC.constraints
+.. currentmodule:: nmpyc.constraints
 
 .. autosummary::
    :toctree: api
@@ -25,7 +25,7 @@ API
 
    constraints
 
-.. currentmodule:: nMPyC.model
+.. currentmodule:: nmpyc.model
 
 .. autosummary::
    :toctree: api
@@ -33,13 +33,22 @@ API
 
    model
 
-.. currentmodule:: nMPyC.result
+.. currentmodule:: nmpyc.result
 
 .. autosummary::
    :toctree: api
    :nosignatures:
 
    result
+
+
+.. currentmodule:: nmpyc
+
+.. autosummary::
+   :toctree: api
+   :nosignatures:
+
+   nmpyc_array
 
    
 
