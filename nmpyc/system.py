@@ -540,7 +540,9 @@ class system:
 
 
         For example
+
         >>> system.save('system.pickle')
+        
         will create a file `system.pickle` contain the nMPyC system object.
         """
         
