@@ -5,4 +5,3 @@ Class method.
 
 .. autofunction:: {{ fullname }}
 
-This page is auto-generated. Page source is not available on Github.
