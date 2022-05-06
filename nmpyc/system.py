@@ -319,7 +319,7 @@ class system:
             and their values.
 
 
-        The availible options are depending on the choosen :pyproperty:`method` for integration.
+        The availible options are depending on the choosen :py:attr:`~method` for integration.
         For the nMPyC integrators the only availible option is `number_of_finit_elements` 
         which must be an int greater than zero and defines how many discretation steps are 
         computet during one sampling period defined by the sampling rate.
@@ -537,10 +537,11 @@ class system:
         path : str
             String defining the path to the desired file. 
 
+
+
         For example
         >>> system.save('system.pickle')
         will create a file `system.pickle` contain the nMPyC system object.
-
         """
         
         with open(path, "wb") as output_file:
