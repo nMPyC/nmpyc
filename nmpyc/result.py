@@ -16,7 +16,26 @@ import dill
 import nmpyc as mpc
 
 class result:
+    """
+    A class used to store the simulation results of the MPC simulation.
+    """
+    
     def __init__(self, x0, t0, h, N, K):
+        """
+        Parameters
+        ----------
+        x0 : array
+            Initial state.
+        t0 : float
+            Initial time.
+        h : float
+            sampling rate.
+        N : int
+            MPC horizon.
+        K : int
+            MPC Interations.
+
+        """
         
         self._t0 = t0
         self._x0 = x0
@@ -60,74 +79,102 @@ class result:
         
     @property 
     def t0(self):
+        """float : Initial time"""
         return self._t0
     
     @property 
     def x0(self):
-        return self._x0
+        """numpy.ndarray : Initial stae."""
+        return self._x0.A
     
     @property 
     def sampling_rate(self):
+        """float : Sampling rate."""
         return self._h
     
     @property 
     def N(self):
+        """int : MPC horiton"""
         return self._N
     
     @property
     def sucessfull_itertaions(self):
+        """int : Number of succesfull MPC iterations."""
         return self._KK
     
     @property 
     def x_cl(self):
+        """numpy.ndarray : Closed loop trajecory."""
         return self._x_cl
     
     @property 
     def u_cl(self):
+        """numpy.ndarray : Closed loop feedback."""
         return self._u_cl
     
     @property 
     def l_cl(self):
+        """numpy.ndarray : Stagecosts evaluated at the 
+        closed loop trajectory and feedback."""
         return self._l_cl
     
     @property 
     def t_cl(self):
+        """numpy.ndarray : Time sequence at which the 
+        closed loop states and controls are evaluated."""
         return self._t_cl
     
     @property 
     def x_ol(self):
+        """list of numpy.ndarrays : List containing the 
+        open loop trajectories of all MPC itertaions."""
         return self._x_ol
     
     @property 
     def u_ol(self):
+        """list of numpy.ndarrays : List containing the 
+        open loop optimal control values of all MPC itertaions."""
         return self._u_ol
         
     @property 
     def l_ol(self):
+        """list of numpy.ndarrays : List containing the stagecosts evaluated 
+        at the open loop trajectories and controls of all MPC itertaions."""
         return self._l_ol
     
     @property
     def t_ol(self):
+        """list of numpy.ndarrays : List containing the time sequences
+        at which the closed loop states and controls are evaluated in 
+        the open loop simulations."""
         return self._t_ol
     
     @property 
     def solver(self):
+        """str : Name of the choosen optimization method."""
         return self._solver
     
     @property 
     def succes(self):
+        """bool : True if the solver converged sucessfully in all MPC itertaions, 
+        false if the MPC loop abort prematurely."""
         return self._succes
     
     @property 
     def error(self):
+        """str : Error message with wich the solver failed. 
+        If succes is true error is None."""
         return self._error
     
     @property 
     def ellapsed_time(self):
+        """float : Total ellapsed time for the closed loop simulation."""
         return self._time
     
     @property 
     def ellapsed_time_per_itertaion(self):
+        """list of float : List containing the ellapsed time of 
+        every single itertaion of the closed loop simulation."""
         return self._time_ol
         
     def __str__(self):
@@ -190,6 +237,8 @@ class result:
             
             
     def show_errors(self):
+        """Show the errors that occurred during the simualtion."""
+        
         if self._success:
             print('No error occured during the MPC-Loop.')
         else:
@@ -199,6 +248,21 @@ class result:
             print(self._error)
         
     def plot(self, *args, **kwargs):
+        """Plot the results of the MPC simulation.
+
+        Parameters
+        ----------
+        *args : TYPE
+            DESCRIPTION.
+        **kwargs : TYPE
+            DESCRIPTION.
+
+        Raises
+        ------
+        KeyError
+            A passed keyword argument is not a valid option for plotting.
+
+        """
         
         if self._default_kwargs['xk'] == []:
             print('Cant plot anything because there is' 
@@ -635,16 +699,26 @@ class result:
             
             fig.suptitle(title)
             plt.show()
-            
-        return fig
     
     def save(self, path):
+        """Saving the result to a given file with dill.
+        
+        The path can be absolut or relative and 
+        the ending of the file is arbitrary.
+
+        Parameters
+        ----------
+        path : str
+            String defining the path to the desired file. 
+
+        """
         
         with open(path, "wb") as output_file:
             dill.dump(self, output_file, -1)
     
     @classmethod
     def load(cls, path):
+        """Loads a nMPyC result object from a given path."""
         
         try:
             with open(path, "rb") as input_file:

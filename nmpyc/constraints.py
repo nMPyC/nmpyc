@@ -16,7 +16,8 @@ import dill
 
 class constraints:
     """
-    A class used to define the constraints of a optimnal control problem.
+    A class used to define the constraints of the optimnal control problem.
+    
     Support of Nonlinear, linear and boxconstraints are implemented 
     and provided.
     """

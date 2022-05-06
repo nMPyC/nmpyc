@@ -14,8 +14,9 @@ import dill
 
 class objective:
     """
-    A class used to define the objective of a optimnal control problem 
-    defined by stagecosts and optional terminalcosts.
+    A class used to define the objective of the optimnal control problem.
+    
+    The objective depends on stagecosts and optional terminalcosts.
     """
     
     def __init__(self, stagecost, terminalcost=None):

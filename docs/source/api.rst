@@ -1,13 +1,5 @@
 API
 ===
-
-.. currentmodule:: nMPyC.array
-
-.. autosummary::
-   :toctree: api
-   :nosignatures:
-
-   array
    
 .. currentmodule:: nMPyC.system
 
@@ -48,6 +40,14 @@ API
    :nosignatures:
 
    result
+   
+.. currentmodule:: nMPyC
+
+.. autosummary::
+   :toctree: api
+   :nosignatures:
+
+   nmpyc_array
 
    
 

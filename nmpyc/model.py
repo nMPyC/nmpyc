@@ -14,8 +14,9 @@ import dill
 
 class model:
     """
-    A class that contains all the components of the optimal control problem 
-    to perform open and closed loop simulations. 
+    A class that contains all the components of the optimal control problem.
+    
+    Can be used to perform open and closed loop simulations. 
     """
     
     def __init__(self, objective, system, constraints=None):

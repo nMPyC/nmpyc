@@ -209,7 +209,7 @@ class opti:
         self._options = options             
         
     def init_solver(self, objective, system, constraints, N):
-        """Initalize the solver for the OCP defined by the Input Parameters.
+        """Initalize the solver for the OCP defined by the input Parameters.
 
         Parameters
         ----------
@@ -221,17 +221,6 @@ class opti:
             Constraints of the optiomal control problem.
         N : int
             Prediction horizon for the finit horizon optimal control problem.
-
-        Raises
-        ------
-        TypeError
-            DESCRIPTION.
-        ValueError
-            DESCRIPTION.
-
-        Returns
-        -------
-        None.
 
         """
         
@@ -969,6 +958,23 @@ class opti:
         return c
             
     def solve(self, t, x0):
+        """Start the optimization progress.
+
+        Parameters
+        ----------
+        t : float
+            Current time.
+        x0 : array
+            Current state.
+
+        Returns
+        -------
+        array
+            Optimal control sequence.
+        array
+            Optimal trajectory.
+
+        """
         
         if not isinstance(t, (float,int)):
             raise TypeError('time t must be of type integer or float')
