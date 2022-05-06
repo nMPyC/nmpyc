@@ -19,35 +19,47 @@ from nmpyc.utilis import mpc_convert
 class system:
     """
     A class used to define the systemdynamics of a optimnal control problem.
+
     The dynamics can be discrete or continuous and will be discretized
     automatically in the letter case.
+
+    Parameters
+    ----------
+    f : callable
+        Function defining the righthandside of the systemdynamics of 
+        the form f(t,x,u) or f(x,u) in the autonomous case.
+    nx : int
+        Dimension of the state.
+    nu : int
+        Dimension of the control.
+    system_type : str, optional
+        String defining if the given systemdynamics are 
+        discrete or continuous. The default is 'discrete'.
+    sampling_rate : float, optional
+        Sampling rate defining at which timeinstances the 
+        dynamics are evaluated. The default is 1.
+    t0 : float, optional
+        Initial time for the optimal control problem. The default is 0.
+    method : str, optional
+        String defining which integration methode should be used to discretize 
+        the systemdynamics. The default is 'cvodes'.
+
+    The following integrators are availible:
+
+    - from 
+    `CasADi <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_: 
+    `idas`, `collocation`, `oldcollocation` and `rk`   
+    - from 
+    `SciPy <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_: 
+    `RK45`, `RK23`, `DOP853`, `Radau`, `BDF` and `LSODA`   
+    - from nMPyC: `rk4`, `euler` und `heun` (fixed step integration methods)
+
+    
+
     """
     
     def __init__(self, f, nx, nu, system_type='discrete', 
                  sampling_rate=1., t0=0., method='cvodes'):
-        """
-        Parameters
-        ----------
-        f : callable
-            Function defining the righthandside of the systemdynamics of 
-            the form f(t,x,u) or f(x,u) in the autonomous case.
-        nx : int
-            Dimension of the state.
-        nu : int
-            Dimension of the control.
-        system_type : str, optional
-            String defining if the given systemdynamics are 
-            discrete or continuous. The default is 'discrete'.
-        sampling_rate : float, optional
-            Sampling rate defining at which timeinstances the 
-            dynamics are evaluated. The default is 1.
-        t0 : float, optional
-            Initial time for the optimal control problem. The default is 0.
-        method : str, optional
-            String defining which methode should be used to discretize 
-            the systemdynamics. The default is 'cvodes'.
-
-        """
         
         self._options = {}
         self._type = 'NLP'
