@@ -44,8 +44,8 @@ class system:
         String defining which integration methode should be used to discretize 
         the systemdynamics. The default is 'cvodes'.
 
-    The following integrators are availible:
 
+    The following integrators are availible:   
     - from 
     `CasADi <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_: 
     `idas`, `collocation`, `oldcollocation` and `rk`   
@@ -53,9 +53,7 @@ class system:
     `SciPy <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_: 
     `RK45`, `RK23`, `DOP853`, `Radau`, `BDF` and `LSODA`   
     - from nMPyC: `rk4`, `euler` und `heun` (fixed step integration methods)
-
     
-
     """
     
     def __init__(self, f, nx, nu, system_type='discrete', 
