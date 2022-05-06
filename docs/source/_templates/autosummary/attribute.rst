@@ -5,4 +5,3 @@ Class attribute.
     :annotation:
 
 
-This page is auto-generated. Page source is not available on Github.
