@@ -47,7 +47,7 @@ class system:
 
     The following integrators are availible:   
 
-    - from `CasADi <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_: `idas`, `collocation`, `oldcollocation` and `rk`   
+    - from `CasADi <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_: `cvodes`, `idas`, `collocation`, `oldcollocation` and `rk`   
 
     - from `SciPy <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_: `RK45`, `RK23`, `DOP853`, `Radau`, `BDF` and `LSODA` 
       
@@ -80,7 +80,7 @@ class system:
                 
     @property 
     def f(self):
-        """callable : Righthandside of the systemdynamics."""
+        """callable : Righthandside :math:`f(x,u)` of the systemdynamics."""
         return self._f
     
     @f.setter 
@@ -114,7 +114,7 @@ class system:
         
     @property 
     def system_type(self):
-        """str : String efining if the dynamics are discrete or continuous."""
+        """str : String defining if the dynamics are discrete or continuous."""
         return self._system_type
     
     @system_type.setter 
@@ -244,12 +244,11 @@ class system:
     @classmethod
     def LQP(cls, A, B , nx, nu, system_type='discrete', 
             sampling_rate=1., t0=0., method='euler'):
-        """Initialize a system with linear dynamics to define a 
-        linear quadratic OCP.
+        """Initialize a system with linear dynamics.
         
         In this case the linear righthandside of the dynamics has the 
-        form f(x,u) = Ax+Bu which is always autonomouse.   
-        If not a fixed step method is choosen for integraton the optimizer 
+        form :math:`f(x,u) = Ax+Bu` which is always autonomouse.   
+        If not a fixed step method is choosen for integration the optimizer 
         can not use the linear structure of the problem during the 
         optimization progress.
         
@@ -319,6 +318,13 @@ class system:
             Dictionary containing the keywords of the required options 
             and their values.
 
+
+        The availible options are depending on the choosen :pyproperty:`method` for integration.
+        For the nMPyC integrators the only availible option is `number_of_finit_elements` 
+        which must be an int greater than zero and defines how many discretation steps are 
+        computet during one sampling period defined by the sampling rate.
+        The availible options for the CasADi integrators can be found at `Sourceforge <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_ and for the SciPy integrators at the `Scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_.
+
         """
         
         if not isinstance(options, dict):
@@ -376,7 +382,7 @@ class system:
     
     @mpc_convert
     def system(self, t, x, u):
-        """Righthandside of the dynamics.
+        """Righthandside :math:`f(x,u)` of the dynamics.
 
         Parameters
         ----------
@@ -530,6 +536,10 @@ class system:
         ----------
         path : str
             String defining the path to the desired file. 
+
+        For example
+        >>> system.save('system.pickle')
+        will create a file `system.pickle` contain the nMPyC system object.
 
         """
         
