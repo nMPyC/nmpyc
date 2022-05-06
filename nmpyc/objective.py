@@ -9,6 +9,8 @@ Created on Fri Nov 26 12:58:20 2021
 import nmpyc as mpc
 from nmpyc.utilis import mpc_convert
 
+import numpy as np
+
 from inspect import signature
 import dill
 
@@ -288,13 +290,14 @@ class objective:
             Stagecost evaluated at the given values.
             
         """
-        
+            
         if self._type == 'NLP':
             return self._L(t,x,u)
         else:
             return (x.transpose()@self._L[0]@x 
                     + u.transpose()@self._L[1]@u 
                     + x.transpose()@self._L[2]@u*2)
+
     
     @mpc_convert
     def endcosts(self, t, x):

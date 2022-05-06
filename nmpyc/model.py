@@ -267,7 +267,7 @@ class model:
             t_l = t
             for l in range(self.N):
                 t_l += self.system.h
-                l_ol += [self.objective.stagecosts(t_l, x_ol[:,l], u_ol[:,l])]
+                l_ol += [float(self.objective.stagecosts(t_l, x_ol[:,l], u_ol[:,l]))]
             l_ol = mpc.array(l_ol)
             
             #save current itertaion

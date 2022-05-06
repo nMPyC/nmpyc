@@ -7,6 +7,8 @@ Created on Wed Dec 22 20:35:46 2021
 """
 
 import inspect
+from functools import wraps
+
 import numpy as np
 
 import nmpyc as mpc
@@ -33,7 +35,7 @@ def flat_list(t):
             
     return flat_list
 
-def mpc_convert(func):
+def mpc_convert_func(func):
     sig = inspect.signature(func)
     params = sig.parameters
     if inspect.getargspec(func)[0][0] == 'self':
@@ -81,3 +83,55 @@ def mpc_convert(func):
                     y = [[y]]
                 return mpc.array(y)
     return inner
+
+def mpc_convert(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        sig = inspect.signature(func)
+        params = sig.parameters
+        if inspect.getargspec(func)[0][0] == 'self':
+            if len(params) == 4:
+                def inner(self,t,x,u):
+                    if np.isscalar(x):
+                        x = [[x]]
+                    if np.isscalar(u):
+                        u = [[u]]
+                    x = mpc.array(x)
+                    u = mpc.array(u)
+                    y = func(self,t,x,u)
+                    if np.isscalar(y):
+                        y = [[y]]
+                    return mpc.array(y)
+            elif len(params) == 3:
+                def inner(self,t,x):
+                    if np.isscalar(x):
+                        x = [[x]]
+                    x = mpc.array(x)
+                    y = func(self,t,x)
+                    if np.isscalar(y):
+                        y = [[y]]
+                    return mpc.array(y)
+        else:
+            if len(params) == 3:
+                def inner(t,x,u):
+                    if np.isscalar(x):
+                        x = [[x]]
+                    if np.isscalar(u):
+                        u = [[u]]
+                    x = mpc.array(x)
+                    u = mpc.array(u)
+                    y = func(t,x,u)
+                    if np.isscalar(y):
+                        y = [[y]]
+                    return mpc.array(y)
+            elif len(params) == 2:
+                def inner(t,x):
+                    if np.isscalar(x):
+                        x = [[x]]
+                    x = mpc.array(x)
+                    y = func(t,x)
+                    if np.isscalar(y):
+                        y = [[y]]
+                    return mpc.array(y)
+        return inner(*args, **kwargs)
+    return wrapper

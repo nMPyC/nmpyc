@@ -702,12 +702,12 @@ class opti:
                 t = self._t0 + k*self._system.h
                 self._X[:,k + 1] = self._system.system_discrete(t, self._X[:,k], self._U[:,k])
         
-        #set objective
+        # Set objective
         J = self._objective.J(self._t, self._X, self._U, self._N)
         J = mpc.convert(J)
         self._optistack.minimize(J)
         
-        #set bounds
+        # Set bounds
         for i in range(self._nx):
             for j in range(self._N):
                 self._optistack.subject_to(
@@ -849,7 +849,7 @@ class opti:
                 X[:, k + 1] = mpc.convert(
                     self._system.system_discrete(t[k], X[:, k], U[:, k]),
                     'numpy').flatten()
-        return mpc.convert(self._objective.J(t, X, U, self._N)).flatten()
+        return self._objective.J(t, X, U, self._N)
     
     def _cons_dynamics(self, Z):
         U = np.reshape(Z[:self._N*self._nu], (self._nu,self._N))
