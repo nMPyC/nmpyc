@@ -56,7 +56,9 @@ class system:
         Initial time for the optimal control problem. The default is 0.
     method : str, optional
         String defining which integration methode should be used to discretize 
-        the systemdynamics. The default is 'cvodes'.
+        the systemdynamics. The default is 'cvodes'. 
+        For further informations about the provided integrators see 
+        :py:attr:`~method`.
         
     """
     
@@ -185,7 +187,13 @@ class system:
         
     @property 
     def nx(self):
-        """int : Dimension of the state."""
+        """int : Dimension of the state. 
+        
+        This means the value of :math:`x(t)` at a given time :math:`t_k` 
+        is a element of :math:`\mathbb{R}^{nx \times nx}`.
+        In the linear case this value equals with the dimension 
+        of the system matrix :math:`A`.
+        """
         return self._nx
     
     @nx.setter 
@@ -200,7 +208,13 @@ class system:
         
     @property 
     def nu(self):
-        """int : Dimension of the control."""
+        """int : Dimension of the control.
+        
+        his means the value of :math:`u(t)` at a given time :math:`t_k` 
+        is a element of :math:`\mathbb{R}^{nu \times nu}`.
+        In the linear case this value equals with the dimension 
+        of the control matrix :math:`B`.
+        """
         return self._nu
     
     @nu.setter 
