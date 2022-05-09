@@ -29,7 +29,7 @@ class system:
 
     .. math::
 
-       \dot{x}(t_k)=f(t_k,x(t_k),u(t_k)))
+       \dot{x}(t_k)=f(t_k,x(t_k),u(t_k))).
 
     In the letter case the differential equation will be discretized by a choosen 
     integration method.
@@ -227,7 +227,10 @@ class system:
     
     @property 
     def autonomous(self):
-        """bool : If true, the objective is time independend."""
+        """bool : If True, the system is time-invariant. 
+        That menas that the righthandside of the dynamics :math:`f(t,x,u)` 
+        are not explicitly depend on the time variable :math:`t`.
+        In this case :math:`f(t,x,u)=f(x,u)` holds."""
         return self._autonomous
     
     @property
