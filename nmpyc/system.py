@@ -190,7 +190,7 @@ class system:
         """int : Dimension of the state. 
         
         This means the value of :math:`x(t)` at a given time :math:`t_k` 
-        is a element of :math:`\mathbb{R}^{nx \times nx}`.
+        is a element of :math:`\mathbb{R}^{nx \\times nx}`.
         In the linear case this value equals with the dimension 
         of the system matrix :math:`A`.
         """
@@ -211,7 +211,7 @@ class system:
         """int : Dimension of the control.
         
         his means the value of :math:`u(t)` at a given time :math:`t_k` 
-        is a element of :math:`\mathbb{R}^{nu \times nu}`.
+        is a element of :math:`\mathbb{R}^{nu \\times nu}`.
         In the linear case this value equals with the dimension 
         of the control matrix :math:`B`.
         """
