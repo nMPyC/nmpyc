@@ -3,8 +3,9 @@
 
 # Author: Jonas Schiessl
 
-
 """
+Module for array definition and computation.
+
 This module provides an array class and associated function for 
 corresponding matrix calculations.
 
