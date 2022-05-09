@@ -88,7 +88,7 @@ class system:
                 
     @property 
     def f(self):
-        """callable orl list of array: Righthandside :math:`f(t,x,u)` of the systemdynamics.
+        """callable or list of array: Righthandside :math:`f(t,x,u)` of the systemdynamics.
         
         The return value of this attribute depends on how the system was initialized.
         If it is initialized as a linear system by :py:meth:`~LQP` a list containing the arrays defining the 
@@ -355,25 +355,25 @@ class system:
             Matrix definig the linear state inmpact on the righthandside 
             of the dynamics..
         nx : int
-        Dimension of the state. Must be a psoitive integer. 
-        See also :py:attr:`~nx`.
-    nu : int
-        Dimension of the control. Must be a psoitive integer. 
-        See also :py:attr:`~nu`.
-    system_type : str, optional
-        String defining if the given systemdynamics are 
-        discrete or continuous. The default is 'discrete'.
-    sampling_rate : float, optional
-        Sampling rate defining at which timeinstances the 
-        dynamics are evaluated. The default is 1.
-    t0 : float, optional
-        Initial time for the optimal control problem. The default is 0.
-        See also :py:attr:`~t0`.
-    method : str, optional
-        String defining which integration methode should be used to discretize 
-        the systemdynamics. The default is 'euler'. 
-        For further informations about the provided integrators see 
-        :py:attr:`~method`.
+            Dimension of the state. Must be a psoitive integer. 
+            See also :py:attr:`~nx`.
+        nu : int
+            Dimension of the control. Must be a psoitive integer. 
+            See also :py:attr:`~nu`.
+        system_type : str, optional
+            String defining if the given systemdynamics are 
+            discrete or continuous. The default is 'discrete'.
+        sampling_rate : float, optional
+            Sampling rate defining at which timeinstances the 
+            dynamics are evaluated. The default is 1.
+        t0 : float, optional
+            Initial time for the optimal control problem. The default is 0.
+            See also :py:attr:`~t0`.
+        method : str, optional
+            String defining which integration methode should be used to discretize 
+            the systemdynamics. The default is 'euler'. 
+            For further informations about the provided integrators see 
+            :py:attr:`~method`.
 
         Returns
         -------
