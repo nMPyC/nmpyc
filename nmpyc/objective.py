@@ -245,6 +245,13 @@ class objective:
     def J(self, t, x, u, N):
         """Evaluate Objectivefunction of the OCP.
 
+        The objectivefunction is assembled from the stagecosts :math:`\ell(t,x,u)` 
+        and optional endcosts :math:`F(t,x)` and has the form 
+
+        .. math::
+
+           J(t,x,u,N) = \sum_{k=0}^{N-1} \ell(t(k),x(k),u(k)) + F(t(N),x(N)).
+
         Parameters
         ----------
         t : array
