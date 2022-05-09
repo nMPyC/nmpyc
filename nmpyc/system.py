@@ -25,7 +25,7 @@ class system:
     ----------
     f : callable
         Function defining the righthandside of the systemdynamics of 
-        the form f(t,x,u) or f(x,u) in the autonomous case.
+        the form :math:`f(t,x,u)` or :math:`f(x,u)` in the :py:attr:`~autonomous` case.
     nx : int
         Dimension of the state.
     nu : int
@@ -245,7 +245,13 @@ class system:
         """Initialize a system with linear dynamics.
         
         In this case the linear righthandside of the dynamics has the 
-        form :math:`f(x,u) = Ax+Bu` which is always autonomouse.   
+        form :
+        
+        .. math::
+            
+           f(x,u) = Ax+Bu 
+            
+        which is always :py:attr:`~autonomouse`.   
         If not a fixed step method is choosen for integration the optimizer 
         can not use the linear structure of the problem during the 
         optimization progress.
