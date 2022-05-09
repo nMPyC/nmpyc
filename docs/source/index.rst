@@ -12,6 +12,34 @@ In addition, our toolbox supports a variety of discretization methods and optimi
 
    This project is under active development.
 
+
+Instalation
+------------
+
+To install the Python package, you first need to download the source code from `GitLab <https://gitlab.uni-bayreuth.de/bt704963/nmpyc1>`_.
+This can be done via Git using the command
+
+::
+
+   git clone https://gitlab.uni-bayreuth.de/bt704963/nmpyc1.git
+
+Now the tollbox can be used either by importing the package according to its storage path in the python code or by adding it to the python default path.
+To realize the letter case you can navigate to the location of the package and use
+
+::
+
+   pip install .
+
+This command will automatically add the package to the python default path and install the required Python packages and their dependencies which are:
+
+- CasADi
+- osqp
+- NumPy
+- SciPy
+- matplotlib
+- dill
+
+
 Contents
 --------
 
