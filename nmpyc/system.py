@@ -91,7 +91,15 @@ class system:
                 
     @property 
     def f(self):
-        """callable : Righthandside :math:`f(x,u)` of the systemdynamics."""
+        """callable orl list of arrays: Righthandside :math:`f(t,x,u)` of the systemdynamics.
+        
+        The return value of this attribute depends on how the system was initialized.
+        If it is initialized as a linear system by :py:meth:`~LQP` a list containing the arrays defining the 
+        systemdynamics are returned.
+        If the system was initalized by a possible nonlinear callable function this function is return. 
+        Note, that even if :py:attr:`~autonomuse` is True the returned funtion depends on the time 
+        and always has the form :math:`f(t,x,u)`.
+        """
         return self._f
     
     @f.setter 
