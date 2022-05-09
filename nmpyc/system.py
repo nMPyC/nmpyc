@@ -214,7 +214,7 @@ class system:
     
     @property 
     def autonomous(self):
-        """bool : If true, the objective is timeindependend."""
+        """bool : If true, the objective is time independend."""
         return self._autonomous
     
     @property
@@ -531,7 +531,7 @@ class system:
             self._f[1] = (B_k1 + B_k2*2 + B_k3*2 + B_k4)*(self._h/6)
     
     def save(self, path):
-        """Saving the system to a given file with dill.
+        """Saving the system to a given file with `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.
         
         The path can be absolut or relative and 
         the ending of the file is arbitrary.
