@@ -30,7 +30,7 @@ To realize the letter case you can navigate to the location of the package and u
 
    pip install .
 
-This command will automatically add the package to the python default path and install the required Python packages and their dependencies which are `CasADi <https://web.casadi.org>`_, `osqp <https://osqp.org/>`_, `NumPy <https://numpy.org>`_, `SciPy <https://scipy.org>`_, `matplotlib <https://matplotlib.org/stable/index.html>`_ and `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.
+This command will automatically add the package to the python default path and install the required Python packages and their dependencies which are `CasADi <https://web.casadi.org>`_,  `osqp <https://osqp.org/>`_,  `NumPy <https://numpy.org>`_,  `SciPy <https://scipy.org>`_,  `matplotlib <https://matplotlib.org/stable/index.html>`_ and `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.
 
 
 Contents
