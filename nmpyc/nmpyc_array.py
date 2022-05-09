@@ -3,8 +3,9 @@
 
 # Author: Jonas Schiessl
 
-
 """
+Module for array definition and computation.
+
 This module provides an array class and associated function for 
 corresponding matrix calculations.
 
@@ -34,8 +35,7 @@ class array:
     
     Parameters
     ---------
-    dim : int, tuple, cas.MX, cas.SX, cas.DM, list or 
-    numpy.ndarray, optional
+    dim : int, tuple, cas.MX, cas.SX, cas.DM, list or numpy.ndarray, optional
         Dimension of which an empty array is created or object from which 
         the entries and dimension are copied. The default is 0.
 
@@ -97,7 +97,7 @@ class array:
     
     @property
     def symbolic(self):
-        """bool : True if array has symbolic entrie, False otherwise."""
+        """bool : True if array has symbolic entries, False otherwise."""
         return self._casadi
     
     @property
@@ -533,7 +533,7 @@ class array:
     
     
 def reshape(a, new_size):
-    """Reshapes a array to a new size.
+    """Reshape an array to a new size.
 
     Parameters
     ----------
@@ -572,7 +572,7 @@ def reshape(a, new_size):
     return array(A)
 
 def convert(a, dtype='auto'):
-    """Converts a numpy-, casadi- or nMPyC-array to another of these intances.
+    """Convert a numpy-, casadi- or nMPyC-array to another of these intances.
 
     Parameters
     ----------
@@ -705,7 +705,7 @@ def concatenate(arrays, axis = 0):
             + str(axis))
     
 def eye(dim):
-    """Craets a array defining the idendity.
+    """Craet an array defining the idendity.
 
     Parameters
     ----------
@@ -739,7 +739,7 @@ def eye(dim):
     return y
 
 def zeros(dim):
-    """Creats a array with only zero entries.
+    """Creat an array with only zero entries.
 
     Parameters
     ----------
@@ -778,6 +778,27 @@ def zeros(dim):
     return y
 
 def ones(dim):
+    """Creat an array with only entries equal to one.
+
+    Parameters
+    ----------
+    dim : int or tuple
+        Dimension of the array.
+
+    Raises
+    ------
+    ValueError
+        If the given dimension is not supported.
+    TypeError
+        If the given dimension has not the right type.
+
+    Returns
+    -------
+    y : array
+        An array of the given dimension with only entries equal to one.
+
+    """
+
     if isinstance(dim, int): None
     elif isinstance(dim, tuple):
         if len(dim) != 2:
@@ -796,7 +817,7 @@ def ones(dim):
     return y
 
 def diag(x):
-    """Creats a diagonal matrix from a given vector.
+    """Creat an diagonal matrix from a given vector.
 
     Parameters
     ----------
@@ -925,7 +946,7 @@ def sinh(x):
     return y
 
 def arcsin(x):
-    """Calculates the arcussinus of a given number or array"""
+    """Calculate the arcussinus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -973,7 +994,7 @@ def arcsinh(x):
     return y
 
 def cos(x):
-    """calculate the cosinus of a given number or array"""
+    """Calculate the cosinus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1069,7 +1090,7 @@ def arccosh(x):
     return y
 
 def tan(x):
-    """Calculates the tangens of a given number or array"""
+    """Calculate the tangens of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1117,7 +1138,7 @@ def tanh(x):
     return y
 
 def arctan(x):
-    """Calculates the arcustangens of a given number or array"""
+    """Calculate the arcustangens of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1227,7 +1248,7 @@ def power(x,n):
     return y
 
 def matrix_power(x,n):
-    """Raises a square matrix to the n-th power.
+    """Raise a square matrix to the n-th power.
 
     Parameters
     ----------
@@ -1265,6 +1286,8 @@ def matrix_power(x,n):
     return y
 
 def abs(x):
+    """Calculate the absolute value of a number or array."""
+
     if isinstance(x, array):
         x_ = x._A
     else:
@@ -1287,7 +1310,7 @@ def abs(x):
     return y
     
 def norm(x,order=None):
-    """Returns the norm of a vector or matrix.
+    """Return the norm of a vector or matrix.
 
     Parameters
     ----------
@@ -1331,7 +1354,7 @@ def norm(x,order=None):
     return y
 
 def max(*args):
-    """Returns the maximal value of the arguments"""
+    """Return the maximal value of the arguments"""
        
     for i in range(len(args)):
         if isinstance(args[i], array):
@@ -1346,7 +1369,7 @@ def max(*args):
     return cas.fmax(*args)
 
 def min(*args):
-    """Returns the minimal value of the arguments"""
+    """Return the minimal value of the arguments"""
     
     for i in range(len(args)):
         if isinstance(args[i], array):

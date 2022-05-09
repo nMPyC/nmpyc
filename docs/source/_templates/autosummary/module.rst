@@ -1,9 +1,9 @@
 {{ objname | escape | underline }}
 
-
-{% if classes %}
 .. automodule:: {{ fullname }}
 .. currentmodule:: {{ fullname }}
+
+{% if classes %}
 
 .. rubric:: Classes
 .. autosummary::
@@ -15,8 +15,6 @@
 {% endif %}
 
 {% if functions %}
-.. automodule:: {{ fullname }}
-.. currentmodule:: {{ fullname }}
 
 .. rubric:: Functions
 .. autosummary::
