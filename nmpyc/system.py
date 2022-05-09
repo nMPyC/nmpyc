@@ -18,8 +18,21 @@ class system:
     """
     A class used to define the systemdynamics of a optimnal control problem.
 
-    The dynamics can be discrete or continuous and will be discretized
-    automatically in the letter case.
+    The dynamics can be discrete or continuous. 
+    A discrete system is defined by a difference equation 
+
+    .. math::
+
+       x(t_{k+1}) = f(t_k,x(t_k),u(t_k))
+
+    and a continouse system is defined by the ordinary differential equation
+
+    .. math::
+
+       \dot{x}(t_k)=f(t_k,x(t_k),u(t_k)))
+
+    In the letter case the differential equation will be discretized by a choosen 
+    integration method.
 
     Parameters
     ----------
