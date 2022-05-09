@@ -333,7 +333,7 @@ class objective:
             return x.transpose()@self._F@x
     
     def save(self, path):
-        """Saving the objective to a given file with dill.
+        """Saving the objective to a given file with `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.
         
         The path can be absolut or relative and 
         the ending of the file is arbitrary.
