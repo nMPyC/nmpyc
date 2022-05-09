@@ -91,7 +91,7 @@ class system:
                 
     @property 
     def f(self):
-        """callable orl list of arrays: Righthandside :math:`f(t,x,u)` of the systemdynamics.
+        """callable orl list of :py:class:`nmpyc.nmpyc_array.array`: Righthandside :math:`f(t,x,u)` of the systemdynamics.
         
         The return value of this attribute depends on how the system was initialized.
         If it is initialized as a linear system by :py:meth:`~LQP` a list containing the arrays defining the 
@@ -149,7 +149,19 @@ class system:
         
     @property 
     def h(self):
-        """float : Samplingrate of the system."""
+        """float : Sampling time :math:`h` of the system.
+        
+        This attribute defines at which timeinstances the 
+        dynamics are evaluated. 
+        This means the time :math:`t_k` is given by the euqation
+
+        .. math::
+           
+           t_k = t_0 + kh.
+
+        In addition, the control values are assumed to be constant during a sampling instance
+        and can only be change at the times :math:`t_k`.
+        """
         return self._h
     
     @h.setter 
