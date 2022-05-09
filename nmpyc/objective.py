@@ -21,10 +21,10 @@ class objective:
     ----------
     stagecost : callable
         A function defining the stagecosts of the optimal control problem. 
-        Has to be of the form l(t,x,u) or l(x,u) in the autonomous case.
+        Has to be of the form :math:`l(t,x,u)` or :math:`l(x,u)` in the :py:attr:`~autonomous` case.
     terminalcost : callable, optional
         A function defining the terminalcosts of the optimal control 
-        problem. Has to be of the form F(t,x) or F(x) in the autonomous 
+        problem. Has to be of the form :math:`F(t,x)` or :math:`F(x)` in the autonomous 
         case. If None the no terminalcosts are applied. 
         The default is None.
     
@@ -39,7 +39,7 @@ class objective:
         
     @property 
     def stagecost(self):
-        """callable : Function defining the stagecosts l(t,x,u)."""
+        """callable : Function defining the stagecosts :math:`l(t,x,u)`."""
         return self._L
     
     @stagecost.setter 
@@ -73,7 +73,7 @@ class objective:
         
     @property 
     def terminalcost(self):
-        """callable : Function defining the endcosts F(t,x)."""
+        """callable : Function defining the endcosts :math:`F(t,x)`."""
         return self._F
     
     @terminalcost.setter 
@@ -148,19 +148,31 @@ class objective:
         
     @classmethod
     def LQP(cls, Q, R, N=None, P=None):
-        """Initialize a linear objective to define a linear quadratic OCP.
+        """Initialize a quadratic objective.
+
+        In this case the stagecost of the objective have the form
+
+        .. math::
+           \ell(x,u) = x^T Q x + u^T R u + 2 x^T Q u
+
+        and the optional terminal cost are defined as 
+
+        .. math::
+           F(x,u) = x^t P x.
+
+        In this case the objective is always :py:attr:`~autonomouse`.
 
         Parameters
         ----------
         Q : array
-            Matrix defining the costs of the state of the form x^TQx.
+            Matrix defining the costs of the state of the form :math:`x^TQx`.
         R : array
-            Matrix defining the cost of the control of the form u^TRu.
+            Matrix defining the cost of the control of the form :math:`u^TRu`.
         N : array, optional
-            Possible Matrix defining the mixed costterm of the form 2x^TNu. 
+            Possible Matrix defining the mixed costterm of the form :math:`2x^TNu`. 
             The default is None.
         P : array, optional
-            Posible Matrix defining the endcost of the form x^TPx. 
+            Posible Matrix defining the endcost of the form :math:`x^TPx`. 
             The default is None.
 
         Returns
@@ -215,15 +227,15 @@ class objective:
     def add_termianlcost(self, terminalcost):
         """Add endcosts to the objective.
         
-        The encosts must be a callable function of the form F(t,x) 
-        or F(x) in the autonomous case. If endcosts already exists they 
+        The encosts must be a callable function of the form :math:`F(t,x)` 
+        or :math:`F(x)` in the autonomous case. If endcosts already exists they 
         will be overwritten by the new one given.
 
         Parameters
         ----------
         terminalcost : callable
             A function defining the terminalcosts of the optimal control 
-            problem. Has to be of the form F(t,x) or F(x) in the autonomous 
+            problem. Has to be of the form :math:`F(t,x)` or :math:`F(x)` in the autonomous 
             case.
 
         """
