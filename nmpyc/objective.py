@@ -243,7 +243,7 @@ class objective:
         self.terminalcost = terminalcost
         
     def J(self, t, x, u, N):
-        """Objectivefunction.
+        """Evaluate Objectivefunction of the OCP.
 
         Parameters
         ----------
@@ -281,7 +281,7 @@ class objective:
     
     @mpc_convert
     def stagecosts(self,t,x,u):
-        """Stagecosts of the objective.
+        """Evaluate stagecosts of the objective.
 
         Parameters
         ----------
@@ -309,7 +309,7 @@ class objective:
     
     @mpc_convert
     def endcosts(self, t, x):
-        """Endcosts of the objective.
+        """Evaluate endcosts of the objective.
 
         Parameters
         ----------
