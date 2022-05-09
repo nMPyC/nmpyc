@@ -39,10 +39,13 @@ class system:
     f : callable
         Function defining the righthandside of the systemdynamics of 
         the form :math:`f(t,x,u)` or :math:`f(x,u)` in the :py:attr:`~autonomous` case.
+        See also :py:attr:`~f`.
     nx : int
-        Dimension of the state.
+        Dimension of the state. Must be a psoitive integer. 
+        See also :py:attr:`~nx`.
     nu : int
-        Dimension of the control.
+        Dimension of the control. Must be a psoitive integer. 
+        See also :py:attr:`~nu`.
     system_type : str, optional
         String defining if the given systemdynamics are 
         discrete or continuous. The default is 'discrete'.
@@ -54,16 +57,7 @@ class system:
     method : str, optional
         String defining which integration methode should be used to discretize 
         the systemdynamics. The default is 'cvodes'.
-
-
-    The following integrators are availible:   
-
-    - from `CasADi <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_: `cvodes`, `idas`, `collocation`, `oldcollocation` and `rk`   
-
-    - from `SciPy <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_: `RK45`, `RK23`, `DOP853`, `Radau`, `BDF` and `LSODA` 
-      
-    - from nMPyC: `rk4`, `euler` und `heun` (fixed step integration methods)
-    
+        
     """
     
     def __init__(self, f, nx, nu, system_type='discrete', 
@@ -221,7 +215,16 @@ class system:
         
     @property 
     def method(self):
-        """str : Integration methode for discretization of the dynamics."""
+        """str : Integration methode for discretization of the dynamics.
+        
+        The following integrators are currently supported:   
+
+        - from `CasADi <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_: `cvodes`, `idas`, `collocation`, `oldcollocation` and `rk`   
+
+        - from `SciPy <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_: `RK45`, `RK23`, `DOP853`, `Radau`, `BDF` and `LSODA` 
+        
+        - from nMPyC: `rk4`, `euler` und `heun` (fixed step integration methods)"""
+
         return self._method
     
     @method.setter
