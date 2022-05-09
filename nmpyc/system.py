@@ -88,7 +88,7 @@ class system:
                 
     @property 
     def f(self):
-        """callable orl list of :py:class:`nmpyc.nmpyc_array.array`: Righthandside :math:`f(t,x,u)` of the systemdynamics.
+        """callable orl list of array: Righthandside :math:`f(t,x,u)` of the systemdynamics.
         
         The return value of this attribute depends on how the system was initialized.
         If it is initialized as a linear system by :py:meth:`~LQP` a list containing the arrays defining the 
@@ -136,13 +136,13 @@ class system:
 
         .. math::
 
-        x(t_{k+1}) = f(t_k,x(t_k),u(t_k))
+           x(t_{k+1}) = f(t_k,x(t_k),u(t_k))
 
         and a continouse system is defined by the ordinary differential equation
 
         .. math::
 
-        \dot{x}(t_k)=f(t_k,x(t_k),u(t_k))).
+           \dot{x}(t_k)=f(t_k,x(t_k),u(t_k))).
 
         """
         return self._system_type
@@ -214,7 +214,7 @@ class system:
         This means the value of :math:`x(t)` at a given time :math:`t_k` 
         is a element of :math:`\mathbb{R}^{nx}`.
         In the linear case this value equals with the dimension 
-        of the system matrix :math:`A \in \mathbb{R}^{nx \\time nx}`.
+        of the system matrix :math:`A \in \mathbb{R}^{nx \\times nx}`.
         """
         return self._nx
     
@@ -307,7 +307,7 @@ class system:
 
         It also implies that the system is :py:attr:`~autonomous`.
 
-        If the system dynamics are not initialized as linear with the :py:method:`~LQP` 
+        If the system dynamics are not initialized as linear with the :py:meth:`~LQP` 
         method this attribute holds the value `NLP`.
         """
         return self._type
@@ -355,20 +355,25 @@ class system:
             Matrix definig the linear state inmpact on the righthandside 
             of the dynamics..
         nx : int
-            Dimension of the state.
-        nu : int
-            Dimension of the control.
-        system_type : str, optional
-            String defining if the given systemdynamics are 
-            discrete or continuous. The default is 'discrete'.
-        sampling_rate : float, optional
-            Sampling rate defining at which timeinstances the 
-            dynamics are evaluated. The default is 1.
-        t0 : float, optional
-            Initial time for the optimal control problem. The default is 0.
-        method : str, optional
-            String defining which methode should be used to discretize 
-            the systemdynamics. The default is 'euler'.
+        Dimension of the state. Must be a psoitive integer. 
+        See also :py:attr:`~nx`.
+    nu : int
+        Dimension of the control. Must be a psoitive integer. 
+        See also :py:attr:`~nu`.
+    system_type : str, optional
+        String defining if the given systemdynamics are 
+        discrete or continuous. The default is 'discrete'.
+    sampling_rate : float, optional
+        Sampling rate defining at which timeinstances the 
+        dynamics are evaluated. The default is 1.
+    t0 : float, optional
+        Initial time for the optimal control problem. The default is 0.
+        See also :py:attr:`~t0`.
+    method : str, optional
+        String defining which integration methode should be used to discretize 
+        the systemdynamics. The default is 'euler'. 
+        For further informations about the provided integrators see 
+        :py:attr:`~method`.
 
         Returns
         -------
@@ -489,8 +494,8 @@ class system:
 
         Returns
         -------
-       array
-            Value of the posiible not discrete righthandside of the dynamics 
+        array
+            Value of the possible not discrete righthandside of the dynamics 
             evaluated at the given inputs.
 
         """
