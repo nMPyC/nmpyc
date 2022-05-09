@@ -778,6 +778,27 @@ def zeros(dim):
     return y
 
 def ones(dim):
+    """Creat an array with only entries equal to one.
+
+    Parameters
+    ----------
+    dim : int or tuple
+        Dimension of the array.
+
+    Raises
+    ------
+    ValueError
+        If the given dimension is not supported.
+    TypeError
+        If the given dimension has not the right type.
+
+    Returns
+    -------
+    y : array
+        An array of the given dimension with only entries equal to one.
+
+    """
+
     if isinstance(dim, int): None
     elif isinstance(dim, tuple):
         if len(dim) != 2:
