@@ -243,8 +243,7 @@ class objective:
         self.terminalcost = terminalcost
         
     def J(self, t, x, u, N):
-        """Objectivefunction assembeld from the given 
-        stagecost and possible endcosts.
+        """Objectivefunction.
 
         Parameters
         ----------
