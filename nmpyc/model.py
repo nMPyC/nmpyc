@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 23 13:14:49 2021
 
-@author: Jonas Schiessl
-"""
+# @author: Jonas Schiessl
 
 import nmpyc as mpc
 from nmpyc.opti import opti
@@ -17,24 +14,24 @@ class model:
     A class that contains all the components of the optimal control problem.
     
     Can be used to perform open and closed loop simulations. 
+    
+    Parameters
+    ----------
+    objective : objective
+        nMPyC-objective defining the objective of the 
+        optimal control problem.
+    system : system
+        nMPyC-system defining the systemdynamics of the 
+        optimal control problem.
+    constraints : constraints optional
+        nMPyC-constraints defining the constraints of the optimal control 
+        problem. If constraints is None the problem is unconstrained. 
+        The default is None.
+
     """
     
     def __init__(self, objective, system, constraints=None):
-        """
-        Parameters
-        ----------
-        objective : objective
-            nMPyC-objective defining the objective of the 
-            optimal control problem.
-        system : system
-            nMPyC-system defining the systemdynamics of the 
-            optimal control problem.
-        constraints : constraints optional
-            nMPyC-constraints defining the constraints of the optimal control 
-            problem. If constraints is None the problem is unconstrained. 
-            The default is None.
-
-        """
+        
         
         self.objective = objective
         self.system = system   

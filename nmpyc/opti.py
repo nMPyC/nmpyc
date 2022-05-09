@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 23 15:09:26 2021
 
-@author: Jonas Schiessl
-"""
+# @author: Jonas Schiessl
 
 import casadi as cas
 import numpy as np
@@ -22,6 +19,7 @@ from numpy.linalg import matrix_power
 class opti:
     """
     A class used to sore the optimization problem of the OCP.
+    
     In this class the choosen optimizer is initialized and the minimization 
     method is called if the problem should bes solved durcing the MPC loop.
     """
@@ -849,7 +847,23 @@ class opti:
                 X[:, k + 1] = mpc.convert(
                     self._system.system_discrete(t[k], X[:, k], U[:, k]),
                     'numpy').flatten()
-        return self._objective.J(t, X, U, self._N)
+        J = 0.
+        if self._objective._type == 'NLP':
+            for k in range(self._N):
+                J += self._objective._L(t[k],X[:, k],U[:, k])
+        else:
+            for k in range(self._N):
+                J += (X[:, k].T@self._objective._L[0].A@X[:, k]
+                      + U[:, k].T@self._objective._L[1].A@U[:, k]
+                      + X[:, k].T@self._objective._L[2].A@U[:, k]*2)
+                
+        if self._objective._F is not None:
+            if self._objective._type == 'NLP':
+                J += self._objective._F(t[:,self._N], X[:, self._N])
+            else:
+                J += X[:, self._N].T@self._objective._F.A@X[:, self._N]
+        
+        return J
     
     def _cons_dynamics(self, Z):
         U = np.reshape(Z[:self._N*self._nu], (self._nu,self._N))

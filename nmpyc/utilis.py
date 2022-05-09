@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Dec 22 20:35:46 2021
 
-@author: Jonas Schiessl
-"""
+# @author: Jonas Schiessl
 
 import inspect
 from functools import wraps

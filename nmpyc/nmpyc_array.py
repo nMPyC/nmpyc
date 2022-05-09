@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 24 12:54:28 2021
 
-@author: Jonas Schiessl
+# Author: Jonas Schiessl
+
+
+"""
+This module provides an array class and associated function for 
+corresponding matrix calculations.
+
+The goal of this class and the individual functions is to enable 
+compatibility of calculations with both casadi and numpy objects 
+without changing the syntax of the program. 
+This is to enable the user to program as easily as possible and at 
+the same time to switch between symbolic and numeric calculation.
 """
 import numpy as np
 from numpy import linalg as LA
@@ -18,21 +27,21 @@ pi = np.pi
 class array:
     """
     A class used to save arrays with symbolic or numeric values. 
+    
     The symbolic entries are provides by CasADi and will be 
     transformed automatically to numeric values of numpy type 
     if it is posiible.
+    
+    Parameters
+    ---------
+    dim : int, tuple, cas.MX, cas.SX, cas.DM, list or 
+    numpy.ndarray, optional
+        Dimension of which an empty array is created or object from which 
+        the entries and dimension are copied. The default is 0.
+
     """
     
     def __init__(self, dim=0):
-        """
-        Parameters
-        ----------
-        dim : int, tuple, cas.MX, cas.SX, cas.DM, list or 
-        numpy.ndarray, optional
-            Dimension of which an empty array is created or object from which 
-            the entries and dimension are copied. The default is 0.
-
-        """
         
         if isinstance(dim, int):
             self._dim = (dim, 1)
@@ -636,6 +645,65 @@ def convert(a, dtype='auto'):
     
     return a
 
+def concatenate(arrays, axis = 0):
+    """Join a sequence of arrays along an existing axis.
+
+    Parameters
+    ----------
+    arrays : tuple of casadi.MX, casadi.SX, casadi.DM or numpy.ndarrays
+        Sequnce of arrays which should be concatenated. 
+        The arrays must have the same shape, except in the dimension 
+        corresponding to axis.
+    axis : int, optional
+        The axis along which the arrays will be joined. The default is 0.
+
+    Returns
+    -------
+    array
+        The concatenated array.
+
+    """
+    
+    casadi = False
+    
+    if not isinstance(arrays, tuple):
+        raise TypeError(
+            'arrays hmust be of type tuple - not ' + str(type(arrays)))
+        
+    if not isinstance(axis, int):
+        raise TypeError('axis must be an integer - not ' + str(type(axis)))
+    
+    array_list = []
+    for i in range(len(arrays)):
+        if isinstance(arrays[i], array):
+            array_list += [arrays[i].A]
+        else:
+            array_list += [arrays[i]]
+        if isinstance(array_list[i], (cas.MX, cas.SX, cas.DM)):
+            casadi = True
+        elif not isinstance(array_list[i], np.ndarray):
+            raise ValueError(
+                'The elements of the arrays sequence must be of type array,' + 
+                ' casadi.MX, casadi.SX, casadi.DM or numpy.ndarray - not ' 
+                + str(type(arrays[i])))
+            
+    arrays = tuple(array_list)
+        
+    if axis == 0:
+        if casadi:
+            return cas.vertcat(*arrays)
+        else:
+            return np.concatenate(arrays, axis=0)
+    elif axis == 1:
+        if casadi:
+            return array(cas.horzcat(*arrays))
+        else:
+            return array(np.concatenate(arrays, axis=1))
+    else:
+        raise ValueError(
+            'axis must be 0 (first axis) or 1 (second axis) - not ' 
+            + str(axis))
+    
 def eye(dim):
     """Craets a array defining the idendity.
 
@@ -1158,6 +1226,44 @@ def power(x,n):
 
     return y
 
+def matrix_power(x,n):
+    """Raises a square matrix to the n-th power.
+
+    Parameters
+    ----------
+    x : int, float, numpy.ndarray, cas.MS, cas.SX or cas.DM
+        Number or array of which the n-th power should be computed.
+    n : int or float
+        Number defining the exponent.
+
+    """
+    
+    if not isinstance(n, (int, float)):
+        raise TypeError(
+            'input n must be of type integer or float - not ' 
+            + str(type(n)))
+    
+    if isinstance(x, array):
+        x_ = x._A
+    else:
+        x_ = x
+        
+    if isinstance(x_, (np.ndarray)):
+        y = np.linalg.matrix_power(x_,n)
+        
+    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
+        y = cas.mpower(x_,n)
+        
+    else: 
+        raise TypeError(
+            'input x must be of type integer, float, array, numpy.ndarray,' 
+            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
+    
+    if isinstance(x, array):
+        y = array(y)
+
+    return y
+
 def abs(x):
     if isinstance(x, array):
         x_ = x._A
@@ -1263,5 +1369,11 @@ if __name__ == '__main__':
     a[:,0] = np.array([[2,2]])
     print(a)
     print(a[:,0])
+    
+    b = concatenate((a,a))
+    print(b)
+    
+    b = concatenate((a,a),axis=1)
+    print(b)
     
     print(array.__doc__)

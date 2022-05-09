@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 23 15:37:23 2021
 
-@author: Jonas Schiessl
-"""
+# @author: Jonas Schiessl
+
 import dill
 
 import numpy as np

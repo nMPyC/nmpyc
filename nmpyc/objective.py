@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 26 12:58:20 2021
 
-@author: Jonas Schiessl
-"""
+# @author: Jonas Schiessl
 
 import nmpyc as mpc
 from nmpyc.utilis import mpc_convert
@@ -19,21 +16,21 @@ class objective:
     A class used to define the objective of the optimnal control problem.
     
     The objective depends on stagecosts and optional terminalcosts.
+    
+    Parameters
+    ----------
+    stagecost : callable
+        A function defining the stagecosts of the optimal control problem. 
+        Has to be of the form l(t,x,u) or l(x,u) in the autonomous case.
+    terminalcost : callable, optional
+        A function defining the terminalcosts of the optimal control 
+        problem. Has to be of the form F(t,x) or F(x) in the autonomous 
+        case. If None the no terminalcosts are applied. 
+        The default is None.
+    
     """
     
     def __init__(self, stagecost, terminalcost=None):
-        """
-        Parameters
-        ----------
-        stagecost : callable
-            A function defining the stagecosts of the optimal control problem. 
-            Has to be of the form l(t,x,u) or l(x,u) in the autonomous case.
-        terminalcost : callable, optional
-            A function defining the terminalcosts of the optimal control 
-            problem. Has to be of the form F(t,x) or F(x) in the autonomous 
-            case. If None the no terminalcosts are applied. 
-            The default is None.
-        """
         
         self.stagecost = stagecost
         self.terminalcost = terminalcost

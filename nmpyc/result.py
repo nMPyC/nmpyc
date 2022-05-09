@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Jan  5 18:41:00 2022
 
-@author: Jonas Schiessl
-"""
+# @author: Jonas Schiessl
 
 import numpy as np
 
@@ -18,24 +15,23 @@ import nmpyc as mpc
 class result:
     """
     A class used to store the simulation results of the MPC simulation.
+    
+    Parameters
+    ----------
+    x0 : array
+        Initial state.
+    t0 : float
+        Initial time.
+    h : float
+        sampling rate.
+    N : int
+        MPC horizon.
+    K : int
+        MPC Interations.
+
     """
     
     def __init__(self, x0, t0, h, N, K):
-        """
-        Parameters
-        ----------
-        x0 : array
-            Initial state.
-        t0 : float
-            Initial time.
-        h : float
-            sampling rate.
-        N : int
-            MPC horizon.
-        K : int
-            MPC Interations.
-
-        """
         
         self._t0 = t0
         self._x0 = x0

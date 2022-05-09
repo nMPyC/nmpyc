@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 26 12:58:18 2021
 
-@author: Jonas Schiessl
-"""
+# @author: Jonas Schiessl
 
 import nmpyc as mpc 
 from nmpyc.utilis import mpc_convert
