@@ -26,9 +26,8 @@
 {% endif %}
 
 {% if attributes %}
-.. automodule:: {{ fullname }}
-.. currentmodule:: {{ fullname }}
 
+.. rubric:: Attributes
 .. autosummary::
    :toctree:
    :recursive:
