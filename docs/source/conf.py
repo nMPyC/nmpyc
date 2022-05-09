@@ -9,9 +9,8 @@ project = 'nMPyC'
 copyright = '2022, Jonas Schießl'
 author = 'Jonas Schießl'
 
-# The full version, including alpha/beta/rc tags
+version = '1.0.0'
 release = '1.0.0'
-
 
 # -- General configuration ---------------------------------------------------
 
