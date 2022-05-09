@@ -54,6 +54,7 @@ class system:
         dynamics are evaluated. The default is 1.
     t0 : float, optional
         Initial time for the optimal control problem. The default is 0.
+        See also :py:attr:`~t0`.
     method : str, optional
         String defining which integration methode should be used to discretize 
         the systemdynamics. The default is 'cvodes'. 
@@ -129,7 +130,21 @@ class system:
         
     @property 
     def system_type(self):
-        """str : String defining if the dynamics are discrete or continuous."""
+        """str : String defining if the dynamics are discrete or continuous.
+        
+        A discrete system is defined by a difference equation 
+
+        .. math::
+
+        x(t_{k+1}) = f(t_k,x(t_k),u(t_k))
+
+        and a continouse system is defined by the ordinary differential equation
+
+        .. math::
+
+        \dot{x}(t_k)=f(t_k,x(t_k),u(t_k))).
+
+        """
         return self._system_type
     
     @system_type.setter 
@@ -175,7 +190,14 @@ class system:
         
     @property 
     def t0(self):
-        """float : Initial time of the optimal control problem."""
+        """float : Initial time of the optimal control problem.
+        
+        This means that the initial state :math:`x_0` is measured 
+        at the time :math:`t_0`.
+        The state :math:`x(t)` is evaluated at the time instances 
+        :math:`t_0 + kh` during the MPC loop where :math:`h` is 
+        the :py:attr:`~sampling_rate`.
+        """
         return self._t0
     
     @t0.setter 
@@ -190,9 +212,9 @@ class system:
         """int : Dimension of the state. 
         
         This means the value of :math:`x(t)` at a given time :math:`t_k` 
-        is a element of :math:`\mathbb{R}^{nx \\times nx}`.
+        is a element of :math:`\mathbb{R}^{nx}`.
         In the linear case this value equals with the dimension 
-        of the system matrix :math:`A`.
+        of the system matrix :math:`A \in \mathbb{R}^{nx \\time nx}`.
         """
         return self._nx
     
@@ -211,9 +233,9 @@ class system:
         """int : Dimension of the control.
         
         his means the value of :math:`u(t)` at a given time :math:`t_k` 
-        is a element of :math:`\mathbb{R}^{nu \\times nu}`.
+        is a element of :math:`\mathbb{R}^{nu}`.
         In the linear case this value equals with the dimension 
-        of the control matrix :math:`B`.
+        of the columns of the control matrix :math:`B \in \mathbb{R}^{nx \\times nu}`.
         """
         return self._nu
     
@@ -273,7 +295,21 @@ class system:
     
     @property
     def type(self):
-        """str : If LQP, the systemdynamics are linear."""
+        """str : Indicating whether the system dynamics are linear.
+        
+        If `LQP`, the system dynamics are linear.
+        This means that the the righthandside of the system dynamics 
+        is given by
+
+        .. math::
+
+           f(x,u) = Ax + Bu.
+
+        It also implies that the system is :py:attr:`~autonomous`.
+
+        If the system dynamics are not initialized as linear with the :py:method:`~LQP` 
+        method this attribute holds the value `NLP`.
+        """
         return self._type
     
     def __str__(self):
