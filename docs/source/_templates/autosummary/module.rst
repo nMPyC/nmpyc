@@ -25,16 +25,16 @@
     {% endfor %}
 {% endif %}
 
-{% if modules %}
+{% if attributes %}
 .. automodule:: {{ fullname }}
 .. currentmodule:: {{ fullname }}
 
 .. autosummary::
    :toctree:
    :recursive:
-   :template: module.rst
-   {% for module in modules %}
-   {{ module }}
+   :template: attribute.rst
+   {% for attribute in attributes %}
+   {{ attribute }}
    {% endfor %}
 {% endif %}
 
