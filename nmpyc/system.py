@@ -228,6 +228,7 @@ class system:
     @property 
     def autonomous(self):
         """bool : If True, the system is time-invariant. 
+        
         That menas that the righthandside of the dynamics :math:`f(t,x,u)` 
         are not explicitly depend on the time variable :math:`t`.
         In this case :math:`f(t,x,u)=f(x,u)` holds."""
