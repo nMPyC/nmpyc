@@ -130,7 +130,7 @@ class objective:
         By default :math:`\delta = 1` holds and in this case the problem 
         is called undiscounted.
         The discont factor for the OCP of the MPC simulation can be set 
-        by calling the the :py:meth:`~mpc` method.
+        by calling the the :py:meth:`model.mpc` method.
         """
         return self._discont
     
