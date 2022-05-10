@@ -137,7 +137,19 @@ class constraints:
     
     @property 
     def type(self):
-        """str : If LQP, all constraints are linear."""
+        """str : Indicating whether all constraints are linear.
+        
+        If `LQP`, all constraints are linear.
+        This means that all constraints are of the form
+
+        .. math::
+
+           Ex + Fu \leq h
+
+        If at least one constraint is initialized as a nonlinear constraint 
+        this attribute has the value `NLP`.
+        """
+
         return self._type
         
     def __str__(self):
