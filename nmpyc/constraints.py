@@ -15,8 +15,12 @@ class constraints:
     """
     A class used to define the constraints of the optimnal control problem.
     
-    Support of Nonlinear, linear and boxconstraints are implemented 
+    Support of nonlinear, linear and boxconstraints are implemented 
     and provided.
+
+    To define the constraints, an empty object must first be created. 
+    Then the individual constraints can be added with the help of the methods
+    :py:meth:`add_bound` and :py:meth:`add_constr`.
     """
     
     def __init__(self):
@@ -39,47 +43,151 @@ class constraints:
         
     @property
     def lower_bndx(self):
-        """array : Lower bound for the state."""
+        """array : Lower bound :math:`l_x \in \mathbb{R}^{nx}` for the state.
+        
+        That means for all states :math:`x(t_k)` the inequality 
+
+        .. math::
+
+           x_i(t_k) \geq l_{x_i} \quad \\text{for } i = 1,\ldots,nx
+
+        holds as a constraint.
+        """
         return self._lower_bndx 
     
     @property
     def upper_bndx(self):
-        """array : Upper bound for the state."""
+        """array : Upper bound :math:`u_x \in \mathbb{R}^{nx}` for the state.
+        
+        That means for all states :math:`x(t_k)` the inequality 
+
+        .. math::
+
+           x_i(t_k) \leq u_{x_i} \quad \\text{for } i = 1,\ldots,nx
+
+        holds as a constraint.
+        """
         return self._upper_bndx 
     
     @property
     def lower_bndu(self):
-        """array : Lower bound for the control."""
+        """array : Lower bound :math:`l_u \in \mathbb{R}^{nu}` for the control.
+        
+        That means for all controls :math:`u(t_k)` the inequality 
+
+        .. math::
+
+           u_i(t_k) \geq l_{u_i} \quad \\text{for } i = 1,\ldots,nu
+
+        holds as a constraint.
+        """
         return self._lower_bndu
     
     @property
     def upper_bndu(self):
-        """array : Upper bound for the control."""
+        """array : Upper bound :math:`u_u \in \mathbb{R}^{nu}` for the control.
+        
+        That means for all controls :math:`u(t_k)` the inequality 
+
+        .. math::
+
+           u_i(t_k) \leq u_{u_i} \quad \\text{for } i = 1,\ldots,nu
+
+        holds as a constraint.
+        """
         return self._upper_bndu 
     
     @property 
     def lower_bndend(self):
-        """array : Lower bound for the terminal state."""
+        """array : Lower bound :math:`l_x \in \mathbb{R}^{nx}` for the terminal state.
+        
+        That means for the terminal state :math:`x(t_N)` the inequality 
+
+        .. math::
+
+           x_i(t_N) \geq l_{x_i} \quad \\text{for } i = 1,\ldots,nx
+
+        holds as a constraint.
+        """
         return self._lower_bndend
     
     @property 
     def upper_bndend(self):
-        """array : Upper bound for the terminal state."""
+        """array : Upper bound :math:`u_x \in \mathbb{R}^{nx}` for the terminal state.
+        
+        That means for the terminal state :math:`x(t_N)` the inequality 
+
+        .. math::
+
+           x_i(t_N) \leq u_{x_i} \quad \\text{for } i = 1,\ldots,nx
+
+        holds as a constraint.
+        """
         return self._upper_bndend
     
     @property 
     def linear_constr(self):
-        """dict : Collection of all linear constraints."""
+        """dict : Collection of all linear constraints.
+        
+        This dictionary has the following form:
+
+        >>> linear_constr = {'eq': [..], 'ineq': [..], 
+        >>>                  'terminal_eq': [..], 'terminal_ineq': [..]}
+
+        In the lists contained in the dictionary the arrays defining the 
+        constraint are saved. 
+        For example
+
+        >>> linear_constr['eq'][0]
+
+        returns a list with the arrays :math:`H`, :math:`F` and :math:`h` defining the 
+        first equality constraint
+
+        .. math::
+
+           Hx + Fu = h.
+        """
         return self._linear_constr
     
     @property 
     def nonlinear_constr(self):
-        """dict : Collection of all nonlinear constraints."""
+        """dict : Collection of all nonlinear constraints.
+        
+        This dictionary has the following form:
+
+        >>> nonlinear_constr = {'eq': [..], 'ineq': [..], 
+        >>>                     'terminal_eq': [..], 'terminal_ineq': [..]}
+
+        In the lists contained in the dictionary the function defining the 
+        constraints are saved. 
+        For example
+
+        >>> nonlinear_constr['eq'][0]
+
+        returns the function :math:`h(t,x,u)` defining the 
+        first equality constraint
+
+        .. math::
+
+           h(t,x,u) = 0.
+        """
         return self._nonlinear_constr
     
     @property 
     def type(self):
-        """str : If LQP, all constraints are linear."""
+        """str : Indicating whether all constraints are linear.
+        
+        If `LQP`, all constraints are linear.
+        This means that all constraints are of the form
+
+        .. math::
+
+           Ex + Fu \leq h
+
+        If at least one constraint is initialized as a nonlinear constraint 
+        this attribute has the value `NLP`.
+        """
+
         return self._type
         
     def __str__(self):
@@ -151,6 +259,11 @@ class constraints:
     def add_bound(self, bnd_type, variable, bound):
         """Add bounds as linear constraints to the OCP.
 
+        Note, that while adding the bound it is not 
+        checked if the bounds have the correct shape.
+        This will be verified later during the optimization 
+        progress.
+
         Parameters
         ----------
         bnd_type : str
@@ -160,6 +273,17 @@ class constraints:
             Posiible values are state, control and terminal.
         bound : array
             Array containing the values of the bound.
+
+        
+        For example 
+
+        >>> constraints.add_bound('lower', 'state', lbx)
+
+        will add `lbx` as :py:attr:`~lower_bndx` while
+
+        >>> constraints.add_bound('upper', 'terminal', ub_end)
+
+        will add `ub_end` as :py:attr:`~upper_bndend`.
 
         """
         
@@ -215,15 +339,31 @@ class constraints:
     def add_constr(self, cons_type, *args):
         """Add linear or nonlinear constraints to the OCP.
         
-        Nonlinear inequality constraints are of the form   
-        g(t,x,u) >= 0 or g(x,u) >= 0.
+        Nonlinear inequality constraints are of the form 
+
+        .. math::
+
+           g(t,x,u) \geq 0 \quad \\text{or} \quad g(x,u) \geq 0.
+
         Nonlinear equality constraints are of the form
-        h(t,x,u) = 0 or h(x,u) = 0.
+
+        .. math::
+
+           h(t,x,u) = 0 \quad \\text{or} \quad h(x,u) = 0.
+
         Linear inequality constraints are of the form 
-        Ex + Fu >= h.
+
+        .. math::
+
+           Ex + Fu \geq h.
+
         Linear equality constraints are of the form 
-        Ex + Fu = h.
-        For the form of terminal constrains see add_terminalconstr().
+
+        .. math::
+
+           Ex + Fu = h.
+
+        For the form of terminal constrains see :py:meth:`~add_terminalconstr`.
 
         Parameters
         ----------
@@ -235,6 +375,18 @@ class constraints:
             arrays defining the linear constraints. 
             In the letter case the order of arguments are E, F, h and 
             if h is undefined this array is set to zero.
+
+
+
+        For example 
+
+        >>> constraints.add_constr('ineq', E, F, h)
+
+        will add a linear inequality constraint to :py:attr:`linear_constr` while
+
+        >>> constraints.add_constr('terminal_eq',h_end)
+
+        will add a nonlinear equality terminal constraint to :py:attr:`nonlinear_constr`.
 
         """
         
@@ -298,14 +450,29 @@ class constraints:
     def add_terminalconstr(self, cons_type, *args):
         """Add linear or nonlinear terminal constraints to the OCP.
         
-        Nonlinear terminal inequality constraints are of the form   
-        g(t,x) >= 0 or g(x) >= 0.
+        Nonlinear terminal inequality constraints are of the form 
+
+        .. math::
+
+           g(t,x) \geq 0 \quad \\text{or} g(x) \geq 0.
+
         Nonlinear terminal equality constraints are of the form
-        h(t,x) = 0 or h(x) = 0.
+
+        .. math::
+
+           h(t,x) = 0 \quad \\text{or} \quad h(x) = 0.
+
         Linear terminal inequality constraints are of the form 
-        Ex >= h.
+
+        .. math::
+
+           Ex \geq h.
+
         Linear terminal equality constraints are of the form 
-        Ex = h.
+
+        .. math::
+        
+           Ex = h.
 
         Parameters
         ----------
@@ -318,6 +485,17 @@ class constraints:
             In the letter case the order of arguments are E, h and 
             if h is undefined this array is set to zero.
 
+
+
+        For example 
+
+        >>> constraints.add_terminalconstr('ineq', E, F, h)
+
+        will add a linear inequality terminal constraint to :py:attr:`linear_constr` while
+
+        >>> constraints.add_constr('eq',h)
+
+        will add a nonlinear equality terminal constraint to :py:attr:`nonlinear_constr`.
         """
         
         if not isinstance(cons_type, str):
@@ -369,7 +547,7 @@ class constraints:
             self._type = 'NLP'
                 
     def save(self, path):
-        """Saving the constraints to a given file with dill.
+        """Saving the constraints to a given file with `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.
         
         The path can be absolut or relative and 
         the ending of the file is arbitrary.
@@ -379,6 +557,13 @@ class constraints:
         path : str
             String defining the path to the desired file. 
 
+
+
+        For example
+
+        >>> constraints.save('constraints.pickle')
+        
+        will create a file `constraints.pickle` contain the nMPyC constraints object.
         """
         
         with open(path, "wb") as output_file:
@@ -386,18 +571,36 @@ class constraints:
     
     @classmethod
     def load(cls, path):
-        """Loads a nMPyC constraint object from a given path."""
+        """Loads a nMPyC constraints object from a file.
+        
+        The specified path must lead to a file that was previously saved with
+        :py:meth:`~save`.
+        
+        Parameters
+        ----------
+        path : str
+            String defining the path to the file containing the nMPyC 
+            constraints object. 
+            
+            
+        For example
+
+        >>> constraints.load('constraints.pickle')
+        
+        will load the constraints previously saved with :py:meth:`~save`.
+            
+        """
         
         try:
             with open(path, "rb") as input_file:
                 e = dill.load(input_file)
         except:
             raise Exception(
-                'Can not load model from file. File not readable!')
+                'Can not load constraints from file. File not readable!')
             
         if not isinstance(e, constraints):
             raise Exception(
-                'Can not load model from file. File does not cotain a model!')
+                'Can not load constraints from file. File does not cotain a constraints!')
             
         return e
                 

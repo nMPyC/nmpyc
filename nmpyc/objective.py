@@ -13,27 +13,27 @@ import dill
 
 class objective:
     """
-    A class used to define the objective of the optimnal control problem.
+    A class used to define the objective of the optimal control problem.
     
-    The objective depends on stage costs and optional terminal cost ad has the form
+    The objective depends on the stage cost and optional on terminal cost and has the form
 
     .. math::
 
        J(t,x,u,N) := \sum_{k=0}^{N-1} \ell(t_k,x(t_k),u(t_k)) + F(t_N,x(t_N)).
 
-    The values of the times :math:`t_k` are defined by initilizing the :py:class:`nmpyc.system.system`.
+    The values of the times :math:`t_k` are defined by initializing the :py:class:`nmpyc.system.system`.
     For the slightly different form of the objective in the discounted case see :py:attr:`~discount`.
     
     Parameters
     ----------
     stagecost : callable
-        A function defining the stage costs of the optimal control problem. 
+        A function defining the stage cost of the optimal control problem. 
         Has to be of the form :math:`\ell(t,x,u)` or :math:`\ell(x,u)` in the :py:attr:`~autonomous` case.
         See also :py:attr:`stagecost`.
     terminalcost : callable, optional
         A function defining the terminal cost of the optimal control 
         problem. Has to be of the form :math:`F(t,x)` or :math:`F(x)` in the autonomous 
-        case. If None, no terminal cost is applied. 
+        case. If None, no terminal cost is added. 
         The default is None. See also :py:attr:`terminalcost`.
     
     """
@@ -50,13 +50,13 @@ class objective:
         """callable or list of array: Stage cost :math:`\ell(t,x,u)`.
         
         The return value of this attribute depends on how the 
-        objective was initialized. 
+        objective is initialized. 
         If it is initialized as a quadratic objective by :py:meth:`~LQP` a list 
         containing the arrays defining the stage cost are returned. 
-        If the obejctive was initalized by possible nonlinear callable functions 
-        the function defining the stage cost is return. 
-        Note, that even if :py:attr:`~autonomous` is True the returned funtion depends 
-        on the time and always has the form :math:`\ell(t,x,u)`.
+        If the obejctive is initalized by possibly nonlinear callable functions 
+        the function defining the stage cost is returned. 
+        Note, that even if :py:attr:`~autonomous` is True the returned function depends 
+        on the time :math:`t` and always has the form :math:`\ell(t,x,u)`.
         """
         return self._L
     
@@ -94,13 +94,13 @@ class objective:
         """callable or array: Terminal cost :math:`F(t,x)`.
         
         The return value of this attribute depends on how the 
-        objective was initialized. 
+        objective is initialized. 
         If it is initialized as a quadratic objective by :py:meth:`~LQP` the 
         array defining the terminal cost is returned. 
-        If the obejctive was initalized by possible nonlinear callable functions 
-        the function defining the terminal cost is return. 
-        Note, that even if :py:attr:`~autonomous` is True the returned funtion depends 
-        on the time and always has the form :math:`\ell(t,x,u)`.
+        If the obejctive is initalized by possibly nonlinear callable functions 
+        the function defining the terminal cost is returned. 
+        Note, that even if :py:attr:`~autonomous` is True the returned function depends 
+        on the time :math:`t` and always has the form :math:`\ell(t,x,u)`.
         """
         return self._F
     
@@ -132,26 +132,26 @@ class objective:
     def autonomous(self):
         """bool : If True, the objective is autonomous. 
         
-        That menas that the stage costs and terminal cost 
+        The stage cost and terminal cost 
         of the objective :math:`J(t,x,u,N)` 
-        are not explicitly depend on the time variable :math:`t`.
+        are not explicitly dependend on the time variable :math:`t`.
         In this case :math:`J(t,x,u,N)=J(x,u,N)` holds."""
 
         return self._autonomous
     
     @property 
     def type(self):
-        """str : Indicating whether the objective is quadratic.
+        """str : Indicating whether the objective is quadratic or nonlinear.
         
         If `LQP`, the objective is quadratic.
-        This means that the the stage cost 
+        Then the stage cost 
         is given by
 
         .. math::
 
            \ell(x,u) = x^TQx + u^TRu + 2x^TNx.
 
-        and the terminal cost reads as
+        and the terminal cost is given by
 
         .. math::
 
@@ -159,7 +159,7 @@ class objective:
 
         It also implies that the system is :py:attr:`~autonomous`.
 
-        If the objective is not initialized as quadratic with the :py:meth:`~LQP` 
+        If the objective is not initialized as quadratic function with the :py:meth:`~LQP` 
         method this attribute holds the value `NLP`.
         """
         return self._type
@@ -169,15 +169,14 @@ class objective:
         """float : The discount factor of the objective.
         
         For a discount factor :math:`\delta \in (0,1]` the 
-        discounted objectivefunction reads as
+        discounted objective function is given by
 
         .. math::
            
            J(t,x,u,N) = \sum_{k=0}^{N-1} \delta^k \ell(t_k,x(t_k),u(t_k)) + F(t_N,x(t_N)).
 
-        By default :math:`\delta = 1` holds and in this case the problem 
-        is called undiscounted.
-        The discont factor for the OCP of the MPC simulation can be set 
+        By default the discount factor is equal to 1 :math:`\delta = 1`. Then, we name the problem undiscounted.
+        The discount factor for the OCP of the MPC simulation can be set 
         when the :py:meth:`nmpyc.model.model.mpc` method is called.
         """
         return self._discont
@@ -217,12 +216,12 @@ class objective:
     def LQP(cls, Q, R, N=None, P=None):
         """Initialize a quadratic objective.
 
-        In this case the stage costs of the objective have the form
+        In this case the stage cost of the objective has the form
 
         .. math::
            \ell(x,u) = x^T Q x + u^T R u + 2 x^T Q u
 
-        and the optional terminal cost are defined as 
+        and the optional terminal cost is defined as 
 
         .. math::
            F(x,u) = x^T P x.
@@ -232,11 +231,11 @@ class objective:
         Parameters
         ----------
         Q : array
-            Matrix defining the costs of the state of the form :math:`x^TQx`.
+            Matrix defining the cost of the state of the form :math:`x^TQx`.
         R : array
             Matrix defining the cost of the control of the form :math:`u^TRu`.
         N : array, optional
-            Possible Matrix defining the mixed costterm of the form :math:`2x^TNu`. 
+            Possible Matrix defining the mixed cost term of the form :math:`2x^TNu`. 
             The default is None.
         P : array, optional
             Posible Matrix defining the terminal cost of the form :math:`x^TPx`. 
@@ -296,7 +295,7 @@ class objective:
         
         The terminal cost must be a callable function of the form :math:`F(t,x)` 
         or :math:`F(x)` in the autonomous case. If terminal cost already exists they 
-        will be overwritten by the new one given.
+        will be over written.
 
         Parameters
         ----------
@@ -310,9 +309,9 @@ class objective:
         self.terminalcost = terminalcost
         
     def J(self, t, x, u, N):
-        """Evaluate objectivefunction of the OCP.
+        """Evaluate objective function of the OCP.
 
-        The objectivefunction is assembled from the stage costs :math:`\ell(t,x,u)` 
+        The objective function is assembled from the stage cost :math:`\ell(t,x,u)` 
         and optional terminal cost :math:`F(t,x)` and has the form 
 
         .. math::
@@ -324,21 +323,21 @@ class objective:
         Parameters
         ----------
         t : array
-            Timesequence at which the stage costs and terminal cost are evaluated.
+            Times instant at which the stage costs and terminal cost are evaluated.
         x : array
-            State trajectory at which the stage costs and terminal cost are 
+            State trajectory at which the stage cost and terminal cost are 
             evaluated.
         u : array
-            Control sequence at which the stage costs are evaluated.
+            Control sequence at which the stage cost is evaluated.
         N : int
-            Maximum index up to which the stage costs are to be summed up. 
+            Maximum index up to which the stage cost are summed. 
             During the MPC iteration this index is equivalent to 
             the MPC horizon.
 
         Returns
         -------
         J : array
-            Value of the objectivefunction at the given input parameters.
+            Value of the objective function at the given input parameters.
 
         """
         
@@ -362,16 +361,16 @@ class objective:
         Parameters
         ----------
         t : float
-            Time at which the stage cost should be evaluated.
+            Time instant at which the stage cost is evaluated.
         x : array
-            Current state at which the stage cost should be evaluated.
+            Current state at which the stage cost is evaluated.
         u : array
-            Current control at which the stage cost should be evaluated.
+            Current control at which the stage cost is evaluated.
 
         Returns
         -------
         array
-            Stage cost evaluated at the given values.
+            Stage cost evaluated at the given input values.
             
         """
             
@@ -390,14 +389,14 @@ class objective:
         Parameters
         ----------
         t : float
-            Time at which the terminal cost should be evaluated.
+            Time instant at which the terminal cost is evaluated.
         x : array
-            Current state at which the terminal cost should be evaluated.
+            Current state at which the terminal cost is evaluated.
 
         Returns
         -------
         array
-            Terminal cost evaluated at the given values.
+            Terminal cost evaluated at the given input values.
 
         """
         
@@ -425,7 +424,7 @@ class objective:
 
         >>> objective.save('objective.pickle')
         
-        will create a file `objective.pickle` contain the nMPyC objective object.
+        will create a file `objective.pickle` containing the nMPyC objective object.
         """
 
         
@@ -464,6 +463,6 @@ class objective:
             
         if not isinstance(e, objective):
             raise Exception(
-                'Can not load objective from file. File does not cotain a objective!')
+                'Can not load objective from file. File does not contain a objective!')
             
         return e

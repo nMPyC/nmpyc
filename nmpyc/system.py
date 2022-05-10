@@ -16,7 +16,7 @@ from nmpyc.utils import mpc_convert
 
 class system:
     """
-    A class used to define the system dynamics of a optimnal control problem.
+    A class used to define the system dynamics of an optimal control problem.
 
     The dynamics can be discrete or continuous. 
     A discrete system is defined by a difference equation 
@@ -25,7 +25,7 @@ class system:
 
        x(t_{k+1}) = f(t_k,x(t_k),u(t_k))
 
-    and a continouse system is defined by the ordinary differential equation
+    and a continous system is defined by the ordinary differential equation
 
     .. math::
 
@@ -37,26 +37,26 @@ class system:
     Parameters
     ----------
     f : callable
-        Function defining the righthandside of the system dynamics of 
+        Function defining the right hand side of the system dynamics of 
         the form :math:`f(t,x,u)` or :math:`f(x,u)` in the 
         :py:attr:`~autonomous` case. See also :py:attr:`~f`.
     nx : int
-        Dimension of the state. Must be a psoitive integer. 
+        Dimension of the state. Must be a positive integer. 
         See also :py:attr:`~nx`.
     nu : int
-        Dimension of the control. Must be a psoitive integer. 
+        Dimension of the control. Must be a positive integer. 
         See also :py:attr:`~nu`.
     system_type : str, optional
         String defining if the given system dynamics are 
         discrete or continuous. The default is 'discrete'.
     sampling_rate : float, optional
-        Sampling rate defining at which timeinstances the 
+        Sampling rate defining at which time instances the 
         dynamics are evaluated. The default is 1.
     t0 : float, optional
         Initial time for the optimal control problem. The default is 0.
         See also :py:attr:`~t0`.
     method : str, optional
-        String defining which integration methode should be used to discretize 
+        String defining which integration method should be used to discretize 
         the system dynamics. The default is 'cvodes'. 
         For further informations about the provided integrators see 
         :py:attr:`~method`.
@@ -88,12 +88,12 @@ class system:
                 
     @property 
     def f(self):
-        """callable or list of array: Righthandside :math:`f(t,x,u)` of the system dynamics.
+        """callable or list of array: Right hand side :math:`f(t,x,u)` of the system dynamics.
         
-        The return value of this attribute depends on how the system was initialized.
+        The return value of this attribute depends on how the system is initialized.
         If it is initialized as a linear system by :py:meth:`~LQP` a list containing the arrays defining the 
         system dynamics are returned.
-        If the system was initalized by a possible nonlinear callable function this function is return. 
+        If the system is initalized by a possible nonlinear callable function this function is returned. 
         Note, that even if :py:attr:`~autonomous` is True the returned funtion depends on the time 
         and always has the form :math:`f(t,x,u)`.
         """
@@ -130,7 +130,7 @@ class system:
         
     @property 
     def system_type(self):
-        """str : String defining if the dynamics are discrete or continuous.
+        """str : String defining whether the dynamics are discrete or continuous.
         
         A discrete system is defined by a difference equation 
 
@@ -138,7 +138,7 @@ class system:
 
            x(t_{k+1}) = f(t_k,x(t_k),u(t_k))
 
-        and a continouse system is defined by the ordinary differential equation
+        and a continous system is defined by the ordinary differential equation
 
         .. math::
 
@@ -162,9 +162,9 @@ class system:
     def h(self):
         """float : Sampling time :math:`h` of the system.
         
-        This attribute defines at which timeinstances the 
+        This attribute defines at which time instances the 
         dynamics are evaluated. 
-        This means the time :math:`t_k` is given by the euqation
+        This means the time :math:`t_k` is given by the equation
 
         .. math::
            
@@ -192,8 +192,8 @@ class system:
     def t0(self):
         """float : Initial time of the optimal control problem.
         
-        This means that the initial state :math:`x_0` is measured 
-        at the time :math:`t_0`.
+        The initial state :math:`x_0` is measured 
+        at time :math:`t_0`.
         The state :math:`x(t)` is evaluated at the time instances 
         :math:`t_0 + kh` during the MPC loop where :math:`h` is 
         the :py:attr:`~sampling_rate`.
@@ -211,7 +211,7 @@ class system:
     def nx(self):
         """int : Dimension of the state. 
         
-        This means the value of :math:`x(t)` at a given time :math:`t_k` 
+        The value of :math:`x(t)` at a given time :math:`t_k` 
         is a element of :math:`\mathbb{R}^{nx}`.
         In the linear case this value equals with the dimension 
         of the system matrix :math:`A \in \mathbb{R}^{nx \\times nx}`.
@@ -232,7 +232,7 @@ class system:
     def nu(self):
         """int : Dimension of the control.
         
-        his means the value of :math:`u(t)` at a given time :math:`t_k` 
+        The value of :math:`u(t)` at a given time :math:`t_k` 
         is a element of :math:`\mathbb{R}^{nu}`.
         In the linear case this value equals with the dimension 
         of the columns of the control matrix :math:`B \in \mathbb{R}^{nx \\times nu}`.
@@ -251,7 +251,7 @@ class system:
         
     @property 
     def method(self):
-        """str : Integration methode for discretization of the dynamics.
+        """str : Integration method for discretization of the dynamics.
         
         The following integrators are currently supported:   
 
@@ -288,8 +288,8 @@ class system:
     def autonomous(self):
         """bool : If True, the system is time-invariant. 
         
-        That menas that the righthandside of the dynamics :math:`f(t,x,u)` 
-        are not explicitly depend on the time variable :math:`t`.
+        The right hand side of the dynamics :math:`f(t,x,u)` 
+        are not explicitly dependent on the time variable :math:`t`.
         In this case :math:`f(t,x,u)=f(x,u)` holds."""
         return self._autonomous
     
@@ -298,7 +298,7 @@ class system:
         """str : Indicating whether the system dynamics are linear.
         
         If `LQP`, the system dynamics are linear.
-        This means that the the righthandside of the system dynamics 
+        The right hand side of the system dynamics 
         is given by
 
         .. math::
@@ -308,7 +308,7 @@ class system:
         It also implies that the system is :py:attr:`~autonomous`.
 
         If the system dynamics are not initialized as linear with the :py:meth:`~LQP` 
-        method this attribute holds the value `NLP`.
+        method this attribute has the value `NLP`.
         """
         return self._type
     
@@ -332,45 +332,45 @@ class system:
     @classmethod
     def LQP(cls, A, B , nx, nu, system_type='discrete', 
             sampling_rate=1., t0=0., method='euler'):
-        """Initialize a system with linear dynamics.
+        """Initialize the system with linear dynamics.
         
-        In this case the linear righthandside of the dynamics has the 
+        In this case the right hand side of the dynamics has the 
         form :
         
         .. math::
             
            f(x,u) = Ax+Bu 
             
-        which is always :py:attr:`~autonomouse`.   
+        which is always :py:attr:`~autonomous`.   
         If not a fixed step method is choosen for integration the optimizer 
         can not use the linear structure of the problem during the 
-        optimization progress.
+        optimization process.
         
         Parameters
         ----------
         A : array
-            Matrix definig the linear state inmpact on the righthandside 
+            Matrix definig the linear state input on the right hand side 
             of the dynamics.
         B : array
-            Matrix definig the linear state inmpact on the righthandside 
-            of the dynamics..
+            Matrix definig the linear state input on the right hand side 
+            of the dynamics.
         nx : int
-            Dimension of the state. Must be a psoitive integer. 
+            Dimension of the state. Must be a positive integer. 
             See also :py:attr:`~nx`.
         nu : int
-            Dimension of the control. Must be a psoitive integer. 
+            Dimension of the control. Must be a positive integer. 
             See also :py:attr:`~nu`.
         system_type : str, optional
-            String defining if the given system dynamics are 
+            String defining whether the given system dynamics are 
             discrete or continuous. The default is 'discrete'.
         sampling_rate : float, optional
-            Sampling rate defining at which timeinstances the 
+            Sampling rate defining at which time instances the 
             dynamics are evaluated. The default is 1.
         t0 : float, optional
             Initial time for the optimal control problem. The default is 0.
             See also :py:attr:`~t0`.
         method : str, optional
-            String defining which integration methode should be used to discretize 
+            String defining which integration method should be used to discretize 
             the system dynamics. The default is 'euler'. 
             For further informations about the provided integrators see 
             :py:attr:`~method`.
@@ -418,11 +418,11 @@ class system:
             and their values.
 
 
-        The availible options are depending on the choosen :py:attr:`~method` for integration.
-        For the nMPyC integrators the only availible option is `number_of_finit_elements` 
+        The available options are depending on the choosen :py:attr:`~method` of integration.
+        For the nMPyC integrators the only available option is `number_of_finit_elements` 
         which must be an int greater than zero and defines how many discretation steps are 
-        computet during one sampling period defined by the sampling rate.
-        The availible options for the CasADi integrators can be found at `Sourceforge <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_ and for the SciPy integrators at the `Scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_.
+        computed during one sampling period defined by the sampling rate.
+        The available options for the CasADi integrators can be found at `Sourceforge <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_ and for the SciPy integrators at the `Scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_.
 
         """
         
@@ -434,21 +434,21 @@ class system:
     
     @mpc_convert
     def system_discrete(self, t, x, u):
-        """Evaluate discretized righthandside of the system dynamics.
+        """Evaluate discretized right hand side of the system dynamics.
 
         Parameters
         ----------
         t : float
-            Time at which the system dynamics shoul be evaluated.
+            Time instant at which the system dynamics are evaluated.
         x : array
-            State value at which the system dynamics shoul be evaluated.
+            State value at which the system dynamics are evaluated.
         u : array
-            Control value at which the system dynamics shoul be evaluated.
+            Control value at which the system dynamics are evaluated.
 
         Returns
         -------
         array
-            Value of the discretized righthandside of the dynamics 
+            Value of the discretized right hand side of the dynamics 
             evaluated at the given inputs.
 
         """
@@ -481,21 +481,21 @@ class system:
     
     @mpc_convert
     def system(self, t, x, u):
-        """Evaluate righthandside :math:`f(t,x,u)` of the dynamics.
+        """Evaluate right hand side :math:`f(t,x,u)` of the dynamics.
 
         Parameters
         ----------
         t : float
-            Time at which the system dynamics shoul be evaluated.
+            Time instant at which the system dynamics are evaluated.
         x : array
-            State value at which the system dynamics shoul be evaluated.
+            State value at which the system dynamics are evaluated.
         u : array
-            Control value at which the system dynamics shoul be evaluated.
+            Control value at which the system dynamics are evaluated.
 
         Returns
         -------
         array
-            Value of the possible not discrete righthandside of the dynamics 
+            Value of the possible not discrete right hand side of the dynamics 
             evaluated at the given inputs.
 
         """
@@ -642,7 +642,7 @@ class system:
 
         >>> system.save('system.pickle')
         
-        will create a file `system.pickle` contain the nMPyC system object.
+        will create a file `system.pickle` containing the nMPyC system object.
         """
         
         with open(path, "wb") as output_file:
