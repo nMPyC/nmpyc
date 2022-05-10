@@ -339,7 +339,6 @@ class constraints:
             if h is undefined this array is set to zero.
 
 
-        For example
 
         For example 
 
@@ -413,14 +412,29 @@ class constraints:
     def add_terminalconstr(self, cons_type, *args):
         """Add linear or nonlinear terminal constraints to the OCP.
         
-        Nonlinear terminal inequality constraints are of the form   
-        g(t,x) >= 0 or g(x) >= 0.
+        Nonlinear terminal inequality constraints are of the form 
+
+        .. math::
+
+           g(t,x) \geq 0 \quad \\text{or} g(x) \geq 0.
+
         Nonlinear terminal equality constraints are of the form
-        h(t,x) = 0 or h(x) = 0.
+
+        .. math::
+
+           h(t,x) = 0 \quad \\text{or} \quad h(x) = 0.
+
         Linear terminal inequality constraints are of the form 
-        Ex >= h.
+
+        .. math::
+
+           Ex \geq h.
+
         Linear terminal equality constraints are of the form 
-        Ex = h.
+
+        .. math::
+        
+           Ex = h.
 
         Parameters
         ----------
@@ -433,6 +447,17 @@ class constraints:
             In the letter case the order of arguments are E, h and 
             if h is undefined this array is set to zero.
 
+
+
+        For example 
+
+        >>> constraints.add_terminalconstr('ineq', E, F, h)
+
+        will add a linear inequality terminal constraint to :py:attr:`linear_constr` while
+
+        >>> constraints.add_constr('eq',h)
+
+        will add a nonlinear equality terminal constraint to :py:attr:`nonlinear_constr`.
         """
         
         if not isinstance(cons_type, str):
