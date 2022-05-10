@@ -49,7 +49,7 @@ class constraints:
 
         .. math::
 
-           x_i(t_k) \geq l_x_i \quad \text{for } i = 1,\ldots,nx
+           x_i(t_k) \geq l_{x_i} \quad \text{for } i = 1,\ldots,nx
 
         holds as a constraint.
         """
@@ -57,13 +57,13 @@ class constraints:
     
     @property
     def upper_bndx(self):
-        """array : Upper bound :math:`u_x \in \R^{nx}` for the state.
+        """array : Upper bound :math:`u_x \in \mathbb{R}^{nx}` for the state.
         
         That means for all states :math:`x(t_k)` the inequality 
 
         .. math::
 
-           x_i(t_k) \leq u_x_i \quad \text{for } i = 1,\ldots,nx
+           x_i(t_k) \leq u_{x_i} \quad \text{for } i = 1,\ldots,nx
 
         holds as a constraint.
         """
@@ -71,13 +71,13 @@ class constraints:
     
     @property
     def lower_bndu(self):
-        """array : Lower bound :math:`l_u \in \R^{nu}` for the control.
+        """array : Lower bound :math:`l_u \in \mathbb{R}^{nu}` for the control.
         
         That means for all controls :math:`u(t_k)` the inequality 
 
         .. math::
 
-           u_i(t_k) \geq l_u_i \quad \text{for } i = 1,\ldots,nu
+           u_i(t_k) \geq l_{u_i} \quad \text{for } i = 1,\ldots,nu
 
         holds as a constraint.
         """
@@ -85,13 +85,13 @@ class constraints:
     
     @property
     def upper_bndu(self):
-        """array : Upper bound :math:`u_u \in \R^{nu}` for the control.
+        """array : Upper bound :math:`u_u \in \mathbb{R}^{nu}` for the control.
         
         That means for all controls :math:`u(t_k)` the inequality 
 
         .. math::
 
-           u_i(t_k) \leq u_u_i \quad \text{for } i = 1,\ldots,nu
+           u_i(t_k) \leq u_{u_i} \quad \text{for } i = 1,\ldots,nu
 
         holds as a constraint.
         """
@@ -99,13 +99,13 @@ class constraints:
     
     @property 
     def lower_bndend(self):
-        """array : Lower bound :math:`l_x \in \R^{nx}` for the terminal state.
+        """array : Lower bound :math:`l_x \in \mathbb{R}^{nx}` for the terminal state.
         
         That means for the terminal state :math:`x(t_N)` the inequality 
 
         .. math::
 
-           x_i(t_N) \geq l_x_i \quad \text{for } i = 1,\ldots,nx
+           x_i(t_N) \geq l_{x_i} \quad \text{for } i = 1,\ldots,nx
 
         holds as a constraint.
         """
@@ -113,14 +113,13 @@ class constraints:
     
     @property 
     def upper_bndend(self):
-        """array : Upper bound for the terminal state.
-        :math:`u_x \in \R^{nx}` for the terminal state.
+        """array : Upper bound :math:`u_x \in \mathbb{R}^{nx}` for the terminal state.
         
         That means for the terminal state :math:`x(t_N)` the inequality 
 
         .. math::
 
-           x_i(t_N) \leq u_x_i \quad \text{for } i = 1,\ldots,nx
+           x_i(t_N) \leq u_{x_i} \quad \text{for } i = 1,\ldots,nx
 
         holds as a constraint.
         """
