@@ -102,7 +102,13 @@ class objective:
         
     @property 
     def autonomous(self):
-        """bool : If True, the objective is time independend."""
+        """bool : If True, the objective is autonomous. 
+        
+        That menas that the stage costs and terminal cost 
+        of the objective :math:`J(t,x,u,N)` 
+        are not explicitly depend on the time variable :math:`t`.
+        In this case :math:`J(t,x,u,N)=J(x,u,N)` holds."""
+
         return self._autonomous
     
     @property 
