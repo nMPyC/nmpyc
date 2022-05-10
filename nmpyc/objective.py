@@ -15,7 +15,11 @@ class objective:
     """
     A class used to define the objective of the optimnal control problem.
     
-    The objective depends on stage costs and optional terminal cost.
+    The objective depends on stage costs and optional terminal cost ad has the form
+
+    .. math::
+
+       J(t,x,u,N) := \sum_{k=0}^{N-1} \ell(t_k,x(t_k),u(t_k)) + F(t_N,x(t_N))
     
     Parameters
     ----------
@@ -125,7 +129,7 @@ class objective:
 
         .. math::
            
-           J(t,x,u,N) = \sum_{k=0}^{N-1} \delta^k \ell(t,x,u) + F(t,x).
+           J(t,x,u,N) = \sum_{k=0}^{N-1} \delta^k \ell(t_k,x(t_k),u(t_k)) + F(t_N,x(t_N)).
 
         By default :math:`\delta = 1` holds and in this case the problem 
         is called undiscounted.
