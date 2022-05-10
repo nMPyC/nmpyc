@@ -116,11 +116,6 @@ class model:
                 'MPC horizon N must be of type integer - not ' 
                 + str(type(NN)))
         
-    @property
-    def discount(self):
-        """float : Discountfactor of the objective"""
-        return self._objective.discont
-        
     def __str__(self):
         
         string = 'OBJECTIVE: \n'
