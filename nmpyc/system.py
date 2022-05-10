@@ -12,7 +12,7 @@ from inspect import signature
 import dill
 
 import nmpyc as mpc
-from nmpyc.utilis import mpc_convert
+from nmpyc.utils import mpc_convert
 
 class system:
     """

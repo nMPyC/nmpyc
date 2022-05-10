@@ -9,7 +9,7 @@ import numpy as np
 import osqp
 
 import nmpyc as mpc
-from nmpyc.utilis import flat_list
+from nmpyc.utils import flat_list
 
 from scipy.optimize import minimize
 import scipy.sparse as sparse

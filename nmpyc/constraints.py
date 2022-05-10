@@ -4,7 +4,7 @@
 # @author: Jonas Schiessl
 
 import nmpyc as mpc 
-from nmpyc.utilis import mpc_convert
+from nmpyc.utils import mpc_convert
 
 import numpy as np
 
