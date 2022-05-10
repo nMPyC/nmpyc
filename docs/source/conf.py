@@ -6,8 +6,8 @@ sys.path.insert(0, os.path.abspath('./'))
 # -- Project information -----------------------------------------------------
 
 project = 'nMPyC'
-copyright = '2022, Jonas Schießl'
-author = 'Jonas Schießl'
+copyright = '2022, Jonas Schießl, Lisa Krügel'
+author = 'Jonas Schießl, Lisa Krügel'
 
 version = '1.0.0'
 release = '1.0.0'
