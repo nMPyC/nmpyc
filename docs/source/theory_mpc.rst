@@ -1,7 +1,7 @@
 Basics of model predictive control
 ===================================
 
-**Model predictive control (MPC)** is an optimized-based method for obtaining an approximately optimal feedback control for an optimal control problem on an infinite or finite time horizon. The basic idea of MPC is to predict the future behavior of the controlled system over a finite time horizon and compute an optimal control input that, while ensuring satisfaction of given system constraints, minimizes the objective function. In each sampling instant a finite horizon open-loop optimal control problem is solved to calculate the control input. More precis, this control input is used to define the feedback which is applied to the system until the next sampling instant, at whicht the horizon is shifted and the procedure is repeated again.
+**Model predictive control (MPC)** is an optimized-based method for obtaining an approximately optimal feedback control for an optimal control problem on an infinite or finite time horizon. The basic idea of MPC is to predict the future behavior of the controlled system over a finite time horizon and compute an optimal control input that, while ensuring satisfaction of given system constraints, minimizes the objective function. In each sampling instant a finite horizon open-loop optimal control problem is solved to calculate the control input. More precisley, this control input is used to define the feedback which is applied to the system until the next sampling instant, at whicht the horizon is shifted and the procedure is repeated again.
 
 Optimal control problems
 --------------------------------
