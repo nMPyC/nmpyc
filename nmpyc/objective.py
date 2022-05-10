@@ -118,7 +118,15 @@ class objective:
     
     @property
     def discount(self):
-        """float : The discount factor of the objective."""
+        """float : The discount factor of the objective.
+        
+        For a discount factor :math:`\delta \in (0,1]` the 
+        discounted objectivefunction reads as
+
+        .. math::
+           
+           J(t,x,u,N) = \sum_{k=0}^{N-1} \delta^k \ell(t,x,u) + F(t,x).
+        """
         return self._discont
     
     @discount.setter
