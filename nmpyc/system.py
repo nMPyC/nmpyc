@@ -16,7 +16,7 @@ from nmpyc.utilis import mpc_convert
 
 class system:
     """
-    A class used to define the systemdynamics of a optimnal control problem.
+    A class used to define the system dynamics of a optimnal control problem.
 
     The dynamics can be discrete or continuous. 
     A discrete system is defined by a difference equation 
@@ -37,9 +37,9 @@ class system:
     Parameters
     ----------
     f : callable
-        Function defining the righthandside of the systemdynamics of 
-        the form :math:`f(t,x,u)` or :math:`f(x,u)` in the :py:attr:`~autonomous` case.
-        See also :py:attr:`~f`.
+        Function defining the righthandside of the system dynamics of 
+        the form :math:`f(t,x,u)` or :math:`f(x,u)` in the 
+        :py:attr:`~autonomous` case. See also :py:attr:`~f`.
     nx : int
         Dimension of the state. Must be a psoitive integer. 
         See also :py:attr:`~nx`.
@@ -47,7 +47,7 @@ class system:
         Dimension of the control. Must be a psoitive integer. 
         See also :py:attr:`~nu`.
     system_type : str, optional
-        String defining if the given systemdynamics are 
+        String defining if the given system dynamics are 
         discrete or continuous. The default is 'discrete'.
     sampling_rate : float, optional
         Sampling rate defining at which timeinstances the 
@@ -57,7 +57,7 @@ class system:
         See also :py:attr:`~t0`.
     method : str, optional
         String defining which integration methode should be used to discretize 
-        the systemdynamics. The default is 'cvodes'. 
+        the system dynamics. The default is 'cvodes'. 
         For further informations about the provided integrators see 
         :py:attr:`~method`.
         
@@ -88,11 +88,11 @@ class system:
                 
     @property 
     def f(self):
-        """callable or list of array: Righthandside :math:`f(t,x,u)` of the systemdynamics.
+        """callable or list of array: Righthandside :math:`f(t,x,u)` of the system dynamics.
         
         The return value of this attribute depends on how the system was initialized.
         If it is initialized as a linear system by :py:meth:`~LQP` a list containing the arrays defining the 
-        systemdynamics are returned.
+        system dynamics are returned.
         If the system was initalized by a possible nonlinear callable function this function is return. 
         Note, that even if :py:attr:`~autonomuse` is True the returned funtion depends on the time 
         and always has the form :math:`f(t,x,u)`.
@@ -361,7 +361,7 @@ class system:
             Dimension of the control. Must be a psoitive integer. 
             See also :py:attr:`~nu`.
         system_type : str, optional
-            String defining if the given systemdynamics are 
+            String defining if the given system dynamics are 
             discrete or continuous. The default is 'discrete'.
         sampling_rate : float, optional
             Sampling rate defining at which timeinstances the 
@@ -371,7 +371,7 @@ class system:
             See also :py:attr:`~t0`.
         method : str, optional
             String defining which integration methode should be used to discretize 
-            the systemdynamics. The default is 'euler'. 
+            the system dynamics. The default is 'euler'. 
             For further informations about the provided integrators see 
             :py:attr:`~method`.
 
@@ -434,16 +434,16 @@ class system:
     
     @mpc_convert
     def system_discrete(self, t, x, u):
-        """Discretized version of the righthandside of the system dynamics.
+        """Evaluate discretized righthandside of the system dynamics.
 
         Parameters
         ----------
         t : float
-            Time at which the systemdynamic shoul be evaluated.
+            Time at which the system dynamics shoul be evaluated.
         x : array
-            State value at which the systemdynamic shoul be evaluated.
+            State value at which the system dynamics shoul be evaluated.
         u : array
-            Control value at which the systemdynamic shoul be evaluated.
+            Control value at which the system dynamics shoul be evaluated.
 
         Returns
         -------
@@ -481,16 +481,16 @@ class system:
     
     @mpc_convert
     def system(self, t, x, u):
-        """Righthandside :math:`f(x,u)` of the dynamics.
+        """Evaluate righthandside :math:`f(t,x,u)` of the dynamics.
 
         Parameters
         ----------
         t : float
-            Time at which the systemdynamic shoul be evaluated.
+            Time at which the system dynamics shoul be evaluated.
         x : array
-            State value at which the systemdynamic shoul be evaluated.
+            State value at which the system dynamics shoul be evaluated.
         u : array
-            Control value at which the systemdynamic shoul be evaluated.
+            Control value at which the system dynamics shoul be evaluated.
 
         Returns
         -------
@@ -650,7 +650,25 @@ class system:
     
     @classmethod
     def load(cls, path):
-        """Loads a nMPyC system object from a given path."""
+        """Loads a nMPyC system object from a file.
+        
+        The specified path must lead to a file that was previously saved with
+        :py:meth:`~save`.
+        
+        Parameters
+        ----------
+        path : str
+            String defining the path to the file containing the nMPyC 
+            system object. 
+            
+            
+        For example
+
+        >>> system.load('system.pickle')
+        
+        will load teh system previously saved with :py:meth:`~save`.
+            
+        """
         
         try:
             with open(path, "rb") as input_file:
