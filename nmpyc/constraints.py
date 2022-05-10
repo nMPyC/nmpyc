@@ -427,7 +427,7 @@ class constraints:
             self._type = 'NLP'
                 
     def save(self, path):
-        """Saving the constraints to a given file with dill.
+        """Saving the constraints to a given file with `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.
         
         The path can be absolut or relative and 
         the ending of the file is arbitrary.
@@ -437,6 +437,13 @@ class constraints:
         path : str
             String defining the path to the desired file. 
 
+
+
+        For example
+
+        >>> constraints.save('constraints.pickle')
+        
+        will create a file `constraints.pickle` contain the nMPyC constraints object.
         """
         
         with open(path, "wb") as output_file:
