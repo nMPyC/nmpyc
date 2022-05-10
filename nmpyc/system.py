@@ -298,7 +298,7 @@ class system:
         """str : Indicating whether the system dynamics are linear.
         
         If `LQP`, the system dynamics are linear.
-        This means that the the righthandside of the system dynamics 
+        The right hand side of the system dynamics 
         is given by
 
         .. math::
@@ -308,7 +308,7 @@ class system:
         It also implies that the system is :py:attr:`~autonomous`.
 
         If the system dynamics are not initialized as linear with the :py:meth:`~LQP` 
-        method this attribute holds the value `NLP`.
+        method this attribute has the value `NLP`.
         """
         return self._type
     
@@ -332,45 +332,45 @@ class system:
     @classmethod
     def LQP(cls, A, B , nx, nu, system_type='discrete', 
             sampling_rate=1., t0=0., method='euler'):
-        """Initialize a system with linear dynamics.
+        """Initialize the system with linear dynamics.
         
-        In this case the linear righthandside of the dynamics has the 
+        In this case the right hand side of the dynamics has the 
         form :
         
         .. math::
             
            f(x,u) = Ax+Bu 
             
-        which is always :py:attr:`~autonomouse`.   
+        which is always :py:attr:`~autonomous`.   
         If not a fixed step method is choosen for integration the optimizer 
         can not use the linear structure of the problem during the 
-        optimization progress.
+        optimization process.
         
         Parameters
         ----------
         A : array
-            Matrix definig the linear state inmpact on the righthandside 
+            Matrix definig the linear state input on the right hand side 
             of the dynamics.
         B : array
-            Matrix definig the linear state inmpact on the righthandside 
-            of the dynamics..
+            Matrix definig the linear state input on the right hand side 
+            of the dynamics.
         nx : int
-            Dimension of the state. Must be a psoitive integer. 
+            Dimension of the state. Must be a positive integer. 
             See also :py:attr:`~nx`.
         nu : int
-            Dimension of the control. Must be a psoitive integer. 
+            Dimension of the control. Must be a positive integer. 
             See also :py:attr:`~nu`.
         system_type : str, optional
-            String defining if the given system dynamics are 
+            String defining whether the given system dynamics are 
             discrete or continuous. The default is 'discrete'.
         sampling_rate : float, optional
-            Sampling rate defining at which timeinstances the 
+            Sampling rate defining at which time instances the 
             dynamics are evaluated. The default is 1.
         t0 : float, optional
             Initial time for the optimal control problem. The default is 0.
             See also :py:attr:`~t0`.
         method : str, optional
-            String defining which integration methode should be used to discretize 
+            String defining which integration method should be used to discretize 
             the system dynamics. The default is 'euler'. 
             For further informations about the provided integrators see 
             :py:attr:`~method`.
@@ -642,7 +642,7 @@ class system:
 
         >>> system.save('system.pickle')
         
-        will create a file `system.pickle` contain the nMPyC system object.
+        will create a file `system.pickle` containing the nMPyC system object.
         """
         
         with open(path, "wb") as output_file:
