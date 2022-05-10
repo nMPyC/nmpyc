@@ -84,16 +84,6 @@ class model:
             raise TypeError(
                 'constraints must be of type mpc.constraints - not ' 
                 + str(type(cons)))
-            
-    @property
-    def nx(self):
-        """int : Dimesnion of the state."""
-        return self._nx
-    
-    @property
-    def nu(self):
-        """int : Dimension of the control"""
-        return self._nu
     
     @property
     def opti(self):
@@ -152,11 +142,11 @@ class model:
         self._objective.discont = discount
         
         if isinstance(x0, mpc.array):
-            if x0.dim != (self.nx,1):
+            if x0.dim != (self._nx,1):
                 raise ValueError(
                     'x0 has the wrong dimension - ' 
                     + str(x0.dim) 
-                    + ' != (' + str(self.nx) 
+                    + ' != (' + str(self._nx) 
                     + ',1)')
         else: 
             raise TypeError(
@@ -205,10 +195,10 @@ class model:
                 + str(type(K)))
         
         if isinstance(x0, mpc.array):
-            if x0.dim != (self.nx, 1):
+            if x0.dim != (self._nx, 1):
                 raise ValueError(
                     'x0 has the wrong dimension - ' 
-                    + str(x0.dim) + ' != (' + str(self.nx) + ',1)')
+                    + str(x0.dim) + ' != (' + str(self._nx) + ',1)')
             x = x0
         else: 
             raise TypeError(
