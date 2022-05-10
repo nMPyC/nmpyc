@@ -227,7 +227,7 @@ class objective:
         .. math::
            F(x,u) = x^T P x.
 
-        In this case the objective is always :py:attr:`~autonomouse`.
+        In this case the objective is always :py:attr:`~autonomous`.
 
         Parameters
         ----------
@@ -419,14 +419,41 @@ class objective:
         path : str
             String defining the path to the desired file. 
 
+
+
+        For example
+
+        >>> objective.save('objective.pickle')
+        
+        will create a file `objective.pickle` contain the nMPyC objective object.
         """
+
         
         with open(path, "wb") as output_file:
             dill.dump(self, output_file, -1)
     
     @classmethod
     def load(cls, path):
-        """Loads a nMPyC objective object from a given path."""
+        """Loads a nMPyC objective object from a file.
+        
+        The specified path must lead to a file that was previously saved with
+        :py:meth:`~save`.
+        
+        Parameters
+        ----------
+        path : str
+            String defining the path to the file containing the nMPyC 
+            objective object. 
+            
+            
+        For example
+
+        >>> objective.load('objective.pickle')
+        
+        will load the objective previously saved with :py:meth:`~save`.
+            
+        """
+
         
         try:
             with open(path, "rb") as input_file:
