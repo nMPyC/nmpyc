@@ -418,11 +418,11 @@ class system:
             and their values.
 
 
-        The availible options are depending on the choosen :py:attr:`~method` for integration.
-        For the nMPyC integrators the only availible option is `number_of_finit_elements` 
+        The available options are depending on the choosen :py:attr:`~method` of integration.
+        For the nMPyC integrators the only available option is `number_of_finit_elements` 
         which must be an int greater than zero and defines how many discretation steps are 
-        computet during one sampling period defined by the sampling rate.
-        The availible options for the CasADi integrators can be found at `Sourceforge <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_ and for the SciPy integrators at the `Scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_.
+        computed during one sampling period defined by the sampling rate.
+        The available options for the CasADi integrators can be found at `Sourceforge <http://casadi.sourceforge.net/api/html/db/d3d/classcasadi_1_1Integrator.html>`_ and for the SciPy integrators at the `Scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html>`_.
 
         """
         
@@ -434,21 +434,21 @@ class system:
     
     @mpc_convert
     def system_discrete(self, t, x, u):
-        """Evaluate discretized righthandside of the system dynamics.
+        """Evaluate discretized right hand side of the system dynamics.
 
         Parameters
         ----------
         t : float
-            Time at which the system dynamics shoul be evaluated.
+            Time instant at which the system dynamics are evaluated.
         x : array
-            State value at which the system dynamics shoul be evaluated.
+            State value at which the system dynamics are evaluated.
         u : array
-            Control value at which the system dynamics shoul be evaluated.
+            Control value at which the system dynamics are evaluated.
 
         Returns
         -------
         array
-            Value of the discretized righthandside of the dynamics 
+            Value of the discretized right hand side of the dynamics 
             evaluated at the given inputs.
 
         """
@@ -481,21 +481,21 @@ class system:
     
     @mpc_convert
     def system(self, t, x, u):
-        """Evaluate righthandside :math:`f(t,x,u)` of the dynamics.
+        """Evaluate right hand side :math:`f(t,x,u)` of the dynamics.
 
         Parameters
         ----------
         t : float
-            Time at which the system dynamics shoul be evaluated.
+            Time instant at which the system dynamics are evaluated.
         x : array
-            State value at which the system dynamics shoul be evaluated.
+            State value at which the system dynamics are evaluated.
         u : array
-            Control value at which the system dynamics shoul be evaluated.
+            Control value at which the system dynamics are evaluated.
 
         Returns
         -------
         array
-            Value of the possible not discrete righthandside of the dynamics 
+            Value of the possible not discrete right hand side of the dynamics 
             evaluated at the given inputs.
 
         """
