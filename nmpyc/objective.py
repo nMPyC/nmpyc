@@ -43,7 +43,17 @@ class objective:
         
     @property 
     def stagecost(self):
-        """callable : Function defining the stage costs :math:`l(t,x,u)`."""
+        """callable or list of array: Stage cost :math:`l(t,x,u)`.
+        
+        The return value of this attribute depends on how the 
+        objective was initialized. 
+        If it is initialized as a quadratic objective by :py:meth:`~LQP` a list 
+        containing the arrays defining the stage cost are returned. 
+        If the obejctive was initalized by possible nonlinear callable functions 
+        the function defining the stage cost is return. 
+        Note, that even if autonomuse is True the returned funtion depends 
+        on the time and always has the form :math:`\ell(t,x,u)`.
+        """
         return self._L
     
     @stagecost.setter 
