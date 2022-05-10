@@ -28,7 +28,7 @@ without terminal cost or by
 
 with terminal cost.
 
-Additionally, it is possible to add some constraints. In summary, an optimal control problem without terminal conditions is given by 
+In summary, an optimal control problem without terminal conditions is given by 
 
 ..math::
   :nowrap:
@@ -55,3 +55,7 @@ and an optimal control problem with terminal conditions is given by
               x\in\mathbb{X},\quad & x(N,x_0)\in\mahtbb{X}_0
        \end{split}
        \end{equation}
+
+Additionally, with **nMPyC** it is possible to add constraints to the optimal control problem.
+
+Thus, the basica MPC algorithm is formulated as follows:
