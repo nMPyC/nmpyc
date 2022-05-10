@@ -239,13 +239,13 @@ class constraints:
         
         For example 
 
-        >>> constraints.add_bound('lower','state',lbx)
+        >>> constraints.add_bound('lower', 'state', lbx)
 
         will add `lbx` as :py:attr:`~lower_bndx` while
 
-        >>> constraints.add_bound('upper','terminal',ub_end)
+        >>> constraints.add_bound('upper', 'terminal', ub_end)
 
-        will add `ub_end` as _py:attr:`~upperer_bndend`.
+        will add `ub_end` as :py:attr:`~upper_bndend`.
 
         """
         
@@ -301,15 +301,31 @@ class constraints:
     def add_constr(self, cons_type, *args):
         """Add linear or nonlinear constraints to the OCP.
         
-        Nonlinear inequality constraints are of the form   
-        g(t,x,u) >= 0 or g(x,u) >= 0.
+        Nonlinear inequality constraints are of the form 
+
+        .. math::
+
+           g(t,x,u) \geq 0 \quad \\text{or} \quad g(x,u) \geq 0.
+
         Nonlinear equality constraints are of the form
-        h(t,x,u) = 0 or h(x,u) = 0.
+
+        .. math::
+
+           h(t,x,u) = 0 \quad \\text{or} \quad h(x,u) = 0.
+
         Linear inequality constraints are of the form 
-        Ex + Fu >= h.
+
+        .. math::
+
+           Ex + Fu \geq h.
+
         Linear equality constraints are of the form 
-        Ex + Fu = h.
-        For the form of terminal constrains see add_terminalconstr().
+
+        .. math::
+
+           Ex + Fu = h.
+
+        For the form of terminal constrains see :py:meth:`~add_terminalconstr`.
 
         Parameters
         ----------
@@ -321,6 +337,19 @@ class constraints:
             arrays defining the linear constraints. 
             In the letter case the order of arguments are E, F, h and 
             if h is undefined this array is set to zero.
+
+
+        For example
+
+        For example 
+
+        >>> constraints.add_constr('ineq', E, F, h)
+
+        will add a linear inequality constraint to :py:attr:`linear_constr` while
+
+        >>> constraints.add_constr('terminal_eq',h_end)
+
+        will add a nonlinear equality terminal constraint to :py:attr:`nonlinear_constr`.
 
         """
         
