@@ -15,8 +15,12 @@ class constraints:
     """
     A class used to define the constraints of the optimnal control problem.
     
-    Support of Nonlinear, linear and boxconstraints are implemented 
+    Support of nonlinear, linear and boxconstraints are implemented 
     and provided.
+
+    To define the constraints, an empty object must first be created. 
+    Then the individual constraints can be added with the help of the methods
+    :py:meth:`add_bound` and :py:meth:`add_constr`.
     """
     
     def __init__(self):
@@ -39,32 +43,87 @@ class constraints:
         
     @property
     def lower_bndx(self):
-        """array : Lower bound for the state."""
+        """array : Lower bound :math:`l_x \in \R^{nx}` for the state.
+        
+        That means for all states :math:`x(t_k)` the inequality 
+
+        .. math::
+
+           x_i(t_k) \geq l_x_i \quad \text{for } i = 1,\ldots,nx
+
+        holds as a constraint.
+        """
         return self._lower_bndx 
     
     @property
     def upper_bndx(self):
-        """array : Upper bound for the state."""
+        """array : Upper bound :math:`u_x \in \R^{nx}` for the state.
+        
+        That means for all states :math:`x(t_k)` the inequality 
+
+        .. math::
+
+           x_i(t_k) \leq u_x_i \quad \text{for } i = 1,\ldots,nx
+
+        holds as a constraint.
+        """
         return self._upper_bndx 
     
     @property
     def lower_bndu(self):
-        """array : Lower bound for the control."""
+        """array : Lower bound :math:`l_u \in \R^{nu}` for the control.
+        
+        That means for all controls :math:`u(t_k)` the inequality 
+
+        .. math::
+
+           u_i(t_k) \geq l_u_i \quad \text{for } i = 1,\ldots,nu
+
+        holds as a constraint.
+        """
         return self._lower_bndu
     
     @property
     def upper_bndu(self):
-        """array : Upper bound for the control."""
+        """array : Upper bound :math:`u_u \in \R^{nu}` for the control.
+        
+        That means for all controls :math:`u(t_k)` the inequality 
+
+        .. math::
+
+           u_i(t_k) \leq u_u_i \quad \text{for } i = 1,\ldots,nu
+
+        holds as a constraint.
+        """
         return self._upper_bndu 
     
     @property 
     def lower_bndend(self):
-        """array : Lower bound for the terminal state."""
+        """array : Lower bound :math:`l_x \in \R^{nx}` for the terminal state.
+        
+        That means for the terminal state :math:`x(t_N)` the inequality 
+
+        .. math::
+
+           x_i(t_N) \geq l_x_i \quad \text{for } i = 1,\ldots,nx
+
+        holds as a constraint.
+        """
         return self._lower_bndend
     
     @property 
     def upper_bndend(self):
-        """array : Upper bound for the terminal state."""
+        """array : Upper bound for the terminal state.
+        :math:`u_x \in \R^{nx}` for the terminal state.
+        
+        That means for the terminal state :math:`x(t_N)` the inequality 
+
+        .. math::
+
+           x_i(t_N) \leq u_x_i \quad \text{for } i = 1,\ldots,nx
+
+        holds as a constraint.
+        """
         return self._upper_bndend
     
     @property 
