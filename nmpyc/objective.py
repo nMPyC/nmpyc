@@ -15,17 +15,17 @@ class objective:
     """
     A class used to define the objective of the optimnal control problem.
     
-    The objective depends on stagecosts and optional terminalcosts.
+    The objective depends on stage costs and optional terminal cost.
     
     Parameters
     ----------
     stagecost : callable
-        A function defining the stagecosts of the optimal control problem. 
-        Has to be of the form :math:`l(t,x,u)` or :math:`l(x,u)` in the :py:attr:`~autonomous` case.
+        A function defining the stage costs of the optimal control problem. 
+        Has to be of the form :math:`\ell(t,x,u)` or :math:`\ell(x,u)` in the :py:attr:`~autonomous` case.
     terminalcost : callable, optional
-        A function defining the terminalcosts of the optimal control 
+        A function defining the terminal cost of the optimal control 
         problem. Has to be of the form :math:`F(t,x)` or :math:`F(x)` in the autonomous 
-        case. If None the no terminalcosts are applied. 
+        case. If None, no terminal cost is applied. 
         The default is None.
     
     """
@@ -39,7 +39,7 @@ class objective:
         
     @property 
     def stagecost(self):
-        """callable : Function defining the stagecosts :math:`l(t,x,u)`."""
+        """callable : Function defining the stage costs :math:`l(t,x,u)`."""
         return self._L
     
     @stagecost.setter 
@@ -55,25 +55,25 @@ class objective:
                 L = cost
             else:
                 raise ValueError(
-                    'stagecost must have two or three input arguments - not ' 
+                    'stage cost must have two or three input arguments - not ' 
                     + str(len(params)))
         elif isinstance(cost, list):
             for i in range(3):
                 if not isinstance(cost[i], mpc.array): 
                     raise TypeError(
-                        'stagecost must be a list of arrays -  not ' 
+                        'stage cost must be a list of arrays -  not ' 
                         + str(type(cost[i])))
             self._autonomous = True
             L = cost
         else: 
             raise TypeError(
-                'stagecost must be callable or list of arrays - not ' 
+                'stage cost must be callable or list of arrays - not ' 
                 + str(type(cost)))
         self._L = L
         
     @property 
     def terminalcost(self):
-        """callable : Function defining the endcosts :math:`F(t,x)`."""
+        """callable : Function defining the terminal cost :math:`F(t,x)`."""
         return self._F
     
     @terminalcost.setter 
@@ -89,20 +89,20 @@ class objective:
                 F = cost
             else:
                 raise ValueError(
-                    'terminalcost must have two or three input arguments - not ' 
+                    'terminal cost must have two or three input arguments - not ' 
                     + str(len(params)))
         elif isinstance(cost,mpc.array):
             F = cost
         else: 
             if cost is not None:
                 raise TypeError(
-                    'terminalcost must be callable or arrays - not ' 
+                    'terminal cost must be callable or arrays - not ' 
                     + str(type(cost)))
         self._F = F
         
     @property 
     def autonomous(self):
-        """bool : If true, the objective is timeindependend."""
+        """bool : If True, the objective is time independend."""
         return self._autonomous
     
     @property 
@@ -112,7 +112,7 @@ class objective:
     
     @property
     def discount(self):
-        """float : The discountfactor of the objective."""
+        """float : The discount factor of the objective."""
         return self._discont
     
     @discount.setter
@@ -136,7 +136,7 @@ class objective:
         
         terminal = False
         if self._F is not None: terminal = True
-        string += 'terminalcosts: ' + str(terminal) + '\n'
+        string += 'terminalcost: ' + str(terminal) + '\n'
         
         lqp = False
         if self._type == 'LQP': lqp = True
@@ -150,7 +150,7 @@ class objective:
     def LQP(cls, Q, R, N=None, P=None):
         """Initialize a quadratic objective.
 
-        In this case the stagecost of the objective have the form
+        In this case the stage costs of the objective have the form
 
         .. math::
            \ell(x,u) = x^T Q x + u^T R u + 2 x^T Q u
@@ -158,7 +158,7 @@ class objective:
         and the optional terminal cost are defined as 
 
         .. math::
-           F(x,u) = x^t P x.
+           F(x,u) = x^T P x.
 
         In this case the objective is always :py:attr:`~autonomouse`.
 
@@ -172,7 +172,7 @@ class objective:
             Possible Matrix defining the mixed costterm of the form :math:`2x^TNu`. 
             The default is None.
         P : array, optional
-            Posible Matrix defining the endcost of the form :math:`x^TPx`. 
+            Posible Matrix defining the terminal cost of the form :math:`x^TPx`. 
             The default is None.
 
         Returns
@@ -225,16 +225,16 @@ class objective:
         return QP
         
     def add_termianlcost(self, terminalcost):
-        """Add endcosts to the objective.
+        """Add terminal cost to the objective.
         
-        The encosts must be a callable function of the form :math:`F(t,x)` 
-        or :math:`F(x)` in the autonomous case. If endcosts already exists they 
+        The terminal cost must be a callable function of the form :math:`F(t,x)` 
+        or :math:`F(x)` in the autonomous case. If terminal cost already exists they 
         will be overwritten by the new one given.
 
         Parameters
         ----------
         terminalcost : callable
-            A function defining the terminalcosts of the optimal control 
+            A function defining the terminal cost of the optimal control 
             problem. Has to be of the form :math:`F(t,x)` or :math:`F(x)` in the autonomous 
             case.
 
@@ -243,10 +243,10 @@ class objective:
         self.terminalcost = terminalcost
         
     def J(self, t, x, u, N):
-        """Evaluate Objectivefunction of the OCP.
+        """Evaluate objectivefunction of the OCP.
 
-        The objectivefunction is assembled from the stagecosts :math:`\ell(t,x,u)` 
-        and optional endcosts :math:`F(t,x)` and has the form 
+        The objectivefunction is assembled from the stage costs :math:`\ell(t,x,u)` 
+        and optional terminal cost :math:`F(t,x)` and has the form 
 
         .. math::
 
@@ -255,14 +255,14 @@ class objective:
         Parameters
         ----------
         t : array
-            Timesequence at which the stagecosts and endcosts are evaluated.
+            Timesequence at which the stage costs and terminal cost are evaluated.
         x : array
-            State trajectory at which the stagecosts and endcosts are 
+            State trajectory at which the stage costs and terminal cost are 
             evaluated.
         u : array
-            Control sequence at which the stagecosts are evaluated.
+            Control sequence at which the stage costs are evaluated.
         N : int
-            Maximum index up to which the stageccosts are to be summed up. 
+            Maximum index up to which the stage costs are to be summed up. 
             During the MPC iteration this index is equivalent to 
             the MPC horizon.
 
@@ -288,21 +288,21 @@ class objective:
     
     @mpc_convert
     def stagecosts(self,t,x,u):
-        """Evaluate stagecosts of the objective.
+        """Evaluate stage cost of the objective.
 
         Parameters
         ----------
         t : float
-            Time at which the stagecost should be evaluated.
+            Time at which the stage cost should be evaluated.
         x : array
-            Current state at which the stagecost should be evaluated.
+            Current state at which the stage cost should be evaluated.
         u : array
-            Current control at which the stagecost should be evaluated.
+            Current control at which the stage cost should be evaluated.
 
         Returns
         -------
         array
-            Stagecost evaluated at the given values.
+            Stage cost evaluated at the given values.
             
         """
             
@@ -316,19 +316,19 @@ class objective:
     
     @mpc_convert
     def endcosts(self, t, x):
-        """Evaluate endcosts of the objective.
+        """Evaluate termninal cost of the objective.
 
         Parameters
         ----------
         t : float
-            Time at which the endcost should be evaluated.
+            Time at which the terminal cost should be evaluated.
         x : array
-            Current state at which the endcost should be evaluated.
+            Current state at which the terminal cost should be evaluated.
 
         Returns
         -------
         array
-            Endcost evaluated at the given values.
+            Terminal cost evaluated at the given values.
 
         """
         
@@ -364,10 +364,10 @@ class objective:
                 e = dill.load(input_file)
         except:
             raise Exception(
-                'Can not load model from file. File not readable!')
+                'Can not load objective from file. File not readable!')
             
         if not isinstance(e, objective):
             raise Exception(
-                'Can not load model from file. File does not cotain a model!')
+                'Can not load objective from file. File does not cotain a objective!')
             
         return e
