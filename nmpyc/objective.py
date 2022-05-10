@@ -21,7 +21,7 @@ class objective:
 
        J(t,x,u,N) := \sum_{k=0}^{N-1} \ell(t_k,x(t_k),u(t_k)) + F(t_N,x(t_N)).
 
-    The values of the times :math:`t_k` are defined by initilizing the :py:class:`nmpyc.system`.
+    The values of the times :math:`t_k` are defined by initilizing the :py:class:`nmpyc.system.system`.
     For the slightly different form of the objective in the discounted case see :py:attr:`~discount`.
     
     Parameters
@@ -46,7 +46,7 @@ class objective:
         
     @property 
     def stagecost(self):
-        """callable or list of array: Stage cost :math:`l(t,x,u)`.
+        """callable or list of array: Stage cost :math:`\ell(t,x,u)`.
         
         The return value of this attribute depends on how the 
         objective was initialized. 
@@ -54,7 +54,7 @@ class objective:
         containing the arrays defining the stage cost are returned. 
         If the obejctive was initalized by possible nonlinear callable functions 
         the function defining the stage cost is return. 
-        Note, that even if :py:attr:`~autonomuse` is True the returned funtion depends 
+        Note, that even if :py:attr:`~autonomous` is True the returned funtion depends 
         on the time and always has the form :math:`\ell(t,x,u)`.
         """
         return self._L
@@ -98,7 +98,7 @@ class objective:
         array defining the terminal cost is returned. 
         If the obejctive was initalized by possible nonlinear callable functions 
         the function defining the terminal cost is return. 
-        Note, that even if :py:attr:`~autonomuse` is True the returned funtion depends 
+        Note, that even if :py:attr:`~autonomous` is True the returned funtion depends 
         on the time and always has the form :math:`\ell(t,x,u)`.
         """
         return self._F
