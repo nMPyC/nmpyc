@@ -9,7 +9,7 @@ In order to describe the functionality of MPC we consider optimal control proble
 
 .. math::
 
-       x(t_{k+1}) = f(x(t_k),u(t_k)), \quad k = 0,\dots,N-1, 
+       x(k+1,x_0) = f(x(k,x_0),u(k)), \quad k = 0,\dots,N-1, \\
        x(0) = x_0
 
 with :math:`N\in\mathbb{N}` or discretized differential equations.
