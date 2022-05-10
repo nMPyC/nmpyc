@@ -6,7 +6,10 @@ Basics of model predictive control
 Optimal control problems
 --------------------------------
 In order to describe the functionality of MPC we consider optimal control problems. To this end, we consider difference equations of the form 
+.. math::
 
+       x(t_{k+1}) = f(t_k,x(t_k),u(t_k))
+       x(0) = x_0
 
 To be more precise, the control input is calculated by solving at each sampling instant a finite horizon open-loop optimal control problem; the first part of the resulting optimal input trajectory is then applied to the system until the next sampling instant, at which the horizon is shifted and the whole procedure is repeated again.
 **nMPyC** is a Python library for solving optimal control problems via model predictive control (MPC).
