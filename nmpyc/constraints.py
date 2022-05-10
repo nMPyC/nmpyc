@@ -135,7 +135,7 @@ class constraints:
 
         In the lists contained in the dictionary the arrays defining the 
         constraint are saved. 
-        For example the
+        For example
 
         >>> linear_constr['eq'][0]
 
@@ -144,13 +144,31 @@ class constraints:
 
         .. math::
 
-           Hx + Fu = h
+           Hx + Fu = h.
         """
         return self._linear_constr
     
     @property 
     def nonlinear_constr(self):
-        """dict : Collection of all nonlinear constraints."""
+        """dict : Collection of all nonlinear constraints.
+        
+        This dictionary has the following form:
+
+        >>> nonlinear_constr = {'eq': [..], 'ineq': [..], 'terminal_eq': [..], 'terminal_ineq': [..]}
+
+        In the lists contained in the dictionary the function defining the 
+        constraints are saved. 
+        For example
+
+        >>> nonlinear_constr['eq'][0]
+
+        returns the function :math:`h(t,x,u)` defining the 
+        first equality constraint
+
+        .. math::
+
+           h(t,x,u) = 0.
+        """
         return self._nonlinear_constr
     
     @property 
