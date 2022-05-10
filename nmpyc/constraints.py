@@ -156,7 +156,7 @@ class constraints:
         This dictionary has the following form:
 
         >>> nonlinear_constr = {'eq': [..], 'ineq': [..], 
-        >>>                  'terminal_eq': [..], 'terminal_ineq': [..]}
+        >>>                     'terminal_eq': [..], 'terminal_ineq': [..]}
 
         In the lists contained in the dictionary the function defining the 
         constraints are saved. 
