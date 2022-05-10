@@ -444,18 +444,36 @@ class constraints:
     
     @classmethod
     def load(cls, path):
-        """Loads a nMPyC constraint object from a given path."""
+        """Loads a nMPyC constraints object from a file.
+        
+        The specified path must lead to a file that was previously saved with
+        :py:meth:`~save`.
+        
+        Parameters
+        ----------
+        path : str
+            String defining the path to the file containing the nMPyC 
+            constraints object. 
+            
+            
+        For example
+
+        >>> constraints.load('constraints.pickle')
+        
+        will load the constraints previously saved with :py:meth:`~save`.
+            
+        """
         
         try:
             with open(path, "rb") as input_file:
                 e = dill.load(input_file)
         except:
             raise Exception(
-                'Can not load model from file. File not readable!')
+                'Can not load constraints from file. File not readable!')
             
         if not isinstance(e, constraints):
             raise Exception(
-                'Can not load model from file. File does not cotain a model!')
+                'Can not load constraints from file. File does not cotain a constraints!')
             
         return e
                 
