@@ -127,7 +127,25 @@ class constraints:
     
     @property 
     def linear_constr(self):
-        """dict : Collection of all linear constraints."""
+        """dict : Collection of all linear constraints.
+        
+        This dictionary has the following form:
+
+        >>> linear_constr = {'eq': [..], 'ineq': [..], 'terminal_eq': [..], 'terminal_ineq': [..]}
+
+        In the lists contained in the dictionary the arrays defining the 
+        constraint are saved. 
+        For example the
+
+        >>> linear_constr['eq'][0]
+
+        returns a list with the arrays :math:`H`, :math:`F` and :math:`h` defining the 
+        first equality constraint
+
+        .. math::
+
+           Hx + Fu = h
+        """
         return self._linear_constr
     
     @property 
