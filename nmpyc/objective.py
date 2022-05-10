@@ -29,11 +29,12 @@ class objective:
     stagecost : callable
         A function defining the stage costs of the optimal control problem. 
         Has to be of the form :math:`\ell(t,x,u)` or :math:`\ell(x,u)` in the :py:attr:`~autonomous` case.
+        See also :py:attr:`stagecost`.
     terminalcost : callable, optional
         A function defining the terminal cost of the optimal control 
         problem. Has to be of the form :math:`F(t,x)` or :math:`F(x)` in the autonomous 
         case. If None, no terminal cost is applied. 
-        The default is None.
+        The default is None. See also :py:attr:`terminalcost`.
     
     """
     
@@ -140,7 +141,27 @@ class objective:
     
     @property 
     def type(self):
-        """str : If LQP, the objective is quadratic."""
+        """str : Indicating whether the objective is quadratic.
+        
+        If `LQP`, the objective is quadratic.
+        This means that the the stage cost 
+        is given by
+
+        .. math::
+
+           \ell(x,u) = x^TQx + u^TRu + 2x^TNx.
+
+        and the terminal cost reads as
+
+        .. math::
+
+           F(x) = x^TPx.
+
+        It also implies that the system is :py:attr:`~autonomous`.
+
+        If the objective is not initialized as quadratic with the :py:meth:`~LQP` 
+        method this attribute holds the value `NLP`.
+        """
         return self._type
     
     @property
