@@ -126,6 +126,11 @@ class objective:
         .. math::
            
            J(t,x,u,N) = \sum_{k=0}^{N-1} \delta^k \ell(t,x,u) + F(t,x).
+
+        By default :math:`\delta = 1` holds and in this case the problem 
+        is called undiscounted.
+        The discont factor for the OCP of the MPC simulation can be set 
+        by calling the the :py:meth:`~mpc` method.
         """
         return self._discont
     
