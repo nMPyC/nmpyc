@@ -22,6 +22,7 @@ class objective:
        J(t,x,u,N) := \sum_{k=0}^{N-1} \ell(t_k,x(t_k),u(t_k)) + F(t_N,x(t_N)).
 
     The values of the times :math:`t_k` are defined by initilizing the :py:class:`nmpyc.system`.
+    For the slightly different form of the objective in the discounted case see :py:attr:`~discount`.
     
     Parameters
     ----------
@@ -295,7 +296,9 @@ class objective:
 
         .. math::
 
-           J(t,x,u,N) = \sum_{k=0}^{N-1} \ell(t(k),x(k),u(k)) + F(t(N),x(N)).
+           J(t,x,u,N) = \sum_{k=0}^{N-1} \delta^k \ell(t_k,x(t_k),u(t_k)) + F(t_N,x(t_N)).
+
+        Where :math:`\delta \in (0,1]` is a possible discount factor, see :py:attr:`~discount`.
 
         Parameters
         ----------
