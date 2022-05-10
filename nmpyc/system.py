@@ -94,7 +94,7 @@ class system:
         If it is initialized as a linear system by :py:meth:`~LQP` a list containing the arrays defining the 
         system dynamics are returned.
         If the system was initalized by a possible nonlinear callable function this function is return. 
-        Note, that even if :py:attr:`~autonomuse` is True the returned funtion depends on the time 
+        Note, that even if :py:attr:`~autonomous` is True the returned funtion depends on the time 
         and always has the form :math:`f(t,x,u)`.
         """
         return self._f
