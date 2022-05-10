@@ -131,7 +131,8 @@ class constraints:
         
         This dictionary has the following form:
 
-        >>> linear_constr = {'eq': [..], 'ineq': [..], 'terminal_eq': [..], 'terminal_ineq': [..]}
+        >>> linear_constr = {'eq': [..], 'ineq': [..], 
+        >>>                  'terminal_eq': [..], 'terminal_ineq': [..]}
 
         In the lists contained in the dictionary the arrays defining the 
         constraint are saved. 
@@ -154,7 +155,8 @@ class constraints:
         
         This dictionary has the following form:
 
-        >>> nonlinear_constr = {'eq': [..], 'ineq': [..], 'terminal_eq': [..], 'terminal_ineq': [..]}
+        >>> nonlinear_constr = {'eq': [..], 'ineq': [..], 
+        >>>                  'terminal_eq': [..], 'terminal_ineq': [..]}
 
         In the lists contained in the dictionary the function defining the 
         constraints are saved. 
