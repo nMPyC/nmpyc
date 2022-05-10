@@ -43,13 +43,13 @@ class constraints:
         
     @property
     def lower_bndx(self):
-        """array : Lower bound :math:`l_x \in \R^{nx}` for the state.
+        """array : Lower bound :math:`l_x \in \mathbb{R}^{nx}` for the state.
         
         That means for all states :math:`x(t_k)` the inequality 
 
         .. math::
 
-           x_i(t_k) \geq l_{x_i} \quad \text{for } i = 1,\ldots,nx
+           x_i(t_k) \geq l_{x_i} \quad \\text{for } i = 1,\ldots,nx
 
         holds as a constraint.
         """
@@ -63,7 +63,7 @@ class constraints:
 
         .. math::
 
-           x_i(t_k) \leq u_{x_i} \quad \text{for } i = 1,\ldots,nx
+           x_i(t_k) \leq u_{x_i} \quad \\text{for } i = 1,\ldots,nx
 
         holds as a constraint.
         """
@@ -77,7 +77,7 @@ class constraints:
 
         .. math::
 
-           u_i(t_k) \geq l_{u_i} \quad \text{for } i = 1,\ldots,nu
+           u_i(t_k) \geq l_{u_i} \quad \\text{for } i = 1,\ldots,nu
 
         holds as a constraint.
         """
@@ -91,7 +91,7 @@ class constraints:
 
         .. math::
 
-           u_i(t_k) \leq u_{u_i} \quad \text{for } i = 1,\ldots,nu
+           u_i(t_k) \leq u_{u_i} \quad \\text{for } i = 1,\ldots,nu
 
         holds as a constraint.
         """
@@ -105,7 +105,7 @@ class constraints:
 
         .. math::
 
-           x_i(t_N) \geq l_{x_i} \quad \text{for } i = 1,\ldots,nx
+           x_i(t_N) \geq l_{x_i} \quad \\text{for } i = 1,\ldots,nx
 
         holds as a constraint.
         """
@@ -119,7 +119,7 @@ class constraints:
 
         .. math::
 
-           x_i(t_N) \leq u_{x_i} \quad \text{for } i = 1,\ldots,nx
+           x_i(t_N) \leq u_{x_i} \quad \\text{for } i = 1,\ldots,nx
 
         holds as a constraint.
         """
