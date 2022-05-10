@@ -221,6 +221,11 @@ class constraints:
     def add_bound(self, bnd_type, variable, bound):
         """Add bounds as linear constraints to the OCP.
 
+        Note, that while adding the bound it is not 
+        checked if the bounds have the correct shape.
+        This will be verified later during the optimization 
+        progress.
+
         Parameters
         ----------
         bnd_type : str
@@ -230,6 +235,17 @@ class constraints:
             Posiible values are state, control and terminal.
         bound : array
             Array containing the values of the bound.
+
+        
+        For example 
+
+        >>> constraints.add_bound('lower','state',lbx)
+
+        will add `lbx` as :py:attr:`~lower_bndx` while
+
+        >>> constraints.add_bound('upper','terminal',ub_end)
+
+        will add `ub_end` as _py:attr:`~upperer_bndend`.
 
         """
         
