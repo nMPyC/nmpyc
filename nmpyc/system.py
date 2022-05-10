@@ -666,7 +666,7 @@ class system:
 
         >>> system.load('system.pickle')
         
-        will load teh system previously saved with :py:meth:`~save`.
+        will load the system previously saved with :py:meth:`~save`.
             
         """
         
@@ -675,10 +675,10 @@ class system:
                 e = dill.load(input_file)
         except:
             raise Exception(
-                'Can not load model from file. File not readable!')
+                'Can not load system from file. File not readable!')
             
         if not isinstance(e, system):
             raise Exception(
-                'Can not load model from file. File does not cotain a system!')
+                'Can not load system from file. File does not cotain a system!')
             
         return e
