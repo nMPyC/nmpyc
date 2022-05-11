@@ -13,12 +13,12 @@ import dill
 
 class constraints:
     """
-    A class used to define the constraints of the optimnal control problem.
+    Class used to define the constraints of the optimnal control problem.
     
-    Support of nonlinear, linear and boxconstraints are implemented 
+    Support for nonlinear, linear and box constraints are implemented 
     and provided.
 
-    To define the constraints, an empty object must first be created. 
+    To define the constraints, first, an empty object have to be created. 
     Then the individual constraints can be added with the help of the methods
     :py:meth:`add_bound` and :py:meth:`add_constr`.
     """
@@ -43,29 +43,29 @@ class constraints:
         
     @property
     def lower_bndx(self):
-        """array : Lower bound :math:`l_x \in \mathbb{R}^{nx}` for the state.
+        """array : Lower bound :math:`l_x \in \mathbb{R}^{nx}` of the state.
         
-        That means for all states :math:`x(t_k)` the inequality 
+        For all states :math:`x(t_k)` the inequalities 
 
         .. math::
 
            x_i(t_k) \geq l_{x_i} \quad \\text{for } i = 1,\ldots,nx
 
-        holds as a constraint.
+        hold as a constraint.
         """
         return self._lower_bndx 
     
     @property
     def upper_bndx(self):
-        """array : Upper bound :math:`u_x \in \mathbb{R}^{nx}` for the state.
+        """array : Upper bound :math:`u_x \in \mathbb{R}^{nx}` of the state.
         
-        That means for all states :math:`x(t_k)` the inequality 
+        For all states :math:`x(t_k)` the inequalities 
 
         .. math::
 
            x_i(t_k) \leq u_{x_i} \quad \\text{for } i = 1,\ldots,nx
 
-        holds as a constraint.
+        hold as a constraint.
         """
         return self._upper_bndx 
     
@@ -73,35 +73,35 @@ class constraints:
     def lower_bndu(self):
         """array : Lower bound :math:`l_u \in \mathbb{R}^{nu}` for the control.
         
-        That means for all controls :math:`u(t_k)` the inequality 
+        For all controls :math:`u(t_k)` the inequalities 
 
         .. math::
 
            u_i(t_k) \geq l_{u_i} \quad \\text{for } i = 1,\ldots,nu
 
-        holds as a constraint.
+        hold as a constraint.
         """
         return self._lower_bndu
     
     @property
     def upper_bndu(self):
-        """array : Upper bound :math:`u_u \in \mathbb{R}^{nu}` for the control.
+        """array : Upper bound :math:`u_u \in \mathbb{R}^{nu}` of the control.
         
-        That means for all controls :math:`u(t_k)` the inequality 
+        For all controls :math:`u(t_k)` the inequalities
 
         .. math::
 
            u_i(t_k) \leq u_{u_i} \quad \\text{for } i = 1,\ldots,nu
 
-        holds as a constraint.
+        hold as a constraint.
         """
         return self._upper_bndu 
     
     @property 
     def lower_bndend(self):
-        """array : Lower bound :math:`l_x \in \mathbb{R}^{nx}` for the terminal state.
+        """array : Lower bound :math:`l_x \in \mathbb{R}^{nx}` of the terminal state.
         
-        That means for the terminal state :math:`x(t_N)` the inequality 
+        For the terminal state :math:`x(t_N)` the inequality 
 
         .. math::
 
@@ -113,15 +113,15 @@ class constraints:
     
     @property 
     def upper_bndend(self):
-        """array : Upper bound :math:`u_x \in \mathbb{R}^{nx}` for the terminal state.
+        """array : Upper bound :math:`u_x \in \mathbb{R}^{nx}` of the terminal state.
         
-        That means for the terminal state :math:`x(t_N)` the inequality 
+        For the terminal state :math:`x(t_N)` the inequalities
 
         .. math::
 
            x_i(t_N) \leq u_{x_i} \quad \\text{for } i = 1,\ldots,nx
 
-        holds as a constraint.
+        hold as a constraint.
         """
         return self._upper_bndend
     
@@ -134,8 +134,7 @@ class constraints:
         >>> linear_constr = {'eq': [..], 'ineq': [..], 
         >>>                  'terminal_eq': [..], 'terminal_ineq': [..]}
 
-        In the lists contained in the dictionary the arrays defining the 
-        constraint are saved. 
+        The arrays that define the constraints are saved as lists which are contained in the dictionary.
         For example
 
         >>> linear_constr['eq'][0]
@@ -158,7 +157,7 @@ class constraints:
         >>> nonlinear_constr = {'eq': [..], 'ineq': [..], 
         >>>                     'terminal_eq': [..], 'terminal_ineq': [..]}
 
-        In the lists contained in the dictionary the function defining the 
+        In the lists contained in the dictionary the functions defining the 
         constraints are saved. 
         For example
 
@@ -178,7 +177,7 @@ class constraints:
         """str : Indicating whether all constraints are linear.
         
         If `LQP`, all constraints are linear.
-        This means that all constraints are of the form
+        Then all constraints are of the form
 
         .. math::
 
@@ -259,7 +258,7 @@ class constraints:
     def add_bound(self, bnd_type, variable, bound):
         """Add bounds as linear constraints to the OCP.
 
-        Note, that while adding the bound it is not 
+        Note while adding the bound it is not 
         checked if the bounds have the correct shape.
         This will be verified later during the optimization 
         progress.
@@ -267,10 +266,10 @@ class constraints:
         Parameters
         ----------
         bnd_type : str
-            String defining if the bound is a lower or upper bound.
+            String defining whether the bound is a lower or upper bound.
         variable : str
             String defining on which variable the bound should be applied. 
-            Posiible values are state, control and terminal.
+            Possible values are *state*, *control* and *terminal*.
         bound : array
             Array containing the values of the bound.
 
@@ -369,7 +368,7 @@ class constraints:
         ----------
         cons_type : str
             String that defines the type of the constraints. 
-            Possible values are eq, ineq, terminal_eq and terminal_ineq.
+            Possible values are *eq*, *ineq*, *terminal_eq* and *terminal_ineq*.
         *args : callable or arrays
             Function defining the (nonlinear) constraints or 
             arrays defining the linear constraints. 
@@ -454,7 +453,7 @@ class constraints:
 
         .. math::
 
-           g(t,x) \geq 0 \quad \\text{or} g(x) \geq 0.
+           g(t,x) \geq 0 \quad \\text{or} \quad g(x) \geq 0.
 
         Nonlinear terminal equality constraints are of the form
 
@@ -478,7 +477,7 @@ class constraints:
         ----------
         cons_type : str
             String that defines the type of the terminal constraints. 
-            Possible values are eq or ineq.
+            Possible values are *eq* or *ineq*.
         *args : callable or arrays
             Function defining the (nonlinear) terminal constraints or 
             arrays defining the linear constraints. 
@@ -563,7 +562,7 @@ class constraints:
 
         >>> constraints.save('constraints.pickle')
         
-        will create a file `constraints.pickle` contain the nMPyC constraints object.
+        will create a file `constraints.pickle` containing the nMPyC constraints object.
         """
         
         with open(path, "wb") as output_file:
