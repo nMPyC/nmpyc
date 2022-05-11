@@ -94,18 +94,30 @@ class model:
         A distinction is made between basic settings for the 
         optimizer and solver-specific settings.
 
-        The basic settings can be adjust via the 
-        :py:meth:`nmpyc.opti.opti.set_options` method
-        while the
-        :py:meth:`nmpyc.opti.opti.set_solverOptions`
-        must be called to custimize the solver-specific 
-        settings.
-
-        For the :py:class:`~model` class these methods can be called by
+        The basic settings can be adjust by calling 
 
         >>> model.opti.set_options({..})
 
-        and 
+        The dictionary that is passed can contain the following entries
+
+        +----------------------+-------------+---------------+
+        |Parameter             | Description | Default value |
+        +======================+=============+===============+
+        |solver                |             |               |
+        +----------------------+-------------+---------------+
+        |full_discretization   |             |               |
+        +----------------------+-------------+---------------+
+        |tol                   |             |               |
+        +----------------------+-------------+---------------+
+        |maxiter               |             |               |
+        +----------------------+-------------+---------------+
+        |verbose               |             |               |
+        +----------------------+-------------+---------------+
+        |U_start               |             |               |
+        +----------------------+-------------+---------------+
+
+
+        The solver-specific settings can be custamized by calling
 
         >>> model.opt.set_solverOptions({..})
         
@@ -183,7 +195,7 @@ class model:
         return (u_ol, x_ol)
             
     def mpc(self, x0, N, K, discount=None):
-        """Solving the optimal control problem with model predictive control.
+        """Solving the optimal control problem via model predictive control.
 
         Parameters
         ----------
