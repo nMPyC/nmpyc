@@ -121,7 +121,11 @@ class model:
         |                      |                                                 |                   |
         |                      | options and parameters is selected.             |                   |
         +----------------------+-------------------------------------------------+-------------------+
-        |full_discretization   |                                                 | True              |
+        |full_discretization   |If True, the method of full discretiziation is   | True              |
+        |                      |                                                 |                   |
+        |                      |used for optimization. Otherwise the The system  |                   |
+        |                      |                                                 |                   |
+        |                      |dynamics is resolved in the objective function.  |                   |
         +----------------------+-------------------------------------------------+-------------------+
         |tol                   |                                                 | 1e-06             |
         +----------------------+-------------------------------------------------+-------------------+
