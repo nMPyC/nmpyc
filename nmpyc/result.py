@@ -244,7 +244,26 @@ class result:
             
             
     def show_errors(self):
-        """Show the errors that occurred during the simualtion."""
+        """Show the errors that occurred during the simualtion.
+        
+        For example, if the solver ipopt was selected and the 
+        defined optimal control problem is infeasible, this method
+        wil print out the message 
+
+        | *An error occured during itertaion 1 of 100:*
+        | *Error in Opti::solve [OptiNode] at .../casadi/core/optistack.cpp:159:*
+        | *.../casadi/core/optistack_internal.cpp:999: Assertion "return_success(accept_limit)" failed:*
+        | *Solver failed. You may use opti.debug.value to investigate the latest values of variables. return_status is         'Infeasible_Problem_Detected'*
+
+        For more informations about the eroor messages take a look 
+        at the documentation of the respective solver.
+
+        If the simulation was completly succesfull, the message 
+
+        | No error occured during the MPC-Loop
+
+        will be printed out.
+        """
         
         if self._success:
             print('No error occured during the MPC-Loop.')
