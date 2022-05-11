@@ -6,13 +6,13 @@
 """
 Module for array definition and computation.
 
-This module provides an array class and associated function for 
+This module provides an array class and associated functions for 
 corresponding matrix calculations.
 
 The goal of this class and the individual functions is to enable 
 compatibility of calculations with both casadi and numpy objects 
 without changing the syntax of the program. 
-This is to enable the user to program as easily as possible and at 
+This enables the user to program as easily as possible and at 
 the same time to switch between symbolic and numeric calculation.
 """
 import numpy as np
@@ -27,9 +27,9 @@ pi = np.pi
 
 class array:
     """
-    A class used to save arrays with symbolic or numeric values. 
+    Class used to save arrays with symbolic or numeric values. 
     
-    The symbolic entries are provides by CasADi and will be 
+    The symbolic entries are provided by CasADi and will be 
     transformed automatically to numeric values of numpy type 
     if it is posiible.
     
@@ -413,12 +413,12 @@ class array:
             self._casadi = True
         
     def _copy(self, other): 
-        """Creats a new array object out aof a casadi, numpy or array object.
+        """Creats a new array object out of a casadi, numpy or array object.
 
         Parameters
         ----------
         other : array, casadi.MX, casadi.SX, casadi.DM, list or numpy.ndarray
-            Object from which the array should be created.
+            Object from which the array is created.
 
         """
         
@@ -577,9 +577,9 @@ def convert(a, dtype='auto'):
     Parameters
     ----------
     a : array, cas.MX, cas.SX, cas.DM or numpy.ndarray
-        Array whic should be converted.
+        Array which should be converted.
     dtype : str, optional
-        Name of the class to which the array shoul be converted. 
+        Name of the class to which the array will be converted. 
         The default is 'auto'.
 
     Returns
@@ -651,7 +651,7 @@ def concatenate(arrays, axis = 0):
     Parameters
     ----------
     arrays : tuple of casadi.MX, casadi.SX, casadi.DM or numpy.ndarrays
-        Sequnce of arrays which should be concatenated. 
+        Sequence of arrays which will be concatenated. 
         The arrays must have the same shape, except in the dimension 
         corresponding to axis.
     axis : int, optional
@@ -705,7 +705,7 @@ def concatenate(arrays, axis = 0):
             + str(axis))
     
 def eye(dim):
-    """Craet an array defining the idendity.
+    """Creates an array defining the idendity.
 
     Parameters
     ----------
@@ -739,7 +739,7 @@ def eye(dim):
     return y
 
 def zeros(dim):
-    """Creat an array with only zero entries.
+    """Creates an array with only zero entries.
 
     Parameters
     ----------
@@ -778,7 +778,7 @@ def zeros(dim):
     return y
 
 def ones(dim):
-    """Creat an array with only entries equal to one.
+    """Creates an array with only entries equal to one.
 
     Parameters
     ----------
@@ -817,12 +817,12 @@ def ones(dim):
     return y
 
 def diag(x):
-    """Creat an diagonal matrix from a given vector.
+    """Creates an diagonal matrix from a given vector.
 
     Parameters
     ----------
     x : array, numpy.ndarray, cas.MX, cas.SX or cas.DX, list
-        Vector containig the diagonal entries of the matrix.
+        Vector containing the diagonal entries of the matrix.
 
     Returns
     -------
@@ -850,7 +850,7 @@ def diag(x):
     return array(y)
 
 def log(x):
-    """Calculate the natural logarith of a given number or array"""
+    """Calculates the natural logarithm of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -874,7 +874,7 @@ def log(x):
     return y
 
 def exp(x):
-    """Calculate the exponential of a given number or array"""
+    """Calculates the exponential of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -898,7 +898,7 @@ def exp(x):
     return y
 
 def sin(x):
-    """Calculate the sinus of a given number or array"""
+    """Calculates the sinus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -922,7 +922,7 @@ def sin(x):
     return y
 
 def sinh(x):
-    """Calculate the sinus hyperbolicus of a given number or array"""
+    """Calculates the sinus hyperbolicus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -946,7 +946,7 @@ def sinh(x):
     return y
 
 def arcsin(x):
-    """Calculate the arcussinus of a given number or array"""
+    """Calculates the arcussinus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -970,7 +970,7 @@ def arcsin(x):
     return y
 
 def arcsinh(x):
-    """Calculate the arcussinus hyperbolicus of a given number or array"""
+    """Calculates the arcussinus hyperbolicus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -994,7 +994,7 @@ def arcsinh(x):
     return y
 
 def cos(x):
-    """Calculate the cosinus of a given number or array"""
+    """Calculates the cosinus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1018,7 +1018,7 @@ def cos(x):
     return y
 
 def cosh(x):
-    """Calculate the cosinus hyperbolicus of a given number or array"""
+    """Calculates the cosinus hyperbolicus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1042,7 +1042,7 @@ def cosh(x):
     return y
 
 def arccos(x):
-    """Calculate the arcuscosinus of a given number or array"""
+    """Calculates the arcuscosinus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1066,7 +1066,7 @@ def arccos(x):
     return y
 
 def arccosh(x):
-    """Calculate the arcuscosinus hypernolicus of a given number or array"""
+    """Calculates the arcuscosinus hypernolicus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1090,7 +1090,7 @@ def arccosh(x):
     return y
 
 def tan(x):
-    """Calculate the tangens of a given number or array"""
+    """Calculates the tangens of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1114,7 +1114,7 @@ def tan(x):
     return y
 
 def tanh(x):
-    """Calculate the tangens hyperblicus of a given number or array"""
+    """Calculates the tangens hyperblicus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1138,7 +1138,7 @@ def tanh(x):
     return y
 
 def arctan(x):
-    """Calculate the arcustangens of a given number or array"""
+    """Calculates the arcustangens of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1162,7 +1162,7 @@ def arctan(x):
     return y
 
 def arctanh(x):
-    """Calculate the arcustangens hyperbolicus of a given number or array"""
+    """Calculates the arcustangens hyperbolicus of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1186,7 +1186,7 @@ def arctanh(x):
     return y
 
 def sqrt(x):
-    """Calculate the squareroot of a given number or array"""
+    """Calculates the square root of a given number or array"""
     
     if isinstance(x, array):
         x_ = x._A
@@ -1210,7 +1210,7 @@ def sqrt(x):
     return y
 
 def power(x,n):
-    """Calculate the (elementwise) n-th power of a number or array.
+    """Calculates the (elementwise) n-th power of a number or array.
 
     Parameters
     ----------
@@ -1248,7 +1248,7 @@ def power(x,n):
     return y
 
 def matrix_power(x,n):
-    """Raise a square matrix to the n-th power.
+    """Raises a square matrix to the n-th power.
 
     Parameters
     ----------
@@ -1286,7 +1286,7 @@ def matrix_power(x,n):
     return y
 
 def abs(x):
-    """Calculate the absolute value of a number or array."""
+    """Calculates the absolute value of a number or array."""
 
     if isinstance(x, array):
         x_ = x._A
@@ -1310,7 +1310,7 @@ def abs(x):
     return y
     
 def norm(x,order=None):
-    """Return the norm of a vector or matrix.
+    """Returns the norm of a vector or matrix.
 
     Parameters
     ----------
@@ -1318,7 +1318,7 @@ def norm(x,order=None):
         Vector or matrix of which the norm should be calculated.
     order : number or str, optional
         String defining the type of the norm. 
-        Posiible values are 1, 2, 'fro' or inf. 
+        Posiible values are 1, 2, 'fro' or 'inf'. 
         The default is None.
 
     """
@@ -1369,7 +1369,7 @@ def max(*args):
     return cas.fmax(*args)
 
 def min(*args):
-    """Return the minimal value of the arguments"""
+    """Returns the minimal value of the arguments"""
     
     for i in range(len(args)):
         if isinstance(args[i], array):
