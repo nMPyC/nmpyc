@@ -13,7 +13,7 @@ class model:
     """
     A class that contains all the components of the optimal control problem.
     
-    Can be used to perform open and closed loop simulations. 
+    Can be used to perform open and closed loop simulations.
     
     Parameters
     ----------
@@ -55,7 +55,7 @@ class model:
             
     @property
     def system(self):
-        """system : Systemdynamic of the optimal control problem."""
+        """system : System dynamics of the optimal control problem."""
         return self._system
     
     @system.setter
@@ -87,7 +87,29 @@ class model:
     
     @property
     def opti(self):
-        """opti : Optimizer for the optimal control problem."""
+        """opti : Optimizer for the optimal control problem.
+        
+        This property can be used to set different optimization 
+        options.
+        A distinction is made between basic settings for the 
+        optimizer and solver-specific settings.
+
+        The basic settings can be adjust via the 
+        :py:meth:`nmpyc.opti.opt.set_options` method
+        while the
+        :py:meth:`nmpyc.opti.opt.set_solverOptions`
+        must be called to custimize the solver-specific 
+        settings.
+
+        For the :py:class:`~model` class these methods can be called by
+
+        >>> model.opti.set_options({..})
+
+        and 
+
+        >>> model.opt.set_solverOptions({..})
+        
+        """
         return self._opti
     
     @property
