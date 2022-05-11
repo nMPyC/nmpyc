@@ -43,3 +43,4 @@ Contents
    api
    examples
    templates
+   faq
