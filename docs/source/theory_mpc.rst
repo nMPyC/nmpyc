@@ -77,7 +77,8 @@ A special case of an optimal control problem is a linear-quadratic problem. Ther
 
        \begin{equation}
        \begin{split}
-              \min_{u(\cdot)\in\mathbb{U}}J^N(x_0,u(\cdot)) &= \sum_{k=0}^{N-1}x(k,x_0)^T Q x(k,x_0) +u(k)^T R u(k)+ 2x(k,x_0)^TN u(k) +x(N,x_0)^T P x(N,x_0)\\
+              \min_{u(\cdot)\in\mathbb{U}}J^N(x_0,u(\cdot)) &= \sum_{k=0}^{N-1}\ell(x(k,x_0),u(k))+F(x(N,x_0))\\
+              &= \sum_{k=0}^{N-1}x(k,x_0)^T Q x(k,x_0) +u(k)^T R u(k)+ 2x(k,x_0)^TN u(k) +x(N,x_0)^T P x(N,x_0)\\
               \text{s.t.}\quad x(k+1,x_0)&=Ax(k,x_0)+Bu(k),\quad k = 0,\dots, N-1\\
               x(0)&= x_0\\
               x\in\mathbb{X},\quad & x(N,x_0)\in\mathbb{X}_0
@@ -95,6 +96,7 @@ where :math:`Q, R, N, P` are weightening matrices and :math:`A, B` the system ma
 
 .. note::
        **nMPyC** supports also discounted optimal control problems. In the discrete case the objective is defined as 
+
        .. math::
               J^N(x_0,u(\cdot)):=\sum_{k=0}^{N-1}\beta^k\ell(x(k,x_0),u(k))
        with :math:`\beta\in(0,1)` the discount factor.
