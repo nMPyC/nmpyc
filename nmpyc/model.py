@@ -154,6 +154,17 @@ class model:
         |                      |by default.                                      |                   |
         +----------------------+-------------------------------------------------+-------------------+
 
+        The auto option for the solver selection follows the rule
+
+        1. If the optimal control problem is recognized as a LQP and 
+        a fixed step discretization of the system is given, 
+        osqp is selected.
+
+        2. If a condition of 1. is violated and 
+        not a SciPy discretization method is choosen, 
+        ipopt is selected.
+
+        3. Otherwise SLSQP is selected.
 
         The solver-specific settings can be custamized by calling
 
