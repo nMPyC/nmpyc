@@ -260,7 +260,7 @@ class result:
 
         If the simulation was completly succesfull, the message 
 
-        | No error occured during the MPC-Loop
+        | *No error occured during the MPC-Loop*
 
         will be printed out.
         """
@@ -276,17 +276,73 @@ class result:
     def plot(self, *args, **kwargs):
         """Plot the results of the MPC simulation.
 
-        Parameters
-        ----------
-        *args : TYPE
-            DESCRIPTION.
-        **kwargs : TYPE
-            DESCRIPTION.
+        If no argument is passed, by defult the closed loop states and controls are 
+        plotted seperated in two subplots.
 
-        Raises
-        ------
-        KeyError
-            A passed keyword argument is not a valid option for plotting.
+        If only a specific component of the solution is to be plotted, 
+        this can be customized by using a string as the first argument. 
+        Valid arguments for this are
+
+        - `state` for only plotting the closed loop state trajectories
+
+        - `control` for only plotting the closed loop control values
+
+        - `cost` for plotting the stagecosts evaluated at the closed loop results
+
+        - `phase` for plotting a phase portrait of two components of the solution.
+
+        Further adjustments can be made with the help of the keyword arguments.
+        Valid arguments are
+
+        +----------------------+-------------------------------------------------+-------------------+
+        | Argument             | Description                                     | Default value     |
+        +======================+=================================================+===================+
+        |xk                    | List specifying which components of the state   | `[1,...,nx]`      |
+        |                      |                                                 |                   |
+        |                      | are to be plotted.                              |                   |
+        +----------------------+-------------------------------------------------+-------------------+
+        |uk                    | List specifying which components of the control | `[1,...,nu]`      |
+        |                      |                                                 |                   |
+        |                      | are to be plotted.                              |                   |
+        +----------------------+-------------------------------------------------+-------------------+
+        |show_ol               |If True, the open loop simulation rersults are   | True              |
+        |                      |                                                 |                   |
+        |                      |also plotted additionaly to the closed loop      |                   |
+        |                      |                                                 |                   |
+        |                      |results.                                         |                   |
+        +----------------------+-------------------------------------------------+-------------------+
+        |iters                 |List indicating from which iterations the open   | `[1,...,K+1]`     |
+        |                      |                                                 |                   |
+        |                      |loop results should be plotted.                  |                   |
+        |                      |                                                 |                   |
+        |                      |Will be ignored if show_ol is False.             |                   |
+        +----------------------+-------------------------------------------------+-------------------+
+        |usetex                |If True, the captions are displayed in TEX style.| True              |
+        +----------------------+-------------------------------------------------+-------------------+
+        |grid                  |If True, a grid is displayed in the background   | True              |
+        |                      |                                                 |                   |
+        |                      |of the plot.                                     |                   |
+        +----------------------+-------------------------------------------------+-------------------+
+        |show_legend           |If True, a legend will be displayed inside       | True              |
+        |                      |                                                 |                   |
+        |                      |the plot.                                        |                   |
+        +----------------------+-------------------------------------------------+-------------------+
+        |phase1                |Phase 1 of the phase portrait plot.              | None              |
+        |                      |                                                 |                   |
+        |                      |Has the form `x_k` or `u_k`, where `k` determines|                   |
+        |                      |                                                 |                   |
+        |                      |the respective component.                        |                   |
+        |                      |                                                 |                   |
+        |                      |Will be ignored if args!='phase'.                |                   |
+        +----------------------+-------------------------------------------------+-------------------+
+        |phase2                |Phase 2 of the phase portrait plot.              | None              |
+        |                      |                                                 |                   |
+        |                      |Has the form `x_k` or `u_k`, where `k` determines|                   |
+        |                      |                                                 |                   |
+        |                      |the respective component.                        |                   |
+        |                      |                                                 |                   |
+        |                      |Will be ignored if args!='phase'.                |                   |
+        +----------------------+-------------------------------------------------+-------------------+
 
         """
         
