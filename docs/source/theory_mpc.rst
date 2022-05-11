@@ -69,6 +69,7 @@ At each time instant :math:`j=0,1,2,\dots:`
 
 Notes and extensions
 ---------------------
+A special case of an optimal control problem is a linear-quadratic problem. There, the stage cost is defined as a quadratic function and the dynamics are linear.
 
 .. note::
        **nMPyC** supports a time dependent formulation of optimal control problem. Hence, all functions, as :math:`f, \ell, F`, can depend on the time instance :math:`j`.
