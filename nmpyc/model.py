@@ -104,13 +104,21 @@ class model:
         |Parameter             | Description                                     | Default value     |
         +======================+=================================================+===================+
         |solver                | String defining which solver should be used for | auto              |
+        |                      |                                                 |                   |
         |                      | optimization. Currently supported solver are    |                   |
+        |                      |                                                 |                   |
         |                      | - ipotpt                                        |                   |
+        |                      |                                                 |                   |
         |                      | - sqpmethod                                     |                   |
+        |                      |                                                 |                   |
         |                      | - ospq                                          |                   |
+        |                      |                                                 |                   |
         |                      | - SLSQP                                         |                   |
+        |                      |                                                 |                   |
         |                      | - trust-constr                                  |                   |
+        |                      |                                                 |                   |
         |                      | For auto a suitable solver depending on other   |                   |
+        |                      |                                                 |                   |
         |                      | options and parameters is selected.             |                   |
         +----------------------+-------------------------------------------------+-------------------+
         |full_discretization   |                                                 | True              |
