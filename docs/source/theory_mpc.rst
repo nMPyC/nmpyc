@@ -36,7 +36,7 @@ In summary, an optimal control problem without terminal conditions is given by
        \begin{equation}
        \begin{split}
               \min_{u(\cdot)\in\mathbb{U}}J^N(x_0,u(\cdot)) &= \sum_{k=0}^{N-1}\ell(x(k,x_0),u(k))\\
-              \\text{s.t.}\quad x(k+1,x_0)&=f(x(k,x_0),u(k)),\quad k = 0,\dots, N-1\\
+              \text{s.t.}\quad x(k+1,x_0)&=f(x(k,x_0),u(k)),\quad k = 0,\dots, N-1\\
               x(0)&= x_0\\
               x&\in\mathbb{X}
        \end{split}
@@ -58,4 +58,28 @@ and an optimal control problem with terminal conditions is given by
 
 Additionally, with **nMPyC** it is possible to add constraints to the optimal control problem.
 
-Thus, the basic MPC algorithm is formulated as follows:
+The basic MPC algorithm
+------------------------
+Regardless of the type of the optimal control problem, the MPC algorithm is given by:
+
+At each time instant :math:`j=0,1,2,\dots:`
+       1. Measure the state :math:`x(j)\in\mathbb{X}` of the system.
+       2. Set :math:`x_0:=x(j)`, solve the optimal control problem (with or without terminal conditions) and denote the obtained optimal control sequence by :math:`u^\star(\cdot)\in\mathbb{U}^N(x_0)`.
+       3. Define the MPC-feedback value :math:`\mu^N(x(j)):=u^\star(0)\in\mathbb{U}` and use this control value in the next sampling period (apply the feedback to the system).
+
+Notes and extensions
+---------------------
+
+.. note::
+       **nMPyC** supports a time dependent formulation of optimal control problem. Hence, all functions, as :math:`f, \ell, F`, can depend on the time instance :math:`j`.
+
+.. note::
+       **nMPyC** supports also discounted optimal control problems. In the discrete case the objective is defined as 
+       .. math::
+              J^N(x_0,u(\cdot)):=\sum_{k=0}^{N-1}\beta^k\ell(x(k,x_0),u(k))
+       with :math:`\beta\in(0,1)` the discount factor.
+
+Further reading
+----------------
+For further reading and more theoretical insights we kindly refer to
+
