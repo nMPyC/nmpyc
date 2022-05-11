@@ -172,7 +172,7 @@ class model:
 
         - `Sourceforge <http://casadi.sourceforge.net/v2.0.0/api/html/d6/d07/classcasadi_1_1NlpSolver.html>`_ for the CasADi solvers
 
-        - `SciPy Dokumetation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html>`_for the SciPy solvers
+        - `SciPy Documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html>`_ for the SciPy solvers
 
         - `OSQP Website <https://osqp.org/docs/interfaces/solver_settings.html>`_ for the osqp solver
         
