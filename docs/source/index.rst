@@ -38,5 +38,8 @@ Contents
 .. toctree::
    :maxdepth: 2
 
+   start
    theory_mpc
    api
+   examples
+   templates
