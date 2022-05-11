@@ -52,7 +52,7 @@ and an optimal control problem with terminal conditions is given by
               \min_{u(\cdot)\in\mathbb{U}}J^N(x_0,u(\cdot)) &= \sum_{k=0}^{N-1}\ell(x(k,x_0),u(k))+F(x(N,x_0))\\
               \\text{s.t.}\quad x(k+1,x_0)&=f(x(k,x_0),u(k)),\quad k = 0,\dots, N-1\\
               x(0)&= x_0\\
-              x\in\mathbb{X},\quad & x(N,x_0)\in\mahtbb{X}_0
+              x\in\mathbb{X},\quad & x(N,x_0)\in\mathbb{X}_0
        \end{split}
        \end{equation}
 
