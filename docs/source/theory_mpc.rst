@@ -30,7 +30,7 @@ with terminal cost.
 
 In summary, an optimal control problem without terminal conditions is given by 
 
-..math::
+.. math::
   :nowrap:
 
        \begin{equation}
@@ -44,7 +44,7 @@ In summary, an optimal control problem without terminal conditions is given by
 
 and an optimal control problem with terminal conditions is given by
 
-..math::
+.. math::
   :nowrap:
 
        \begin{equation}
