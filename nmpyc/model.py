@@ -156,13 +156,9 @@ class model:
 
         The auto option for the solver selection follows the rule
 
-        1. If the optimal control problem is recognized as a LQP and 
-        a fixed step discretization of the system is given, 
-        osqp is selected.
+        1. If the optimal control problem is recognized as a LQP and a fixed step discretization of the system is given, osqp is selected.
 
-        2. If a condition of 1. is violated and 
-        not a SciPy discretization method is choosen, 
-        ipopt is selected.
+        2. If a condition of 1. is violated and not a SciPy discretization method is choosen, ipopt is selected.
 
         3. Otherwise SLSQP is selected.
 
@@ -172,13 +168,11 @@ class model:
 
         Valid parameters which the passed dictionary can contain 
         are depending on the selected solver.
-        For a liost of these settings take a look at 
+        For a list of these settings take a look at 
 
-        - `Sourceforge <http://casadi.sourceforge.net/v2.0.0/api/html/d6/d07/classcasadi_1_1NlpSolver.html>`_ 
-        for the CasADi solvers
+        - `Sourceforge <http://casadi.sourceforge.net/v2.0.0/api/html/d6/d07/classcasadi_1_1NlpSolver.html>`_ for the CasADi solvers
 
-        - `SciPy Dokumetation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html>`_
-        for the SciPy solvers
+        - `SciPy Dokumetation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html>`_for the SciPy solvers
 
         - `OSQP Website <https://osqp.org/docs/interfaces/solver_settings.html>`_ for the osqp solver
         
