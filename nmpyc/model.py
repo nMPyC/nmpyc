@@ -135,11 +135,23 @@ class model:
         |                      |                                                 |                   |
         |                      |value.                                           |                   |
         +----------------------+-------------------------------------------------+-------------------+
-        |maxiter               |                                                 | 5000              |
+        |maxiter               |Maximal number of iterations during the          | 5000              |
+        |                      |                                                 |                   |
+        |                      |optimization progress.                           |                   |
         +----------------------+-------------------------------------------------+-------------------+
-        |verbose               |                                                 | False             |
+        |verbose               |If True, the verbose option of the selected      | False             |
+        |                      |                                                 |                   |
+        |                      |solver ist activated.                            |                   |
         +----------------------+-------------------------------------------------+-------------------+
-        |initial_guess         |                                                 | None              |
+        |initial_guess         |Initial guess for the optimization variable u.   | None              |
+        |                      |                                                 |                   |
+        |                      |Must be an array of shape (nx,N).                |                   |
+        |                      |                                                 |                   |
+        |                      |If the initial guess has not the right shape or  |                   |
+        |                      |                                                 |                   |
+        |                      |is None it will be set to nmpyc.ones((nu,N))*0.1 |                   |
+        |                      |                                                 |                   |
+        |                      |by default. |                   |
         +----------------------+-------------------------------------------------+-------------------+
 
 
