@@ -374,7 +374,7 @@ class model:
         return res
     
     def save(self, path):
-        """Saving the model to a given file with dill.
+        """Saving the model to a given file with `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.
         
         The path can be absolut or relative and 
         the ending of the file is arbitrary.
@@ -384,6 +384,13 @@ class model:
         path : str
             String defining the path to the desired file. 
 
+
+
+        For example
+
+        >>> model.save('objective.pickle')
+        
+        will create a file `model.pickle` containing the nMPyC model object.
         """
         
         self._opti._delete_optistack()
@@ -392,7 +399,25 @@ class model:
     
     @classmethod
     def load(cls, path):
-        """Loads a nMPyC model object from a given path."""
+        """Loads a nMPyC model object from a file.
+        
+        The specified path must lead to a file that was previously saved with
+        :py:meth:`~save`.
+        
+        Parameters
+        ----------
+        path : str
+            String defining the path to the file containing the nMPyC 
+            model object. 
+            
+            
+        For example
+
+        >>> model.load('model.pickle')
+        
+        will load the model previously saved with :py:meth:`~save`.
+            
+        """
         
         try:
             with open(path, "rb") as input_file:
