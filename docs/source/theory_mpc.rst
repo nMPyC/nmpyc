@@ -69,7 +69,26 @@ At each time instant :math:`j=0,1,2,\dots:`
 
 Notes and extensions
 ---------------------
-A special case of an optimal control problem is a linear-quadratic problem. There, the stage cost is defined as a quadratic function and the dynamics are linear.
+A special case of an optimal control problem is a linear-quadratic problem. There, the stage cost is defined as a quadratic function and the dynamics are linear. Thus, the linear-quadratic optimal control problem is given by
+
+
+.. math::
+  :nowrap:
+
+       \begin{equation}
+       \begin{split}
+              \min_{u(\cdot)\in\mathbb{U}}J^N(x_0,u(\cdot)) &= \sum_{k=0}^{N-1}x(k,x_0)^T Q x(k,x_0) +u(k)^T R u(k)+ 2x(k,x_0)^TN u(k) +x(N,x_0)^T P x(N,x_0)\\
+              \text{s.t.}\quad x(k+1,x_0)&=Ax(k,x_0)+Bu(k),\quad k = 0,\dots, N-1\\
+              x(0)&= x_0\\
+              x\in\mathbb{X},\quad & x(N,x_0)\in\mathbb{X}_0
+       \end{split}
+       \end{equation}
+
+where :math:`Q, R, N, P` are weightening matrices and :math:`A, B` the system matrices, each respectively of suitable dimension. Further, the constraints have to be also linear and of the form 
+
+.. math::
+       Ex+ Fu \geq h.
+
 
 .. note::
        **nMPyC** supports a time dependent formulation of optimal control problem. Hence, all functions, as :math:`f, \ell, F`, can depend on the time instance :math:`j`.
