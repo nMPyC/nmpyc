@@ -14,14 +14,14 @@ import nmpyc as mpc
 
 class result:
     """
-    A class used to store the simulation results of the MPC simulation.
+    Class used to store the simulation results of the MPC simulation.
 
     To obtain the individual components of the simulation, 
     such as closed loop and open loop results, 
     the individual attributes need to be called.
 
     Also the result object contains information about errors and 
-    other solver statistics, which can be used for further investiogation 
+    other solver statistics, which can be used for further investigation 
     of the simulation progress.
 
     Additionally, this class provides a way to visualize the results 
@@ -34,11 +34,11 @@ class result:
     t0 : float
         Initial time.
     h : float
-        sampling rate.
+        Sampling rate.
     N : int
         MPC horizon.
     K : int
-        MPC Interations.
+        Number of MPC Interations.
 
     """
     
@@ -91,7 +91,7 @@ class result:
     
     @property 
     def x0(self):
-        """numpy.ndarray : Initial stae."""
+        """numpy.ndarray : Initial state."""
         return self._x0.A
     
     @property 
@@ -101,7 +101,7 @@ class result:
     
     @property 
     def N(self):
-        """int : MPC horiton"""
+        """int : MPC horizon"""
         return self._N
     
     @property
@@ -111,7 +111,7 @@ class result:
     
     @property 
     def x_cl(self):
-        """numpy.ndarray : Closed loop trajecory."""
+        """numpy.ndarray : Closed loop trajectory."""
         return self._x_cl
     
     @property 
@@ -121,7 +121,7 @@ class result:
     
     @property 
     def l_cl(self):
-        """numpy.ndarray : Stagecosts evaluated at the 
+        """numpy.ndarray : Stage costs evaluated at the 
         closed loop trajectory and feedback."""
         return self._l_cl
     
@@ -145,7 +145,7 @@ class result:
         
     @property 
     def l_ol(self):
-        """list of numpy.ndarrays : List containing the stagecosts evaluated 
+        """list of numpy.ndarrays : List containing the stage costs evaluated 
         at the open loop trajectories and controls of all MPC itertaions."""
         return self._l_ol
     
@@ -169,8 +169,8 @@ class result:
     
     @property 
     def error(self):
-        """str : Error message with wich the solver failed. 
-        If succes is true error is None."""
+        """str : Error message with which the solver failed. 
+        If success is True error is None."""
         return self._error
     
     @property 
@@ -244,18 +244,18 @@ class result:
             
             
     def show_errors(self):
-        """Show the errors that occurred during the simualtion.
+        """Shows the errors that occurred during the simualtion.
         
         For example, if the solver ipopt was selected and the 
         defined optimal control problem is infeasible, this method
-        wil print out the message 
+        will print out the message 
 
         | *An error occured during itertaion 1 of 100:*
         | *Error in Opti::solve [OptiNode] at .../casadi/core/optistack.cpp:159:*
         | *.../casadi/core/optistack_internal.cpp:999: Assertion "return_success(accept_limit)" failed:*
         | *Solver failed. You may use opti.debug.value to investigate the latest values of variables. return_status is         'Infeasible_Problem_Detected'*
 
-        For more informations about the eroor messages take a look 
+        For more informations about the error messages take a look 
         at the documentation of the respective solver.
 
         If the simulation was completly succesfull, the message 
@@ -276,10 +276,10 @@ class result:
     def plot(self, *args, **kwargs):
         """Plot the results of the MPC simulation.
 
-        If no argument is passed, by defult the closed loop states and controls are 
+        If no argument is passed, by default the closed loop states and controls are 
         plotted seperated in two subplots.
 
-        If only a specific component of the solution is to be plotted, 
+        If only a specific component of the solution should be plotted, 
         this can be customized by using a string as the first argument. 
         Valid arguments for this are
 
@@ -287,7 +287,7 @@ class result:
 
         - `control` for only plotting the closed loop control values
 
-        - `cost` for plotting the stagecosts evaluated at the closed loop results
+        - `cost` for plotting the stage costs evaluated at the closed loop results
 
         - `phase` for plotting a phase portrait of two components of the solution.
 
@@ -298,11 +298,11 @@ class result:
         +======================+=================================================+===================+
         |xk                    | List specifying which components of the state   | `[1,...,nx]`      |
         |                      |                                                 |                   |
-        |                      | are to be plotted.                              |                   |
+        |                      | are plotted.                                    |                   |
         +----------------------+-------------------------------------------------+-------------------+
         |uk                    | List specifying which components of the control | `[1,...,nu]`      |
         |                      |                                                 |                   |
-        |                      | are to be plotted.                              |                   |
+        |                      | are plotted.                                    |                   |
         +----------------------+-------------------------------------------------+-------------------+
         |show_ol               |If True, the open loop simulation rersults are   | True              |
         |                      |                                                 |                   |
@@ -310,7 +310,7 @@ class result:
         |                      |                                                 |                   |
         |                      |results.                                         |                   |
         +----------------------+-------------------------------------------------+-------------------+
-        |iters                 |List indicating from which iterations the open   | `[1,...,K+1]`     |
+        |iters                 |List indicating from which iteration on the open | `[1,...,K+1]`     |
         |                      |                                                 |                   |
         |                      |loop results should be plotted.                  |                   |
         |                      |                                                 |                   |
