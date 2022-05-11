@@ -11,7 +11,7 @@ import dill
 
 class model:
     """
-    A class that contains all the components of the optimal control problem.
+    Class that contains all the components of the optimal control problem.
     
     Can be used to perform open and closed loop simulations.
     
@@ -21,7 +21,7 @@ class model:
         nMPyC-objective defining the objective of the 
         optimal control problem.
     system : system
-        nMPyC-system defining the systemdynamics of the 
+        nMPyC-system defining the system dynamics of the 
         optimal control problem.
     constraints : constraints optional
         nMPyC-constraints defining the constraints of the optimal control 
@@ -91,10 +91,10 @@ class model:
         
         This property can be used to set different optimization 
         options.
-        A distinction is made between basic settings for the 
+        A distinction is made between basic settings of the 
         optimizer and solver-specific settings.
 
-        The basic settings can be adjust by calling 
+        The basic settings can be adjusted by calling 
 
         >>> model.opti.set_options({..})
 
@@ -103,9 +103,9 @@ class model:
         +----------------------+-------------------------------------------------+-------------------+
         |Parameter             | Description                                     | Default value     |
         +======================+=================================================+===================+
-        |solver                | String defining which solver should be used for | auto              |
+        |solver                | String defining which solver is for             | auto              |
         |                      |                                                 |                   |
-        |                      | optimization. Currently supported solver are    |                   |
+        |                      | optimization. Currently supported solvers are   |                   |
         |                      |                                                 |                   |
         |                      | - ipotpt                                        |                   |
         |                      |                                                 |                   |
@@ -154,7 +154,7 @@ class model:
         |                      |by default.                                      |                   |
         +----------------------+-------------------------------------------------+-------------------+
 
-        The auto option for the solver selection follows the rule
+        The auto option of the solver selection follows the rule
 
         1. If the optimal control problem is recognized as a LQP and a fixed step discretization of the system is given, osqp is selected.
 
@@ -181,7 +181,7 @@ class model:
     
     @property
     def N(self):
-        """int : Prediction horizon for the MPC loop."""
+        """int : Prediction horizon of the MPC loop."""
         return self._N
     
     @N.setter
@@ -207,14 +207,14 @@ class model:
         return string
     
     def solve_ocp(self, x0, N, discount=None):
-        """Solving the finit horizon optimal control problem.
+        """Solves the finit horizon optimal control problem.
 
         Parameters
         ----------
         x0 : array
             Initial value of the optimal control problem.
         N : int
-            Prediction horizon for the control problem.
+            Prediction horizon of the control problem.
         discount : float, optional
             Discountfactor of the objective. The default is None.
 
@@ -250,7 +250,7 @@ class model:
         return (u_ol, x_ol)
             
     def mpc(self, x0, N, K, discount=None):
-        """Solving the optimal control problem via model predictive control.
+        """Solves the optimal control problem via model predictive control.
 
         Parameters
         ----------
@@ -266,7 +266,7 @@ class model:
         Returns
         -------
         res : result
-            nMPyC result objective containing the optimiaztion results of 
+            nMPyC result object containing the optimiaztion results of 
             the closed and open loop simulations.
 
         """
