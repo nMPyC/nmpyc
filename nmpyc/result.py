@@ -15,6 +15,17 @@ import nmpyc as mpc
 class result:
     """
     A class used to store the simulation results of the MPC simulation.
+
+    To obtain the individual components of the simulation, 
+    such as closed loop and open loop results, 
+    the individual attributes need to be called.
+
+    Also the result object contains information about errors and 
+    other solver statistics, which can be used for further investiogation 
+    of the simulation progress.
+
+    Additionally, this class provides a way to visualize the results 
+    in a suitable way with the :py:meth:`~plot` method.
     
     Parameters
     ----------
