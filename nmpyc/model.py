@@ -95,9 +95,9 @@ class model:
         optimizer and solver-specific settings.
 
         The basic settings can be adjust via the 
-        :py:meth:`nmpyc.opti.opt.set_options` method
+        :py:meth:`nmpyc.opti.opti.set_options` method
         while the
-        :py:meth:`nmpyc.opti.opt.set_solverOptions`
+        :py:meth:`nmpyc.opti.opti.set_solverOptions`
         must be called to custimize the solver-specific 
         settings.
 
