@@ -123,11 +123,17 @@ class model:
         +----------------------+-------------------------------------------------+-------------------+
         |full_discretization   |If True, the method of full discretiziation is   | True              |
         |                      |                                                 |                   |
-        |                      |used for optimization. Otherwise the The system  |                   |
+        |                      |used for optimization. Otherwise the the system  |                   |
         |                      |                                                 |                   |
         |                      |dynamics is resolved in the objective function.  |                   |
         +----------------------+-------------------------------------------------+-------------------+
-        |tol                   |                                                 | 1e-06             |
+        |tol                   |The toleranz of the solver.                      | 1e-06             |
+        |                      |                                                 |                   |
+        |                      |If the solver distinguishes between relative     |                   |
+        |                      |                                                 |                   |
+        |                      |and absolute tolerances, both are set to this    |                   |
+        |                      |                                                 |                   |
+        |                      |value.                                           |                   |
         +----------------------+-------------------------------------------------+-------------------+
         |maxiter               |                                                 | 5000              |
         +----------------------+-------------------------------------------------+-------------------+
