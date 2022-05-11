@@ -291,9 +291,7 @@ class result:
 
         - `phase` for plotting a phase portrait of two components of the solution.
 
-        Further adjustments can be made with the help of the keyword arguments.
-        
-        Valid arguments are
+        Further adjustments can be made with the help of the following keyword arguments.
 
         +----------------------+-------------------------------------------------+-------------------+
         | Argument             | Description                                     | Default value     |
