@@ -137,6 +137,17 @@ class opti:
     @property 
     def U_start(self, value):
         """array : Initial guess for the optimizer."""
+
+        if not isinstance(value, array):
+            raise TypeError(
+                'inital guess must be of type array - not ' 
+                + str(type(value)))
+        
+        if value.symbolic:
+            raise TypeError(
+                'inital guess mhas to be purely numeric,' 
+                + ' but also has symbolic entries.')
+
         return self._U_start
     
     #TO-DO: proof initial guess
