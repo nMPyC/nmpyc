@@ -708,7 +708,7 @@ class result:
             plt.show()
     
     def save(self, path):
-        """Saving the result to a given file with dill.
+        """Saving the result to a given file with `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.
         
         The path can be absolut or relative and 
         the ending of the file is arbitrary.
@@ -718,6 +718,13 @@ class result:
         path : str
             String defining the path to the desired file. 
 
+
+
+        For example
+
+        >>> result.save('result.pickle')
+        
+        will create a file `result.pickle` containing the nMPyC result object.
         """
         
         with open(path, "wb") as output_file:
@@ -725,18 +732,36 @@ class result:
     
     @classmethod
     def load(cls, path):
-        """Loads a nMPyC result object from a given path."""
+        """Loads a nMPyC result object from a file.
+        
+        The specified path must lead to a file that was previously saved with
+        :py:meth:`~save`.
+        
+        Parameters
+        ----------
+        path : str
+            String defining the path to the file containing the nMPyC 
+            result object. 
+            
+            
+        For example
+
+        >>> result.load('result.pickle')
+        
+        will load the result previously saved with :py:meth:`~save`.
+            
+        """
         
         try:
             with open(path, "rb") as input_file:
                 e = dill.load(input_file)
         except:
             raise Exception(
-                'Can not load model from file. File not readable!')
+                'Can not load result from file. File not readable!')
             
         if not isinstance(e, result):
             raise Exception(
-                'Can not load model from file. File does not cotain a result!')
+                'Can not load result from file. File does not cotain a result!')
             
         return e
         
