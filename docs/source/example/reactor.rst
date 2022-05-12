@@ -20,15 +20,7 @@ in which :math:`k` is the rate constant. The material balances and the system da
    \end{equation*}
    
 in which :math:`c_A\geq 0` and :math:`c_B\geq 0` are the molar concentrations of :math:`A` and :math:`B` respectively, and :math:`Q\leq 20` (L/min) is 
-the flow through the reactor. The constants and their meanings are given in table below. 
-Further, we consider the stage cost given by 
-
-.. math::
-   :nowrap:
-   
-   \begin{align*}
-      \ell (c_t^{A},c_t^{B},Q_t)&=\frac 1 2\vert c_t^{A}-\frac 1 2\vert^2+\frac 1 2 \vert c_t^B-\frac 1 2\vert^2+\frac 1 2 \vert Q_t -12 \vert^2\\
-   \end{align*}
+the flow through the reactor. The constants and their meanings are given in table below.
 
 ================================ =============================  =====================================  ================
    Reactor constants
@@ -42,3 +34,16 @@ rate constant                     :math:`k_r`                                   
 equilibrium                       :math:`(c_e^{A},c_e^B,Q_e)`    :math:`(\frac 1 2, \frac 1 2, 12)`
 start value                       :math:`(c_0^{A},c_0^B)`        :math:`(0.4, 0.2)`
 ================================ =============================  =====================================  ================
+
+To initialize the system dynamics in our code, we must first define a function that implements :math:`f(x,u)`.
+
+
+
+Further, we consider the stage cost given by 
+
+.. math::
+   :nowrap:
+   
+   \begin{align*}
+      \ell (c_t^{A},c_t^{B},Q_t)&=\frac 1 2\vert c_t^{A}-\frac 1 2\vert^2+\frac 1 2 \vert c_t^B-\frac 1 2\vert^2+\frac 1 2 \vert Q_t -12 \vert^2\\
+   \end{align*}
