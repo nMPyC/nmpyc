@@ -18,7 +18,7 @@ In summary, **nMPyC**
    - supports discounted optimal control problems
    - can save and load the simulation results
 
-The **nMPyC** software is Python based and works therefore on any OS with a Python distribution (for more precise requiremnents see ....). **nMPyC** has been developed by Jonas Schießl and Lisa Krügel under the supervision of Prof. Lars Grüne at the Chair of Applied Mathematics of University of Bayreuth. 
+The **nMPyC** software is Python based and works therefore on any OS with a Python distribution (for more precise requiremnents see ....). **nMPyC** has been developed by Jonas Schießl and Lisa Krügel under the supervision of Prof. Lars Grüne at the `Chair of Applied Mathematic <https://num.math.uni-bayreuth.de/en/index.html>`_ of University of Bayreuth. 
 
 .. note::
 
