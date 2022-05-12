@@ -44,3 +44,4 @@ Contents
    examples
    templates
    faq
+   references
