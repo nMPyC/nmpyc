@@ -81,9 +81,9 @@ In terms of the constraints we asume that
 
 .. math::
 
-   0 &\leq x_1(k) \quad \text{for } i=0,\ldots,N \\
-   0 &\leq x_2(k) \quad \text{for } i=0,\ldots,N \\
-   0 &\leq u(k) \leq 20 \quad \text{for } i=0,\ldots,N-1.
+   0 &\leq x_1(k) \quad &\text{for } i=0,\ldots,N \\
+   0 &\leq x_2(k) \quad &\text{for } i=0,\ldots,N \\
+   0 &\leq u(k) \leq 20 \quad &\text{for } i=0,\ldots,N-1.
 
 This can be realized in our Code as follows.
 
@@ -96,5 +96,37 @@ This can be realized in our Code as follows.
    constraints.add_bound('lower','state', lbx)
    constraints.add_bound('lower','control', lbu)
    constraints.add_bound('upper','control', ubu)
+
+At last let us consider the equilibrium :math:`(c_e^{A},c_e^B,Q_e)` as th terminal condition for our optimnal control problem, which is implemented as 
+
+.. code-block:: python
+
+   xeq = nmpyc.array([0.5,0.5])
+   def he(x): 
+       return x - xeq
+   constraints.add_constr('terminal_eq', he)   
+
+After all components of the optimal control problem have been implemented, we can now combine them into a model and start the MPC loop.
+For this Purpose, we define
+
+.. math::
+
+   x(0) = (0.4,0.2)^T 
+
+and set :math:`N=15`, :math:`K=100`.
+
+.. code-block:: python
+
+   model = mpc.model(objective,system,constraints)
+   x0 = mpc.array([0.4,0.2])
+   res = model.mpc(x0,15,100)
+
+After the simulation we can visualize the results by calling 
+
+.. code-block:: python
+
+   res.plot()
+
+which will lead the following otput.
 
 
