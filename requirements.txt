@@ -5,6 +5,7 @@ nbsphinx
 pygments
 docutils
 sphinx-copybutton
+sphinxcontrib-bibtex
 graphviz
 casadi
 numpy
