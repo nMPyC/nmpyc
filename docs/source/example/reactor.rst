@@ -35,7 +35,7 @@ equilibrium                       :math:`(c_e^{A},c_e^B,Q_e)`    :math:`(\frac 1
 start value                       :math:`(c_0^{A},c_0^B)`        :math:`(0.4, 0.2)`
 ================================ =============================  =====================================  ================
 
-To initialize the system dynamics in our code, we must first define a function that implements :math:`f(x,u)`.
+To initialize the system dynamics in our code, we must first define a function that implements :math:`f(x,u)`, where :math:`x = (c_f^{A},c_f^{B})^T` and :math:`u=Q`.
 
 .. code-block:: python
 
