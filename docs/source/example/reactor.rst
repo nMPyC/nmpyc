@@ -47,9 +47,8 @@ To initialize the system dynamics in our code, we must first define a function t
 
    def f(x,u):
        y = mpc.array(2)
-       h = 0.5
-       y[0] = x[0] + h*((u[0]/V) *(cf_A - x[0]) - k_r*x[0])
-       y[1] = x[1] + h*((u[0]/V) *(cf_B - x[1]) + k_r*x[1])
+       y[0] = x[0] + 0.5*((u[0]/V) *(cf_A - x[0]) - k_r*x[0])
+       y[1] = x[1] + 0.5*((u[0]/V) *(cf_B - x[1]) + k_r*x[1])
        return y
 
 Further, we consider the stage cost given by 
