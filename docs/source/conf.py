@@ -30,6 +30,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.autosummary',
               'sphinx.ext.viewcode',
               'sphinx_copybutton',
+              'sphinxcontrib.bibtex',
               'recommonmark'
               ]
 
@@ -78,6 +79,8 @@ html_show_sourcelink = True
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['static']
 
-
 # -- Options for LaTeX output ---------------------------------------------
 latex_engine ='pdflatex'
+
+# -- References -------------------------------------------------
+bibtex_bibfiles = ['references.bib']
