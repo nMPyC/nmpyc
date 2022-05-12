@@ -104,5 +104,5 @@ where :math:`Q, R, N, P` are weightening matrices and :math:`A, B` the system ma
 
 Further reading
 ----------------
-For further reading and more theoretical insights we kindly refer to
+For further reading and more theoretical insights we kindly refer to :cite:p:`Gruene2017a`
 
