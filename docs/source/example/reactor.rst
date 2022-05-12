@@ -37,7 +37,20 @@ start value                       :math:`(c_0^{A},c_0^B)`        :math:`(0.4, 0.
 
 To initialize the system dynamics in our code, we must first define a function that implements :math:`f(x,u)`.
 
+.. code-block:: python
 
+   # parameters
+   V = 10.
+   cf_A = 1.
+   cf_B = 0.
+   k_r = 1.2
+
+   def f(x,u):
+       y = mpc.array(2)
+       h = 0.5
+       y[0] = x[0] + h*((u[0]/V) *(cf_A - x[0]) - k_r*x[0])
+       y[1] = x[1] + h*((u[0]/V) *(cf_B - x[1]) + k_r*x[1])
+       return y
 
 Further, we consider the stage cost given by 
 
