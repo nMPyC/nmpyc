@@ -55,7 +55,7 @@ After that, we can creat the nMPyC system object by calling
 
 .. code-block:: python
 
-   system = nmpyc.system(f, nx, nu, system_type='discrete')
+   system = nmpyc.system(f, 2, 1, system_type='discrete')
 
 
 In the next step, we need to creat the objective.
