@@ -65,7 +65,7 @@ For this purpose, we consider the stage cost given by
    :nowrap:
    
    \begin{align*}
-      \ell (c_t^{A},c_t^{B},Q_t)&=\frac 1 2\vert c_t^{A}-\frac 1 2\vert^2+\frac 1 2 \vert c_t^B-\frac 1 2\vert^2+\frac 1 2 \vert Q_t -12 \vert^2\\
+      \ell (c_{A}(k),c_{B}(k),Q(k))&=\frac 1 2\vert c_A(k)-\frac 1 2\vert^2+\frac 1 2 \vert c_B(k)-\frac 1 2\vert^2+\frac 1 2 \vert Q(k) -12 \vert^2\\
    \end{align*}
 
 Since we do not need terminal cost, we can initialize the objective directly using the following implementation.
