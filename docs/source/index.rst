@@ -7,6 +7,19 @@ Welcome to nMPyC's documentation!
 
 This library supports a variety of discretization methods and optimizers including `CasADi <https://web.casadi.org/>`_ and `SciPy <https://scipy.org/>`_ solvers.
 
+In summary, **nMPyC**
+   - solves nonlinear finite horizon optimal control problems 
+   - solves nonlinear optimal control problems with model predicitve control (MPC)
+   - uses algorithmic differentation via `CasADi <https://web.casadi.org/>`_
+   - can chose between different discretization methods
+   - can chose between different solvers for nonlinear optimization (depending on the problem)
+   - supports time-varying optimal control problems
+   - supports the special structure of linear-quadratic optimal control problems
+   - supports discounted optimal control problems
+   - can save and load the simulation results
+
+
+
 .. note::
 
    This project is under active development.
