@@ -14,8 +14,8 @@ in which :math:`k` is the rate constant. The material balances and the system da
    
    \begin{equation*}
       \begin{split}
-         c_{A}(k))&=c_{A}(k)+h\left(\frac{Q(k)}{V}(c_f^{A}-c_{A}(k))-k_r{c_{A}(k)}\right)\\
-         c_{B}(k))&=c_{B}(k)+h\left(\frac{Q(k)}{V}(c_f^{B}-c_{B}(k))+k_r{c_{B}(k)}\right),
+         c_{A}(k+1)&=c_{A}(k)+h\left(\frac{Q(k)}{V}(c_f^{A}-c_{A}(k))-k_r{c_{A}(k)}\right)\\
+         c_{B}(k+1)&=c_{B}(k)+h\left(\frac{Q(k)}{V}(c_f^{B}-c_{B}(k))+k_r{c_{B}(k)}\right),
       \end{split}
    \end{equation*}
    
@@ -32,7 +32,7 @@ feed concentration of :math:`B`   :math:`c_f^{B}`                               
 volume of the reactor             :math:`V_R`                                     10                          L
 rate constant                     :math:`k_r`                                     1.2                    L/(mol min)
 equilibrium                       :math:`(c_e^{A},c_e^B,Q_e)`    :math:`(\frac 1 2, \frac 1 2, 12)`
-start value                       :math:`(c_0^{A},c_0^B)`        :math:`(0.4, 0.2)`
+initial value                       :math:`(c_0^{A},c_0^B)`        :math:`(0.4, 0.2)`
 ================================ =============================  =====================================  ================
 
 To initialize the system dynamics in our code, we must first define a function that implements :math:`f(x,u)`, where :math:`x = (c_{A},c_{B})^T` and :math:`u=Q`.
