@@ -129,4 +129,5 @@ After the simulation we can visualize the results by calling
 
 which will lead the following otput.
 
+.. image:: reactor.png
 
