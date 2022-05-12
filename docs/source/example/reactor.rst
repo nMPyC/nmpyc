@@ -5,9 +5,9 @@ We consider a single first-order, irreversible chemical reaction in an isotherma
 
 .. math::
 
-   A \to B \quad r=kc_A
+   A \to B.
    
-in which :math:`k` is the rate constant. The material balances and the system data are provided in :cite:p:`Diehl2011` and is given by the nonlinear model
+The material balances and the system data are provided in :cite:p:`Diehl2011` and is given by the nonlinear model
 
 .. math::
    :nowrap:
