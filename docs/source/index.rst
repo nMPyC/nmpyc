@@ -25,5 +25,5 @@ Contents
    examples
    templates
    faq
-   cite
+   citation
    references
