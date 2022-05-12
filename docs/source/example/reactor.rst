@@ -35,7 +35,7 @@ equilibrium                       :math:`(c_e^{A},c_e^B,Q_e)`    :math:`(\frac 1
 initial value                       :math:`(c_0^{A},c_0^B)`        :math:`(0.4, 0.2)`
 ================================ =============================  =====================================  ================
 
-To initialize the system dynamics in our code, we must first define a function that implements :math:`f(x,u)`, where :math:`x = (c_{A},c_{B})^T` and :math:`u=Q`.
+To initialize the system dynamics a function that implements :math:`f(x,u)`, where :math:`x = (c_{A},c_{B})^T` and :math:`u=Q` has to be defined.
 
 .. code-block:: python
 
@@ -51,15 +51,14 @@ To initialize the system dynamics in our code, we must first define a function t
        y[1] = x[1] + 0.5*((u[0]/V) *(cf_B - x[1]) + k_r*x[1])
        return y
 
-After that, we can creat the nMPyC system object by calling
+After that, the nMPyC system object can be set by calling
 
 .. code-block:: python
 
    system = nmpyc.system(f, 2, 1, system_type='discrete')
 
 
-In the next step, we need to creat the objective.
-For this purpose, we consider the stage cost given by 
+In the next step, the objective is defined by using the stage cost given by
 
 .. math::
    :nowrap:
@@ -77,7 +76,7 @@ Since we do not need terminal cost, we can initialize the objective directly usi
 
    objective = nmpyc.objective(l)
 
-In terms of the constraints we asume that 
+In terms of the constraints we assume that 
 
 .. math::
 
@@ -85,7 +84,7 @@ In terms of the constraints we asume that
    0 &\leq x_2(k) \quad &\text{for } i=0,\ldots,N \\
    0 &\leq u(k) \leq 20 \quad &\text{for } i=0,\ldots,N-1.
 
-This can be realized in our Code as follows.
+This can be realized in the code as follows:
 
 .. code-block:: python
 
@@ -97,7 +96,7 @@ This can be realized in our Code as follows.
    constraints.add_bound('lower','control', lbu)
    constraints.add_bound('upper','control', ubu)
 
-At last let us consider the equilibrium :math:`(c_e^{A},c_e^B,Q_e)` as th terminal condition for our optimnal control problem, which is implemented as 
+Moreover, we consider the equilibrium :math:`(c_e^{A},c_e^B,Q_e)` as th terminal condition for our optimal control problem, which is implemented as 
 
 .. code-block:: python
 
@@ -121,13 +120,13 @@ and set :math:`N=15`, :math:`K=100`.
    x0 = mpc.array([0.4,0.2])
    res = model.mpc(x0,15,100)
 
-After the simulation we can visualize the results by calling 
+Following the simulation we can visualize the results by calling 
 
 .. code-block:: python
 
    res.plot()
 
-which will lead the following otput.
+which generates the plot bellow.
 
 .. image:: reactor.png
 
