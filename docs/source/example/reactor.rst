@@ -77,4 +77,24 @@ Since we do not need terminal cost, we can initialize the objective directly usi
 
    objective = nmpyc.objective(l)
 
+In terms of the constraints we asume that 
+
+.. math::
+
+   0 &\leq x_1(k) \quad \text{for } i=0,\ldots,N \\
+   0 &\leq x_2(k) \quad \text{for } i=0,\ldots,N \\
+   0 &\leq u(k) \leq 20 \quad \text{for } i=0,\ldots,N-1.
+
+This can be realized in our Code as follows.
+
+.. code-block:: python
+
+   constraints = mpc.constraints()
+   lbx = nmpyc.zeros(nx)
+   ubu = nmpyc.ones(nu)*(20)
+   lbu = nmpyc.zeros(nu)
+   constraints.add_bound('lower','state', lbx)
+   constraints.add_bound('lower','control', lbu)
+   constraints.add_bound('upper','control', ubu)
+
 
