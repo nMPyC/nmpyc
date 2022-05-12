@@ -46,12 +46,20 @@ To initialize the system dynamics in our code, we must first define a function t
    k_r = 1.2
 
    def f(x,u):
-       y = mpc.array(2)
+       y = nmpyc.array(2)
        y[0] = x[0] + 0.5*((u[0]/V) *(cf_A - x[0]) - k_r*x[0])
        y[1] = x[1] + 0.5*((u[0]/V) *(cf_B - x[1]) + k_r*x[1])
        return y
 
-Further, we consider the stage cost given by 
+After that, we can creat the nMPyC system object by calling
+
+.. code-block:: python
+
+   system = nmpyc.system(f, nx, nu, system_type='discrete')
+
+
+In the next step, we need to creat the objective.
+For this purpose, we consider the stage cost given by 
 
 .. math::
    :nowrap:
@@ -59,3 +67,14 @@ Further, we consider the stage cost given by
    \begin{align*}
       \ell (c_t^{A},c_t^{B},Q_t)&=\frac 1 2\vert c_t^{A}-\frac 1 2\vert^2+\frac 1 2 \vert c_t^B-\frac 1 2\vert^2+\frac 1 2 \vert Q_t -12 \vert^2\\
    \end{align*}
+
+Since we do not need terminal cost, we can initialize the objective directly using the following implementation.
+
+.. code-block:: python
+
+   def l(x,u):
+       return 0.5 * (x[0]-0.5)**2 + 0.5 * (x[1]-0.5)**2 + 0.5 * (u[0]-12)**2
+
+   objective = nmpyc.objective(l)
+
+
