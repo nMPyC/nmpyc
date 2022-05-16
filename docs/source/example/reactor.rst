@@ -79,9 +79,9 @@ In terms of the constraints we assume that
 
 .. math::
 
-   0 &\leq x_1(k) & & \quad &\text{for } k=0,\ldots,N \\
-   0 &\leq x_2(k) & & \quad &\text{for } k=0,\ldots,N \\
-   0 &\leq u(k) &\leq 20 & \quad &\text{for } k=0,\ldots,N-1.
+   0 &\leq x_1(k) & &\text{for } k=0,\ldots,N \\
+   0 &\leq x_2(k) & &\text{for } k=0,\ldots,N \\
+   0 &\leq u(k) &\leq 20 &\text{for } k=0,\ldots,N-1.
 
 This can be realized in the code as follows:
 
