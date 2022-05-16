@@ -94,12 +94,12 @@ and set :math:`N=20`, :math:`K=100`.
 
 .. code-block:: python
 
-   model = mpc.model(objective,system,constraints)
-   x0 = mpc.array([1, 1, 1, 1]) 
-   res = model.mpc(x0,15,100)
+   model = nmpyc.model(objective,system,constraints)
+   x0 = nmpyc.array([1, 1, 1, 1]) 
+   res = model.mpc(x0,20,100)
 
 Since the problem is completely linear quadratic, the program automatically takes advantage of this fact and uses the appropriate solver osqp.
-To change this and use for example the SciPy solver SLSQP, we can use the `set_options` method.
+To change this and use for example the SciPy solver SLSQP, we can use the `set_options` method before calling model.mpc().
 
 .. code-block:: python
 
