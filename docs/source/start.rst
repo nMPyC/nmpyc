@@ -9,7 +9,7 @@ This can be done as shown in the following code snippet
 
 .. code-block:: python 
 
-   # Add nMPyC to path if necessary
+   # Add nMPyC to path (if necessary)
    import sys
    sys.path.append('../../path-to-nmpyc')
 
