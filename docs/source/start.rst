@@ -114,6 +114,74 @@ Terminal constraints of the form :math:`H(t,x) = 0` or :math:`G(t,x) \geq 0` can
 
 Moreover it is possible to add linear equality and inequality constraints. 
 For this purpose look at the :py:meth:`nmpyc.constraints.constraints.add_constr`.
-For further general informations take a look at the API-References :py:class:`nmpyc.oconstraints.constraints`.
+For further general informations take a look at the API-References :py:class:`nmpyc.constraints.constraints`.
+
+Running Simulations
+--------------------
+
+After we have initialized all the necessary objects, we can run simulations for our problem. To do this, we first create an `mpc.model` object and combine the different parts of the optimal control problem by calling
+
+.. code-block:: python
+
+   model = nmpyc.model(objective, system, constraints)
+
+The `nmpyc.constraints` object is optional and can be omitted for a problem without constraints.
+If we want to adjust the default settings for the optimization, this can be done with the help of the commands 
+
+.. code-block:: python
+
+   model.opti.set_options(dict())
+   model.opti.set_solverOptions(dict())
+
+For more informations about this methods look at :py:attr:`nmpyc.model.opti`.
+
+Now, to start an open loop simulation, we execute the command
+
+.. code-block:: python
+
+   u_ol, x_ol = model.solve_ocp(x0,N,discount)
+
+and for a closed loop simulation 
+
+.. code-block:: python
+
+   u_ol, x_ol = model.mpc(x0,N,K,discount) 
+
+Here `x0` is an :py:class:`nmpyc.nmpyc_array.array` which defines the initial value, `N` is the MPC horizon and the parameter `K` defines the number of MPC iterations. The parameter `discont` is optional and defines the discount factor if a discounted problem is considered.
+
+The result of the simulation can now be viewed in the console by calling 
+
+.. code-block:: python
+
+   print(res)
+
+and as a visual output by calling 
+
+.. code-block:: python
+
+   res.plot()
+
+By default, the states and controls are displayed in two subplots. By passing a string as the first parameter (`=args`), the graphic can be customized. For example, by calling
+
+.. code-block:: python
+   
+   res.show('state')
+
+only the states are plotted. Other keywords are `control` for the control, `cost` for the stage costs, and `phase` to make a phase portrait of two states or controls. 
+Furthermore, the plots displayed in this way can be additionally adjusted by further prameters, see :py:meth:`nmpyc.result.result.plot`.
+
+Now the model and the simulation results can be saved for later use with the functions
+
+.. code-block:: python
+
+   model.save('path')
+   res.save('path')
+
+These saved files can then be loaded with the help of 
+
+.. code-block:: python
+
+   model = nmpyc.model.load('path')
+   res = nmpyc.result.load('path')
 
 
