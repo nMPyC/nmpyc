@@ -88,9 +88,9 @@ This can be realized in the code as follows:
 .. code-block:: python
 
    constraints = nmpyc.constraints()
-   lbx = nmpyc.zeros(nx)
-   ubu = nmpyc.ones(nu)*20
-   lbu = nmpyc.zeros(nu)
+   lbx = nmpyc.zeros(2)
+   ubu = nmpyc.ones(1)*20
+   lbu = nmpyc.zeros(1)
    constraints.add_bound('lower','state', lbx)
    constraints.add_bound('lower','control', lbu)
    constraints.add_bound('upper','control', ubu)
