@@ -20,7 +20,7 @@ Note that the first two lines are omitted if nMPyC has already been added to the
 
 .. note::
 
-   Please use the :py:module:`nmpyc.nmpyc_array` functions and the :py:class:`nmpyc.nmpyc_array.array` class for the calculations in the code to ensure error-free functionality of the program. Further informations about this issue can be found at the API References and the FAQ section.
+   Please use the :py:mod:`nmpyc.nmpyc_array` functions and the :py:class:`nmpyc.nmpyc_array.array` class for the calculations in the code to ensure error-free functionality of the program. Further informations about this issue can be found at the API References and the FAQ section.
 
 
 Creating the System Dynmaics
