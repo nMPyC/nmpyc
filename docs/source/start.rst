@@ -59,10 +59,61 @@ Now we can initialize the objective by calling
 
 .. code-block:: python
 
-   objective = mpc.objective(l,F)
-   #or alternatively without terminal costs
-   objective = mpc.objective(l)
+   objective = nmpyc.objective(l, F)
+   # Or alternatively without terminal costs
+   objective = nmpyc.objective(l)
 
 For more informations take a look at the API-References :py:class:`nmpyc.objective.objective`.
+
+Creating the Constraints
+-------------------------
+
+The optimal control problem can be extended with other constraints besides the necessary system dynamics.
+To do this, we must first create an empty `mpc.constraints` object using the command 
+
+.. code-block:: python
+
+   system = nmpyc.constraints()
+
+We can now add the desired constraints to this object step by step.
+These constraints can be created in different ways.    
+First, we can add box constraints in the form of bounds.
+
+.. code-block:: python
+
+constraints.add_bounds('lower', 'control', lbu) # lower bound for control
+constraints.add_bounds('upper', 'control', ubu) # upper bound for control
+
+Here `lbu` or `lbx` is an :py:class:`nmpyc.nmpyc_array.array` of dimension `(1,nu)` or `(nu,1)`.    
+To add bounds for the state or final state, simply replace `control` with `state` or `terminal` in the above code and adjust the dimension of the array accordingly.
+
+In addition to box constraints, general inequality and equality constraints can also be inserted.
+
+.. code-block:: python
+
+   # Equality constraint h(t,x,u) = 0
+   def h(t,x,u):
+      y = mpc.array(len_constr)
+      ...
+      return y
+   constraints.add_constr('eq', h) 
+
+   # Inequality constraint g(t,x,u) >= 0
+   def g(t,x,u):
+      y = mpc.array(len_constr)
+      ...
+      return y
+   constraints.add_constr('ineq', g) 
+
+Terminal constraints of the form :math:`H(t,x) = 0` or :math:`G(t,x) \geq 0` can also be added.
+
+.. code-block:: python
+
+   constraints.add_constr('terminal_eq', H) 
+   constraints.add_constr('terminal_ineq', G) 
+
+Moreover it is possible to add linear equality and inequality constraints. 
+For this purpose look at the :py:meth:`nmpyc.constraints.constraints.add_constr`.
+For further general informations take a look at the API-References :py:class:`nmpyc.oconstraints.constraints`.
 
 
