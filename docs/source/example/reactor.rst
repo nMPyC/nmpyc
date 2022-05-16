@@ -38,8 +38,7 @@ initial value                       :math:`(c_0^{A},c_0^B)`        :math:`(0.4, 
 To initialize the system dynamics a function that implements :math:`f(x,u)`, where :math:`x = (c_{A},c_{B})^T` and :math:`u=Q` has to be defined.
 
 .. code-block:: python
-
-   # parameters
+   
    V = 10.
    cf_A = 1.
    cf_B = 0.
@@ -80,17 +79,17 @@ In terms of the constraints we assume that
 
 .. math::
 
-   0 &\leq x_1(k) \quad &\text{for } i=0,\ldots,N \\
-   0 &\leq x_2(k) \quad &\text{for } i=0,\ldots,N \\
-   0 &\leq u(k) \leq 20 \quad &\text{for } i=0,\ldots,N-1.
+   0 &\leq x_1(k) & & \quad &\text{for } k=0,\ldots,N \\
+   0 &\leq x_2(k) & & \quad &\text{for } k=0,\ldots,N \\
+   0 &\leq u(k) &\leq 20 & \quad &\text{for } k=0,\ldots,N-1.
 
 This can be realized in the code as follows:
 
 .. code-block:: python
 
-   constraints = mpc.constraints()
+   constraints = nmpyc.constraints()
    lbx = nmpyc.zeros(nx)
-   ubu = nmpyc.ones(nu)*(20)
+   ubu = nmpyc.ones(nu)*20
    lbu = nmpyc.zeros(nu)
    constraints.add_bound('lower','state', lbx)
    constraints.add_bound('lower','control', lbu)
