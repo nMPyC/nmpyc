@@ -461,7 +461,7 @@ NOTE = {To appear}
   doi       = {10.1109/CDC.2017.8264482},
 }
 
-@Misc{Gruene2021a,
+@Misc{,
   author = {Lars Gr{\"u}ne},
   title  = {Mathematical Control Theory},
   year   = {2021},
