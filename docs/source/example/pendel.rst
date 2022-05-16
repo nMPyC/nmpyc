@@ -49,3 +49,12 @@ In doing so, we assume the stage costs
    
    \ell(x,u) = 2*x^Tx + 4*u^Tu.
 
+Since we assume no terminal cost, we can implement the objective as shown in the following code snippet.
+
+.. code-block:: python
+
+   Q = 2*mpc.eye(4)
+   R = 4*mpc.eye(1)  
+   objective = mpc.objective.LQP(Q, R)
+
+Again, we use the LQP method to exploit the linear structure of the problem later.
