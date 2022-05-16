@@ -118,6 +118,6 @@ Following the simulation we can visualize the open and closed loop results by ca
 which generates the plots bellow.
 
 .. image:: invpend_cl.png
-   :width: 500
+   :width: 550
 
 .. image:: invpend_ol.png
