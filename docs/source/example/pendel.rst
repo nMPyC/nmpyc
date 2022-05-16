@@ -1,7 +1,7 @@
 Inverted Pendulum
 ==================
 
-We consider the mechanical model of an inverted rigid pendulum mounted on a carriage.
+We consider the mechanical model of an inverted rigid pendulum mounted on a carriage, see :cite:p:`Gruene2021a`
 
 By means of physical laws an "exact" differential equation model can be derived.
 However, since in our case we want to obtain a linear quadratic problem, 
