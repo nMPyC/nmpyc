@@ -32,13 +32,13 @@ Since the system dynamics are linear, we can initialize them using the LQP metho
    
    g = 9.81
    k = 0.1
-   A = mpc.array([[0, 1, 0, 0], 
-                  [g, -k, 0, 0], 
-                  [0, 0, 0, 1],
-                  [0, 0, 0, 0]])
-   B = mpc.array([0, 1, 0, 1])
-   system = mpc.system.LQP(A, B, 4, 1, 'continuous', 
-                           sampling_rate=0.1, method='rk4')
+   A = nmpyc.array([[0, 1, 0, 0], 
+                    [g, -k, 0, 0], 
+                    [0, 0, 0, 1],
+                    [0, 0, 0, 0]])
+   B = nmpyc.array([0, 1, 0, 1])
+   system = nmpyc.system.LQP(A, B, 4, 1, 'continuous', 
+                             sampling_rate=0.1, method='rk4')
 
 Note that we have to use one of the fixed step methods euler, heun or rk4 as integration method if we want to exploit the linear structure of the problem later in the optimization.
 
@@ -47,14 +47,73 @@ In doing so, we assume the stage costs
 
 .. math::
    
-   \ell(x,u) = 2*x^Tx + 4*u^Tu.
+   \ell(x,u) = 2x^Tx + 4u^Tu.
 
 Since we assume no terminal cost, we can implement the objective as shown in the following code snippet.
 
 .. code-block:: python
 
-   Q = 2*mpc.eye(4)
-   R = 4*mpc.eye(1)  
-   objective = mpc.objective.LQP(Q, R)
+   Q = 2*nmpyc.eye(4)
+   R = 4*nmpyc.eye(1)  
+   objective = nmpyc.objective.LQP(Q, R)
 
 Again, we use the LQP method to exploit the linear structure of the problem later.
+
+In terms of the constraints we assume the state constraints 
+
+.. math::
+
+    -9 \leq x_i(k) \leq 5 \quad \text{for } k=1,\ldots,N 
+
+for :math:`i=1,\ldots,4` and the control constraint 
+
+.. math::
+
+   -20 \leq u(k) \leq 6 \quad \text{for } k=1,\ldots,N 
+
+This can be realized in the code as follows:
+
+.. code-block:: python
+
+   constraints = nmpyc.constraints()
+   lbx = nmpyc.zeros(4)*(-9)
+   ubx = nmpyc.ones(4)*5
+   constraints.add_bound('lower','state', lbx)
+   constraints.add_bound('upper','state', ubx)
+   constraints.add_bound('lower', 'control', mpc.array([-20]))
+   constraints.add_bound('upper', 'control', mpc.array([6]))
+
+After all components of the optimal control problem have been implemented, we can now combine them into a model and start the MPC loop.
+For this Purpose, we define
+
+.. math::
+
+   x(0) = (1,1,1,1)^T 
+
+and set :math:`N=20`, :math:`K=100`.
+
+.. code-block:: python
+
+   model = mpc.model(objective,system,constraints)
+   x0 = mpc.array([1, 1, 1, 1]) 
+   res = model.mpc(x0,15,100)
+
+Since the problem is completely linear quadratic, the program automatically takes advantage of this fact and uses the appropriate solver osqp.
+To change this and use for example the SciPy solver SLSQP, we can use the `set_options` method.
+
+.. code-block:: python
+
+   model.opti.set_options(dict(solver='SLSQP'))
+
+Note that changing the optimizer usually does not bring any advantage and is therefore not necessarily recommended.
+At this point we only want to demomnstrate the use of the function. 
+
+Following the simulation we can visualize the open and closed loop results by calling 
+
+.. code-block:: python
+
+   res.plot() # plot closed loop results
+   res.plot('state', show_ol=True) # plot open loop states
+
+which generates the plots bellow.
+
