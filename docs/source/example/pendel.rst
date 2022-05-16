@@ -122,3 +122,5 @@ which generates the plots bellow.
    :width: 550
 
 .. image:: invpend_ol.png
+   :align: center
+   :width: 550
