@@ -4,7 +4,7 @@ Getting Started
 Import nmpyc
 -------------
 
-After the successfull Installation__ of the nMPyC Package, we have to import nMPyC to use it in our code.
+After the successfull Installation of the nMPyC Package, we have to import nMPyC to use it in our code.
 This can be done as shown in the following code snippet 
 
 .. code-block:: python 
@@ -20,7 +20,7 @@ Note that the first two lines are omitted if nMPyC has already been added to the
 
 .. note::
 
-   Please use the :py:modul:`nmpyc.nmpyc_array` functions and the :py:class:`nmpyc.nmpyc_array.array` class for the calculations in the code to ensure error-free functionality of the program. Further informations about this issue can be found at the API References and the FAQ section.
+   Please use the :py:module:`nmpyc.nmpyc_array` functions and the :py:class:`nmpyc.nmpyc_array.array` class for the calculations in the code to ensure error-free functionality of the program. Further informations about this issue can be found at the API References and the FAQ section.
 
 
 Creating the System Dynmaics
@@ -154,7 +154,7 @@ If we want to adjust the default settings for the optimization, this can be done
    model.opti.set_options(dict())
    model.opti.set_solverOptions(dict())
 
-For more informations about this methods look at :py:attr:`nmpyc.model.opti`.
+For more informations about this methods look at :py:attr:`nmpyc.model.model.opti`.
 
 Now, to start an open loop simulation, we execute the command
 
