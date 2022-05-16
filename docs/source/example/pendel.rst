@@ -63,13 +63,13 @@ In terms of the constraints we assume the state constraints
 
 .. math::
 
-    -9 \leq x_i(k) \leq 5 \quad \text{for } k=1,\ldots,N 
+    -9 \leq x_i(t) \leq 5 
 
 for :math:`i=1,\ldots,4` and the control constraint 
 
 .. math::
 
-   -20 \leq u(k) \leq 6 \quad \text{for } k=1,\ldots,N.
+   -20 \leq u(t) \leq 6 \quad 
 
 This can be realized in the code as follows:
 
