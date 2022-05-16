@@ -69,7 +69,7 @@ for :math:`i=1,\ldots,4` and the control constraint
 
 .. math::
 
-   -20 \leq u(k) \leq 6 \quad \text{for } k=1,\ldots,N 
+   -20 \leq u(k) \leq 6 \quad \text{for } k=1,\ldots,N.
 
 This can be realized in the code as follows:
 
