@@ -42,5 +42,3 @@ Contents
    references
 
 
-.. raw:: html
-   :file: googleb5e65ef07d99d14e.html
