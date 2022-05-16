@@ -115,8 +115,8 @@ and set :math:`N=15`, :math:`K=100`.
 
 .. code-block:: python
 
-   model = mpc.model(objective,system,constraints)
-   x0 = mpc.array([0.4,0.2])
+   model = nmpyc.model(objective,system,constraints)
+   x0 = nmpyc.array([0.4,0.2])
    res = model.mpc(x0,15,100)
 
 Following the simulation we can visualize the results by calling 
