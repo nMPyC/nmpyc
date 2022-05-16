@@ -33,14 +33,19 @@ Since the system dynamics are linear, we can initialize them using the LQP metho
    g = 9.81
    k = 0.1
    A = mpc.array([[0, 1, 0, 0], 
-               [g, -k, 0, 0], 
-               [0, 0, 0, 1],
-               [0, 0, 0, 0]])
+                  [g, -k, 0, 0], 
+                  [0, 0, 0, 1],
+                  [0, 0, 0, 0]])
    B = mpc.array([0, 1, 0, 1])
    system = mpc.system.LQP(A, B, 4, 1, 'continuous', 
                            sampling_rate=0.1, method='rk4')
 
 Note that we have to use one of the fixed step methods euler, heun or rk4 as integration method if we want to exploit the linear structure of the problem later in the optimization.
 
+In the next step, we have to define the objective of the optimal control problem. 
+In doing so, we assume the stage costs 
 
+.. math::
+   
+   \ell(x,u) = 2*x^Tx + 4*u^Tu.
 
