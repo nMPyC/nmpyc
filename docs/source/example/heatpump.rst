@@ -40,5 +40,5 @@ In the heating system the conflict between energy and thermal comfort arises. Th
 	\ell(x,u)&=\frac u P_{\max} + (x_2-T_\text{ref})^2,
    \end{align*}
    
-where :math:`P_{\max} = 15000 (W)` is the maximal power of the heating pump and :math:`T_\text{ref} = 22 C` is the desired temperature of the room. The reference temperature :math:`T_\text{ref}` can be selected differently -- depending on the thermal comfort.
+where :math:`P_{\max} = 15000 (W)` is the maximal power of the heating pump and :math:`T_\text{ref} = 22^{°} C` is the desired temperature of the room. The reference temperature :math:`T_\text{ref}` can be selected differently -- depending on the thermal comfort.
 
