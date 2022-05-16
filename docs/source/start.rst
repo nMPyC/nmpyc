@@ -1,9 +1,30 @@
 Getting Started
 ================
 
+Import nmpyc
+-------------
+
+After the successfull Installation__ of the nMPyC Package, we have to import nMPyC to use it in our code.
+This can be done as shown in the following code snippet 
+
+.. code-block:: python 
+
+   # Add nMPyC to path if necessary
+   import sys
+   sys.path.append('../../path-to-nmpyc')
+
+   # Import nmpyc
+   import nmpyc
+
+Note that the first two lines are omitted if nMPyC has already been added to the Python default path as described in the Installation section. In this case the command `import nmpyc` is sufficient to import nmpyc.
+
+.. note::
+
+   Please use the :py:modul:`nmpyc.nmpyc_array` functions and the :py:class:`nmpyc.nmpyc_array.array` class for the calculations in the code to ensure error-free functionality of the program. Further informations about this issue can be found at the API References and the FAQ section.
+
+
 Creating the System Dynmaics
 -----------------------------
-
 
 To define the system dynamics of our problem, we have to create a `nmpyc.system` object.
 We can define the maybe time-dependend and nonlinear system dynamics using a function of the following form.
@@ -185,3 +206,10 @@ These saved files can then be loaded with the help of
    res = nmpyc.result.load('path')
 
 
+Advanced topics 
+----------------
+
+The above procedure describes only a part of the possibilities of the nMPyC Python library. 
+For example, it is also possible to create autonomous systems and use the linear quadratic structure of a problem. 
+For further informations to the coding of this problem calsses take a look at the examples and templates section.
+And for the implementation of linear system dynamics and quadratic costs, see also :py:meth:`nmpyc.system.system.LQP` and :py:meth:`nmpyc.objective.objective.LQP`.
