@@ -128,5 +128,6 @@ Following the simulation we can visualize the results by calling
 which generates the plot bellow.
 
 .. image:: reactor.png
-   :width: 400
+   :align: center
+   :width: 550
 
