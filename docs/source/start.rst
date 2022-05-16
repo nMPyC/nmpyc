@@ -32,7 +32,7 @@ Further options of the used integration method can be defined by the call
 
    system.set_integratorOptions(dict())
 
-For more informations take a look at the API-References :py:calss:`nmpyc.system.system`.
+For more informations take a look at the API-References :py:class:`nmpyc.system.system`.
 
 
 Creating the Objective
@@ -63,6 +63,6 @@ Now we can initialize the objective by calling
    #or alternatively without terminal costs
    objective = mpc.objective(l)
 
-For more informations take a look at the API-References :py:calss:`nmpyc.objective.objective`.
+For more informations take a look at the API-References :py:class:`nmpyc.objective.objective`.
 
 
