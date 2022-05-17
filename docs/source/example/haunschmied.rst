@@ -1,5 +1,5 @@
-Haunschmied
-============
+2d Investment Problem
+======================
 
 To examplify a discounted problem we consider a 2d variant of an investment problem.
 
