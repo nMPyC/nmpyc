@@ -48,9 +48,9 @@ objective = mpc.objective(l)
 model = mpc.model(objective,system)
 
 x0 = mpc.array([3.0,0.75])
-res = model.mpc(x0,N,K,discont)
-res.plot('phase', phase1='x_1', phase2='x_2', show_ol=True)
+res1 = model.mpc(x0,N,K,discont)
+res1.plot('phase', phase1='x_1', phase2='x_2', show_ol=True)
 
 x0 = mpc.array([5.0,1.75])
-res = model.mpc(x0,N,K,discont)
-res.plot('phase', phase1='x_1', phase2='x_2', show_ol=True)
+res2 = model.mpc(x0,N,K,discont)
+res2.plot('phase', phase1='x_1', phase2='x_2', show_ol=True)

@@ -1064,7 +1064,7 @@ class opti:
                 # set x0 for optimization
                 self._optistack.set_value(self._p, self._x0)
             else:
-                self.init_casadi()
+                self._init_casadi()
                 # set x0 for optimization
                 self._optistack.set_value(self._p, self._x0)
                 # add system dynamics as constrains
