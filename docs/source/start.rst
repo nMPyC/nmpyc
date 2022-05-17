@@ -211,5 +211,5 @@ Advanced topics
 
 The above procedure describes only a part of the possibilities of the nMPyC Python library. 
 For example, it is also possible to create autonomous systems and use the linear quadratic structure of a problem. 
-For further informations to the coding of this problem calsses take a look at the examples and templates section.
+For further informations to the coding of this problem calsses take a look at the :doc:`Examples <examples>` and :doc:`Templates <templates>` section.
 And for the implementation of linear system dynamics and quadratic costs, see also :py:meth:`nmpyc.system.system.LQP` and :py:meth:`nmpyc.objective.objective.LQP`.
