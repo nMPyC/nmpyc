@@ -1,9 +1,6 @@
 Autonomous Problem
 ===================
 
-Time-variant Problem
-======================
-
 .. code-block:: Python
 
    # Import nMPyc package
