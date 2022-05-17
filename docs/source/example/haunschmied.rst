@@ -42,3 +42,21 @@ The convex segment in the payoff function just mentioned is likely to generate t
 of attraction.
 Additionally we choose :math:`k_1=2`, :math:`k_2=0.0117`, :math:`c_1=0.75`, :math:`c_2=2.5` and :math:`\alpha=12` for our computations.
 
+With the nMPyC package the implemnetiation of the objective corresponding to this costs can be done as follws.
+
+.. code-block:: python
+
+   def l(x,u):
+       R = k1*x[0]**(1/2)-x[0]/(1+k2*x[0]**4)
+       c = c1*x[1]+(c2*x[1]**2)/2
+       v = (alpha*u[0]**2)/2
+       return -(R - c - v)
+
+   objective = nmpyc.objective(l)
+
+Since this problem is unconstrained we can now initialize our model by 
+
+.. code-block:: python
+
+   model = nmpyc.model(objective,system)
+
