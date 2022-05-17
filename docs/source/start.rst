@@ -1,10 +1,10 @@
 Getting Started
 ================
 
-Import nmpyc
+Import nMPyC
 -------------
 
-After the successfull Installation of the nMPyC Package, we have to import nMPyC to use it in our code.
+After the successfull installation of the nMPyC package, nMPyC has to be imported to our code.
 This can be done as shown in the following code snippet 
 
 .. code-block:: python 
@@ -16,18 +16,18 @@ This can be done as shown in the following code snippet
    # Import nmpyc
    import nmpyc
 
-Note that the first two lines are omitted if nMPyC has already been added to the Python default path as described in the :doc:`Installation <install>` section. In this case the command :code:`import nmpyc` is sufficient to import nmpyc.
+Note that the first two lines can be omitted if nMPyC has already been added to the Python default path as described in the :doc:`Installation <install>` section. In this case the command :code:`import nmpyc` is sufficient to import the nMPyC library.
 
 .. note::
 
-   Please use the :py:mod:`nmpyc.nmpyc_array` functions and the :py:class:`nmpyc.nmpyc_array.array` class for the calculations in the code to ensure error-free functionality of the program. Further informations about this issue can be found at the :doc:`API References <api>` and the :doc:`FAQ <faq>` section.
+   Please use the :py:mod:`nmpyc.nmpyc_array` functions and the :py:class:`nmpyc.nmpyc_array.array` class for the calculations in the code to ensure error-free functionality of the program. Further informations about this issue can be found in :doc:`API References <api>` and in the :doc:`FAQ <faq>` section.
 
 
-Creating the System Dynmaics
+Creating the System Dynamics
 -----------------------------
 
-To define the system dynamics of our problem, we have to create a `nmpyc.system` object.
-We can define the maybe time-dependend and nonlinear system dynamics using a function of the following form.
+To define the system dynamics of the optimal control problem, we have to create a `nmpyc.system` object.
+We can define the possibly time-dependent and nonlinear system dynamics using a function of the form
 
 .. code-block:: python
 
@@ -47,20 +47,20 @@ Where `nx` is the dimension of the state, `nu` is the dimension of the control v
 
 Furthermore, the parameters `sampling_rate` (sampling rate), `t0` (initial time) and `method` can optionally be adjusted during the initialization of the system. The value of `method` determines the used integration method for the discretization of the differential equation in the continuous case. By default the CasADi integrator `cvodes` is used.
 
-Further options of the used integration method can be defined by the call
+Further options of the used integration method can be defined by the command
 
 .. code-block:: python
 
    system.set_integratorOptions(dict())
 
-For more informations take a look at the API-References :py:class:`nmpyc.system.system`.
+For more informations (also about the parameters and their standard values) see the API-References :py:class:`nmpyc.system.system`.
 
 
 Creating the Objective
 -----------------------
 
-To define the objective, we need to create -- similar to the system dynamics -- an `nmpyc.objective` object.
-To do this, we first define the stage cost:
+To define the objective, we need to create -- similar to the system dynamics -- a `nmpyc.objective` object.
+To do so, we first define the stage cost
 
 .. code-block:: python
 
@@ -68,7 +68,7 @@ To do this, we first define the stage cost:
        ...
        return y
 
-Optionally, we can also add terminal costs of the form
+and add, optionally, a terminal cost of the form
 
 .. code-block:: python
 
@@ -84,13 +84,13 @@ Now we can initialize the objective by calling
    # Or alternatively without terminal costs
    objective = nmpyc.objective(l)
 
-For more informations take a look at the API-References :py:class:`nmpyc.objective.objective`.
+For more informations see the API-References :py:class:`nmpyc.objective.objective`.
 
 Creating the Constraints
 -------------------------
 
 The optimal control problem can be extended with other constraints besides the necessary system dynamics.
-To do this, we must first create an empty `mpc.constraints` object using the command 
+For this reason, we must first create an empty `mpc.constraints` object using the command 
 
 .. code-block:: python
 
@@ -106,7 +106,7 @@ First, we can add box constraints in the form of bounds.
    constraints.add_bounds('upper', 'control', ubu) # upper bound for control
 
 Here `lbu` or `lbx` is an :py:class:`nmpyc.nmpyc_array.array` of dimension `(1,nu)` or `(nu,1)`.    
-To add bounds for the state or final state, simply replace `control` with `state` or `terminal` in the above code and adjust the dimension of the array accordingly.
+To add bounds for the state or terminal state, replace `control` with `state` or `terminal` in the above code and adjust the dimension of the array accordingly.
 
 In addition to box constraints, general inequality and equality constraints can also be inserted.
 
@@ -134,29 +134,29 @@ Terminal constraints of the form :math:`H(t,x) = 0` or :math:`G(t,x) \geq 0` can
    constraints.add_constr('terminal_ineq', G) 
 
 Moreover it is possible to add linear equality and inequality constraints. 
-For this purpose look at the :py:meth:`nmpyc.constraints.constraints.add_constr`.
-For further general informations take a look at the API-References :py:class:`nmpyc.constraints.constraints`.
+For this purpose see :py:meth:`nmpyc.constraints.constraints.add_constr`.
+For further general informations see the API-References :py:class:`nmpyc.constraints.constraints`.
 
 Running Simulations
 --------------------
 
-After we have initialized all the necessary objects, we can run simulations for our problem. To do this, we first create an `mpc.model` object and combine the different parts of the optimal control problem by calling
+After initializing all necessary objects, we can run simulations for our problem. We first create a `mpc.model` object and combine the different parts of the optimal control problem by calling
 
 .. code-block:: python
 
    model = nmpyc.model(objective, system, constraints)
 
 The `nmpyc.constraints` object is optional and can be omitted for a problem without constraints.
-If we want to adjust the default settings for the optimization, this can be done with the help of the commands 
+Modyfying the default settings of the optimization, can be done with the help of the commands
 
 .. code-block:: python
 
    model.opti.set_options(dict())
    model.opti.set_solverOptions(dict())
 
-For more informations about this methods look at :py:attr:`nmpyc.model.model.opti`.
+For more informations about this methods see :py:attr:`nmpyc.model.model.opti`.
 
-Now, to start an open loop simulation, we execute the command
+To start an open loop simulation, we execute the command
 
 .. code-block:: python
 
@@ -168,9 +168,9 @@ and for a closed loop simulation
 
    u_ol, x_ol = model.mpc(x0,N,K,discount) 
 
-Here `x0` is an :py:class:`nmpyc.nmpyc_array.array` which defines the initial value, `N` is the MPC horizon and the parameter `K` defines the number of MPC iterations. The parameter `discont` is optional and defines the discount factor if a discounted problem is considered.
+Here `x0` is a :py:class:`nmpyc.nmpyc_array.array` which defines the initial value, `N` is the MPC horizon and the parameter `K` defines the number of MPC iterations. The parameter `discount` is optional and defines the discount factor (the default is `1`).
 
-The result of the simulation can now be viewed in the console by calling 
+The result of the simulation can now be shown in the console by calling 
 
 .. code-block:: python
 
@@ -182,7 +182,7 @@ and as a visual output by calling
 
    res.plot()
 
-By default, the states and controls are displayed in two subplots. By passing a string as the first parameter (`=args`), the graphic can be customized. For example, by calling
+By default, the states and controls are displayed in two subplots. By passing a string as the first parameter (`=args`), the plot can be customized. For example, by calling
 
 .. code-block:: python
    
@@ -191,7 +191,7 @@ By default, the states and controls are displayed in two subplots. By passing a 
 only the states are plotted. Other keywords are `control` for the control, `cost` for the stage costs, and `phase` to make a phase portrait of two states or controls. 
 Furthermore, the plots displayed in this way can be additionally adjusted by further prameters, see :py:meth:`nmpyc.result.result.plot`.
 
-Now the model and the simulation results can be saved for later use with the functions
+Further, the model and the simulation results can be saved for later use with the functions
 
 .. code-block:: python
 
@@ -209,7 +209,7 @@ These saved files can then be loaded with the help of
 Advanced topics 
 ----------------
 
-The above procedure describes only a part of the possibilities of the nMPyC Python library. 
+The procedure described above is only an excerpt of the possibilities of the nMPyC Python library.
 For example, it is also possible to create autonomous systems and use the linear quadratic structure of a problem. 
-For further informations to the coding of this problem calsses take a look at the :doc:`Examples <examples>` and :doc:`Templates <templates>` section.
+For further informations see the :doc:`Examples <examples>` and :doc:`Templates <templates>` section.
 And for the implementation of linear system dynamics and quadratic costs, see also :py:meth:`nmpyc.system.system.LQP` and :py:meth:`nmpyc.objective.objective.LQP`.
