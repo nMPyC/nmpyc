@@ -102,8 +102,8 @@ First, we can add box constraints in the form of bounds.
 
 .. code-block:: python
 
-constraints.add_bounds('lower', 'control', lbu) # lower bound for control
-constraints.add_bounds('upper', 'control', ubu) # upper bound for control
+   constraints.add_bounds('lower', 'control', lbu) # lower bound for control
+   constraints.add_bounds('upper', 'control', ubu) # upper bound for control
 
 Here `lbu` or `lbx` is an :py:class:`nmpyc.nmpyc_array.array` of dimension `(1,nu)` or `(nu,1)`.    
 To add bounds for the state or final state, simply replace `control` with `state` or `terminal` in the above code and adjust the dimension of the array accordingly.
