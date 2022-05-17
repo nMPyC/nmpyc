@@ -1,7 +1,7 @@
 2d Investment Problem
 ======================
 
-To examplify a discounted problem we consider a 2d variant of an investment problem, originally introduced in :cite:p:`Haunschmied2003` and furhter explored in :cite:p:``Gruene2015`.
+To examplify a discounted problem we consider a 2d variant of an investment problem, originally introduced in :cite:p:`Haunschmied2003` and furhter explored in :cite:p:`Gruene2015`.
 
 The system dynamics for this problem are given by 
 
@@ -64,7 +64,7 @@ For our simulation we assume set the discount factor to
 
 .. math::
 
-   \beta = e^{-\delta*h}
+   \beta = e^{-\delta h}
 
 where :math:`h=0.2` is our samplimng rate and :math:`\delta=0.04` is the continuous discount rate.
 
