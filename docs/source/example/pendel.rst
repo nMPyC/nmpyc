@@ -40,7 +40,7 @@ Since the system dynamics are linear, we can initialize them using the LQP metho
    system = nmpyc.system.LQP(A, B, 4, 1, 'continuous', 
                              sampling_rate=0.1, method='rk4')
 
-Note that we have to use one of the fixed step methods euler, heun or rk4 as integration method if we want to exploit the linear structure of the problem later in the optimization.
+Note that we have to use one of the fixed step methods euler, heun or rk4 as integration method if we want to exploit the linear quadratic structure of the problem later in the optimization.
 
 In the next step, we have to define the objective of the optimal control problem. 
 In doing so, we assume the stage costs 
@@ -57,7 +57,7 @@ Since we assume no terminal cost, we can implement the objective as shown in the
    R = 4*nmpyc.eye(1)  
    objective = nmpyc.objective.LQP(Q, R)
 
-Again, we use the LQP method to exploit the linear structure of the problem later.
+Again, we use the LQP method to exploit the linear quadratic structure of the problem later.
 
 In terms of the constraints we assume the state constraints 
 
