@@ -74,7 +74,7 @@ In the heating system the conflict between energy and thermal comfort arises. Th
 	\ell(x,u)&=\frac u P_{\max} + (x_2-T_\text{ref})^2,
    \end{align*}
    
-where :math:`P_{\max} = 15000 (W)` is the maximal power of the heating pump and :math:`T_\text{ref} = 22^{\circ} C` is the desired temperature of the room. The reference temperature :math:`T_\text{ref}` can be selected differently -- depending on the thermal comfort.
+where :math:`P_{\max} = 15000 (W)` is the maximal power of the heating pump and :math:`T_\text{ref} = 22^{\circ} C` is the desired temperature of the room. The reference temperature :math:`T_\text{ref}` can be selected differently -- depending on the individual thermal comfort.
 
 According to this we can initialize our objective by 
 
@@ -99,11 +99,11 @@ as
    constraints.add_bound('lower', 'control', nmpyc.array([0]))
    constraints.add_bound('upper', 'control', nmpyc.array([P_max]))
 
-After all components of the optimal control problem have been implemented, we can now combine them into a model and start the MPC loop. For this Purpose, we define
+After all components of the optimal control problem have been implemented, we can now combine them into a model and start the MPC loop. For this purpose, we define
 
 .. math::
 
-   x(0) = (22, 19.5)^t
+   x(0) = (22, 19.5)^T
 
 and set :math:`N=30` and :math:`K=500`.
 
