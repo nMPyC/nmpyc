@@ -16,7 +16,7 @@ This can be done as shown in the following code snippet
    # Import nmpyc
    import nmpyc
 
-Note that the first two lines are omitted if nMPyC has already been added to the Python default path as described in the Installation section. In this case the command `import nmpyc` is sufficient to import nmpyc.
+Note that the first two lines are omitted if nMPyC has already been added to the Python default path as described in the Installation section. In this case the command :code:`import nmpyc` is sufficient to import nmpyc.
 
 .. note::
 
