@@ -1,7 +1,7 @@
 Heat Pump
 ==========
 
-This example is a home heating system that involves the optimal control of a small heat pump coupled to a floor heating system. The corresponding dynamic model was used in :cite:p:`Logist2010` and is given by
+This example describes a home heating system that involves the optimal control of a small heat pump coupled to a floor heating system. The corresponding dynamic model is introduced in :cite:p:`Logist2010` and is given by
 
 .. math::
    :nowrap:
@@ -31,7 +31,7 @@ thermal conductivity between the room and the environment     :math:`k_G`       
 thermal time constant of the room                             :math:`\tau_G`     260          :math:`s`
 ============================================================ ================  ============  ================
 
-Thus first of all we have to implement the outside temperature in the code to define oure system dynamics.
+First, we have to implement the outside temperature in the code to define our system dynamics.
 
 .. code-block:: python
 
@@ -39,7 +39,7 @@ Thus first of all we have to implement the outside temperature in the code to de
    def T_amb(t):
     return 2.5 + 7.5*nmpyc.sin((2*nmpyc.pi*t)/t_f - (nmpyc.pi/2))
 
-After that we can define the right hand side of the system.
+After that, we can define the right hand side of the system by
 
 .. code-block:: python
 
@@ -74,7 +74,7 @@ In the heating system the conflict between energy and thermal comfort arises. Th
 	\ell(x,u)&=\frac u P_{\max} + (x_2-T_\text{ref})^2,
    \end{align*}
    
-where :math:`P_{\max} = 15000 (W)` is the maximal power of the heating pump and :math:`T_\text{ref} = 22^{°} C` is the desired temperature of the room. The reference temperature :math:`T_\text{ref}` can be selected differently -- depending on the thermal comfort.
+where :math:`P_{\max} = 15000 (W)` is the maximal power of the heating pump and :math:`T_\text{ref} = 22^{\circ} C` is the desired temperature of the room. The reference temperature :math:`T_\text{ref}` can be selected differently -- depending on the thermal comfort.
 
 According to this we can initialize our objective by 
 
