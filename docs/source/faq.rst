@@ -7,7 +7,7 @@ Why shoul I use the `nmpyc_array` module?
 The idea of the :py:mod:`nmpyc.nmpyc_array` module is to provide a simple syntax for the input, which is similar to the one of NumPy.
 At the same time we want to ensure a switch between symbolic calculation with CasADi and completely numeric calculations. 
 
-A completely numerical calculation is advantageous, for example, if non-differentiable functions have to be evaluated at critical points. Here the algorithmic differentiation of CasADi can lead to problems. 
+A completely numerical calculation is advantageous, for example, if non-differentiable functions have to be evaluated at critical points, e.g. the norm at the origin. Here the algorithmic differentiation of CasADi can lead to problems. 
 
 Therefore this module is built in a way that the array class can automatically switch between CasADi and NumPy objects. In addition, the individual functions are built in such a way that they recognize the type of the input and call the appropriate function from NumPy or CasADi accordingly.
 
@@ -26,9 +26,21 @@ Note however that in this way if applicable no smooth change between numeric and
 Which solver should I use?
 ---------------------------
 
+In most cases, the automatic selection of the solver by the program is recommended. In this way, if possible, the linear quadratic structure of a problem is exploited or at least algorithmic differentiation is still exploited to perform an advantageous optimization. 
 
+However, as already mentioned, this algorithmic differentiation can also lead to problems in some cases. For example, if a non-differentiable function must be evaluated at critical points, e.g. the norm at the origin. In such cases, a numerical calculation should be used for the optimization and a SciPy solver, such as SLSQP, should be selected. 
 
 
 Which discretization method should I use?
 ------------------------------------------
+
+In our numerical simulations we have experienced that mostly a fixed step integration method like euler is sufficient to guarantee the necessary accuracy during the simulation. The advantage of these methods is that with them the largest speed up among the available integrators can be achieved.
+
+However, if it is necessary to achieve higher integration accuracy by an adaptive integration method, one of the CasADi integrators, e.g. cvodes, should always be chosen if possible.
+
+The SciPy integrators should only be considered as a kind of backup in case the other methods fail, since they lead to an above-average lag of time during the simulation in our implementation. 
+
+
+What should I do if I get a Latex Error while plotting?
+--------------------------------------------------------
 
