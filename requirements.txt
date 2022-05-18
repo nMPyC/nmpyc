@@ -1,12 +1,12 @@
 osqp
 sphinx
-ipykernel
+#ipykernel
 nbsphinx
 pygments
 docutils
 sphinx-copybutton
 sphinxcontrib-bibtex
-graphviz
+#graphviz
 casadi
 numpy
 matplotlib
