@@ -83,7 +83,7 @@ html_static_path = ['static']
 latex_engine ='pdflatex'
 
 latex_documents = [
-  ('index', 'nmpyc.tex', u'nMPyC \n A Python library for solving optimal control problems via model predictive control',
+  ('index', 'nmpyc.tex', u'nMPyC \newline A Python library for solving optimal control problems via MPC',
    u'Jonas Schießl and Lisa Krügel', 'manual'),
 ]
 
