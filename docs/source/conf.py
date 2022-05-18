@@ -82,5 +82,10 @@ html_static_path = ['static']
 # -- Options for LaTeX output ---------------------------------------------
 latex_engine ='pdflatex'
 
+latex_documents = [
+  ('index', 'nmpyc.tex', u'nMPyC \n A Python library for solving optimal control problems via model predictive control',
+   u'Jonas Schießl and Lisa Krügel', 'manual'),
+]
+
 # -- References -------------------------------------------------
 bibtex_bibfiles = ['references.bib']
