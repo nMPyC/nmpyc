@@ -41,6 +41,11 @@ However, if it is necessary to achieve higher integration accuracy by an adaptiv
 The SciPy integrators should only be considered as a kind of backup in case the other methods fail, since they lead to an above-average lag of time during the simulation in our implementation. 
 
 
-What should I do if I get a Latex Error while plotting?
+What should I do if I get a LaTeX Error while plotting?
 --------------------------------------------------------
+
+It has been our experience that such errors occur mainly on MacOS if Spyder is used for programming, which in turn is opened via Anaconda Navigator. 
+In this case it is sufficient to open spyder directly and not to take the detour via the anaconda navigator to solve the problem. 
+
+However, if this procedure does not solve the problem or the problem has another cause, it is also possible to disable the LaTeX labeling of the plots by setting the option :code:`usetex=False`. For more details see :py:meth:`nmpyc.result.result.plot`.
 
