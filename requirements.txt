@@ -1,13 +1,12 @@
 sphinx
 nbsphinx
-#pygments
 docutils
 sphinx-copybutton
 sphinxcontrib-bibtex
 casadi
 numpy
 matplotlib
-recommonmark
+#recommonmark
 scipy
 dill
 osqp
