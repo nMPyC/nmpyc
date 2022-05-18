@@ -6,7 +6,6 @@ sphinxcontrib-bibtex
 casadi
 numpy
 matplotlib
-#recommonmark
 scipy
 dill
 osqp
