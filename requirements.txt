@@ -1,15 +1,13 @@
-osqp
 sphinx
-#ipykernel
 nbsphinx
-pygments
+#pygments
 docutils
 sphinx-copybutton
 sphinxcontrib-bibtex
-#graphviz
 casadi
 numpy
 matplotlib
 recommonmark
 scipy
 dill
+osqp
