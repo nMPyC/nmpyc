@@ -22,7 +22,7 @@ master_doc = 'index'
 # ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx_rtd_theme',
-	          'sphinx.ext.intersphinx',
+              'sphinx.ext.intersphinx',
               'sphinx.ext.napoleon',
               'nbsphinx',
               'sphinx.ext.mathjax',
