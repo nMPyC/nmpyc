@@ -10,8 +10,8 @@ sys.path.append('../')
 
 import nmpyc
 
-nu = 1
-nx = 2
+nu = 1 # dimension of state
+nx = 2 # dimension of control
 
 # parameters
 h = 0.5
