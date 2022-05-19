@@ -79,6 +79,8 @@ class system:
             
         if self._type == 'LQP' and self._system_type == 'continuous':
             if self._method in ['rk4', 'euler', 'heun']:
+                self._A = self._f[0]
+                self._B = self._f[1]
                 self._discretizeLQP()
             else:
                 A = self._f[0]
@@ -277,7 +279,7 @@ class system:
             self._integrator = 'scipy'
         elif self._method in ['rk4', 'euler', 'heun']:
             self._integrator = 'mpc'
-            self._options['number_of_finit_elemets'] = 1
+            self._options['number_of_finit_elements'] = 1
         else:
             raise ValueError(
                 'allowed methods are cvodes, idas, collocation, ' 
@@ -431,6 +433,12 @@ class system:
                 'options must be of type dictionary - not ' 
                 + str(type(options)))
         self._options = options
+        
+        if self._type == 'LQP' and self._system_type == 'continuous':
+            if self._method in ['rk4', 'euler', 'heun']:
+                self._f[0] = self._A 
+                self._f[1] = self._B
+                self._discretizeLQP()
     
     @mpc_convert
     def system_discrete(self, t, x, u):
@@ -551,7 +559,7 @@ class system:
         
     def _solve_ode_rk4(self, t, x, u):
         
-        steps = self._options['number_of_finit_elemets']   # number of steps 
+        steps = self._options['number_of_finit_elements']   # number of steps 
         tk = t
         dt = self._h/steps               # time step = sampling rate/steps
         x_next = mpc.array(x)           # copy x
@@ -569,7 +577,7 @@ class system:
     
     def _solve_ode_euler(self, t, x, u):
         
-        steps = self._options['number_of_finit_elemets']
+        steps = self._options['number_of_finit_elements']
         tk = t
         dt = self.h/steps               
         x_next = mpc.array(x)           
@@ -581,7 +589,7 @@ class system:
     
     def _solve_ode_heun(self, t, x, u):
         
-        steps = self._options['number_of_finit_elemets']   
+        steps = self._options['number_of_finit_elements']   
         tk = t
         dt = self._h/steps               
         x_next = mpc.array(x)           
@@ -595,35 +603,75 @@ class system:
     def _discretizeLQP(self):
         
         if self._method == 'euler':
-            self._f[0] = mpc.eye(self._nx) + self._f[0]*self._h 
-            self._f[1] = self._f[1]*self._h
+            
+            steps = self._options['number_of_finit_elements']
+            dt = self.h/steps 
+            
+            A_euler = self._f[1]*dt
+            B_euler = self._f[0]*dt 
+              
+            A = mpc.eye(self._nx)   
+            B = mpc.zeros((self._nx,self._nu))
+            for i in range(steps):
+                B = B + A@B_euler
+                A = A + A@A_euler     
+                
+            self.f[0] = A
+            self.f[1] = B
+                
             
         if self._method == 'heun':
+            
+            steps = self._options['number_of_finit_elements']
+            dt = self.h/steps
+            
             A_k1 = self._f[0]
             B_k1 = self._f[1]
             
-            A_k2 = self._f[0] + self._f[0]*self._h @ A_k1
-            B_k2 = self._f[0]*self._h @ B_k1 + self._f[1]
+            A_k2 = self._f[0] + self._f[0]*dt@ A_k1
+            B_k2 = self._f[0]*dt @ B_k1 + self._f[1]
             
-            self._f[0] = mpc.eye(self._nx) + (A_k1 + A_k2)*(self._h/2)
-            self._f[1] = (B_k1 + B_k2)*(self._h/2)
+            A_heun = (A_k1 + A_k2)*(dt/2)
+            B_heun = (B_k1 + B_k2)*(dt/2)
+            
+            A = mpc.eye(self._nx)   
+            B = mpc.zeros((self._nx,self._nu))
+            for i in range(steps):
+                B = B + A@B_heun
+                A = A + A@A_heun     
+                
+            self.f[0] = A
+            self.f[1] = B
             
         elif self.method == 'rk4':
+            
+            steps = self._options['number_of_finit_elements']
+            dt = self.h/steps
+            
             A_k1 = self._f[0]
             B_k1 = self._f[1]
             
-            A_k2 = self._f[0] + self._f[0]@A_k1*(self._h/2)
-            B_k2 = self._f[0]@B_k1*(self._h/2) + self._f[1]
+            A_k2 = self._f[0] + self._f[0]@A_k1*(dt/2)
+            B_k2 = self._f[0]@B_k1*(dt/2) + self._f[1]
             
-            A_k3 = self._f[0] + self._f[0] @ A_k2*(self._h/2)
-            B_k3 = self._f[0]@B_k2*(self._h/2) + self._f[1]
+            A_k3 = self._f[0] + self._f[0] @ A_k2*(dt/2)
+            B_k3 = self._f[0]@B_k2*(dt/2) + self._f[1]
             
-            A_k4 = self._f[0] + self._f[0] @ A_k3 * self._h
-            B_k4 = self._f[0]@B_k3*self._h + self._f[1]
+            A_k4 = self._f[0] + self._f[0] @ A_k3 * dt
+            B_k4 = self._f[0]@B_k3*dt + self._f[1]
             
-            self._f[0] = (mpc.eye(self._nx) 
-                          + (A_k1 + A_k2*2 + A_k3*2 + A_k4)*(self._h/6))
-            self._f[1] = (B_k1 + B_k2*2 + B_k3*2 + B_k4)*(self._h/6)
+            A_rk4 = (A_k1 + A_k2*2 + A_k3*2 + A_k4)*(dt/6)
+            B_rk4 = (B_k1 + B_k2*2 + B_k3*2 + B_k4)*(dt/6)
+              
+            A = mpc.eye(self._nx)   
+            B = mpc.zeros((self._nx,self._nu))
+            for i in range(steps):
+                B = B + A@B_rk4
+                A = A + A@A_rk4   
+                
+            self.f[0] = A
+            self.f[1] = B
+            
     
     def save(self, path):
         """Saving the system to a given file with `dill <https://dill.readthedocs.io/en/latest/dill.html>`_.

@@ -325,6 +325,20 @@ class array:
         if isinstance(key, (int, slice)):
             key = (key,0)
         
+        try:
+            range(self._dim[0])[key[0]]
+        except:
+            raise IndexError('Index one is out of range: ' 
+                             + str(key[0]) + ' not in range [0,' 
+                             + str(self._dim[0]-1) + ']')
+            
+        try:
+            range(self._dim[1])[key[1]]
+        except:
+            raise IndexError('Index one is out of range: ' 
+                             + str(key[1]) + ' not in range [0,' 
+                             + str(self._dim[1]-1) + ']')
+        
         if isinstance(key,tuple):
             if len(key) != 2:
                 raise ValueError(
@@ -366,6 +380,20 @@ class array:
         if isinstance(key, int):
             key = (key,0)
             
+        try:
+            range(self._dim[0])[key[0]]
+        except:
+            raise IndexError('Index one is out of range: ' 
+                             + str(key[0]) + ' not in range [0,' 
+                             + str(self._dim[0]-1) + ']')
+            
+        try:
+            range(self._dim[1])[key[1]]
+        except:
+            raise IndexError('Index one is out of range: ' 
+                             + str(key[1]) + ' not in range [0,' 
+                             + str(self._dim[1]-1) + ']')
+        
         if isinstance(value, array):
             value = value._A
             
@@ -384,6 +412,7 @@ class array:
             raise TypeError(
                 'key must be of type integer or tuple - not ' 
                 + str(type(key)))
+            
             
         if np.isscalar(value):
            value = float(value)
@@ -1385,18 +1414,21 @@ def min(*args):
     
         
 if __name__ == '__main__':        
-    a = np.array((1,2,3))
-    a = cas.DM((3,3))
-    print(a[:,0])
-    a = array(a)
-    a[:,0] = np.array([[2,2]])
-    print(a)
-    print(a[:,0])
+    # a = np.array((1,2,3))
+    # a = cas.DM((3,3))
+    # print(a[:,0])
+    # a = array(a)
+    # a[:,0] = np.array([[2,2]])
+    # print(a)
+    # print(a[:,0])
     
-    b = concatenate((a,a))
-    print(b)
+    # b = concatenate((a,a))
+    # print(b)
     
-    b = concatenate((a,a),axis=1)
-    print(b)
+    # b = concatenate((a,a),axis=1)
+    # print(b)
     
-    print(array.__doc__)
+    # print(array.__doc__)
+    
+    A = zeros(10)
+    print(A[10])

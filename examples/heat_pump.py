@@ -24,8 +24,8 @@ T_ref = 22
 h = 0.5
 nx = 2
 nu = 1
-N = 30          # MPC horizon length
-K = 500          # final time for the MPC loop
+N = 30   
+K = 500   
 
 def T_amb(t):
     return 2.5 + 7.5*nmpyc.sin((2*nmpyc.pi*t)/t_f - (nmpyc.pi/2))
