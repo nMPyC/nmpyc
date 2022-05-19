@@ -1,7 +1,7 @@
 Examples
 =========
 
-In addition to the information from the API, the following examples are intended to provide guidance for implementing your own problems.
+In addition to the information from the :doc:`API References <api>`, the following examples are intended to provide guidance for implementing your own problems.
 
 To show the different facets of nMPyC, we have tried to illustrate all possibilities the package has to offer with an example. 
 
