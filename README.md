@@ -39,4 +39,4 @@ To realize the letter case you can navigate to the location of the package and u
 
 This command will automatically add the package to the Python default path and install the required Python packages and their dependencies which are [CasADi](https://web.casadi.org>), [osqp](https://osqp.org/>), [NumPy](https://numpy.org>), [SciPy](https://scipy.org>), [matplotlib](https://matplotlib.org/stable/index.html) and [dill](https://dill.readthedocs.io/en/latest/dill.html).
 
-For further informations about the Python library pleas visit the [nMPyC Documentation](https://nmpyc.readthedocs.io/en/latest/index).html
+For further informations about the Python library pleas visit the [nMPyC Documentation](https://nmpyc.readthedocs.io/).
