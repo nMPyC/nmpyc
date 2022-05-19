@@ -14,7 +14,6 @@ nu = 1 # dimension of state
 nx = 2 # dimension of control
 
 # parameters
-h = 0.5
 V = 10.
 cf_A = 1.
 cf_B = 0.
@@ -23,8 +22,8 @@ k_r = 1.2
 def f(t,x,u):
     y = nmpyc.array(2)
     h = 0.5
-    y[0] = x[0] + h*((u[0]/V) *(cf_A - x[0]) - k_r*x[0])
-    y[1] = x[1] + h*((u[0]/V) *(cf_B - x[1]) + k_r*x[1])
+    y[0] = x[0] + 0.5*((u[0]/V) *(cf_A - x[0]) - k_r*x[0])
+    y[1] = x[1] + 0.5*((u[0]/V) *(cf_B - x[1]) + k_r*x[1])
     return y
 
 system = nmpyc.system(f, nx, nu, system_type='discrete')
