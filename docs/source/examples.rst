@@ -5,7 +5,7 @@ In addition to the information from the API, the following examples are intended
 
 To show the different facets of nMPyC, we have tried to illustrate all possibilities the package has to offer with an example. 
 
-Therefore, the chemical reactor is a nonlinear autonomous problem, the inverted pendulum is a linear quadratic problem, the heating pump is a nonlinear time-varying problem and the 2d investment problem is a discounted problem.
+Therefore, the chemical reactor is a nonlinear autonomous problem, the inverted pendulum is a linear quadratic problem, the heat pump is a nonlinear time-varying problem and the 2d investment problem is a discounted problem.
 
 .. toctree::
 
