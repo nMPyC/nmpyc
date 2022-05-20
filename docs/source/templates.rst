@@ -1,7 +1,7 @@
 Templates
 ==========
 
-In addition to the examples, we also want to provide a few templates to facilitate the implementation.
+In addition to the examples, we also provide templates to facilitate the implementation.
 
 To take advantage of the different structures of the problems, we have implemented templates for the following problem types.
 
