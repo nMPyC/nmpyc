@@ -478,6 +478,7 @@ class result:
             
             fig.suptitle(title)
             fig.align_ylabels((ax1, ax2))
+            plt.show()
 
         elif key == 'x_cl':
             
