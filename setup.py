@@ -5,7 +5,7 @@ setup(
     version='1.0.0',
     packages=['nmpyc'],
     author='Jonas Schießl, Lisa Krügel',
-    #author_email='',
+    author_email='nmpyc@uni-bayreuth.de',
     url='https://nmpyc.readthedocs.io/',
     description='Python library for solving optimal control problems via model predictive control',
     license='GNU Lesser General Public License version 3',
