@@ -112,24 +112,24 @@ class result:
     @property 
     def x_cl(self):
         """numpy.ndarray : Closed loop trajectory."""
-        return self._x_cl
+        return self._x_cl.A
     
     @property 
     def u_cl(self):
         """numpy.ndarray : Closed loop feedback."""
-        return self._u_cl
+        return self._u_cl.A
     
     @property 
     def l_cl(self):
         """numpy.ndarray : Stage costs evaluated at the 
         closed loop trajectory and feedback."""
-        return self._l_cl
+        return self._l_cl.A
     
     @property 
     def t_cl(self):
         """numpy.ndarray : Time sequence at which the 
         closed loop states and controls are evaluated."""
-        return self._t_cl
+        return self._t_cl.A
     
     @property 
     def x_ol(self):
