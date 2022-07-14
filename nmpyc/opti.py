@@ -237,21 +237,21 @@ class opti:
             self._objective = objective
         else:
             raise TypeError(
-                'objective must be of type mpc.objective - not ' 
+                'objective must be of type objective - not ' 
                 + str(type(objective)))
         
         if isinstance(system, mpc.system):
             self._system = system
         else:
             raise TypeError(
-                'system must be of type mpc.system - not ' 
+                'system must be of type system - not ' 
                 + str(type(system)))
          
         if isinstance(constraints, mpc.constraints):
             self._constraints = constraints
         else:
             raise TypeError(
-                'constraints must be of type mpc.constraints - not ' 
+                'constraints must be of type constraints - not ' 
                 + str(type(constraints)))
         
         if isinstance(N, int):
@@ -1007,7 +1007,7 @@ class opti:
         if isinstance(x0, mpc.array):
             if x0.dim != (self._nx, 1):
                 raise ValueError('x0 has the wrong dimension - ' + str(x0.dim) + ' != (' + str(self._nx) + ',1)')
-        else: raise TypeError('x0 must be of type mpc.array - not ' + str(type(x0)))
+        else: raise TypeError('x0 must be of type array - not ' + str(type(x0)))
         
         self._t0 = t
         self._X_start[:, 0] = x0
