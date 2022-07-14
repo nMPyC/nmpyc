@@ -50,7 +50,7 @@ class model:
             self._objective = obj
         else:
             raise TypeError(
-                'objective must be of type mpc.objective - not ' 
+                'objective must be of type objective - not ' 
                 + str(type(obj)))
             
     @property
@@ -66,7 +66,7 @@ class model:
             self._nu = self._system.nu
         else:
             raise TypeError(
-                'system must be of type mpc.system - not ' 
+                'system must be of type system - not ' 
                 + str(type(syst)))
             
     @property
@@ -82,7 +82,7 @@ class model:
             self._constraints = cons
         else:
             raise TypeError(
-                'constraints must be of type mpc.constraints - not ' 
+                'constraints must be of type constraints - not ' 
                 + str(type(cons)))
     
     @property
@@ -239,7 +239,7 @@ class model:
                     + ',1)')
         else: 
             raise TypeError(
-                'x0 must be of type mpc.array - not ' 
+                'x0 must be of type array - not ' 
                 + str(type(x0)))
         
         self.opti.init_solver(self.objective, self.system.system_discrete, 
@@ -291,7 +291,7 @@ class model:
             x = x0
         else: 
             raise TypeError(
-                'x0 must be of type mpc.array - not ' 
+                'x0 must be of type array - not ' 
                 + str(type(x0)))
         
         k = 0   # set counter to zero
