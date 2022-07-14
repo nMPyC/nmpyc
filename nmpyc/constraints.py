@@ -599,7 +599,7 @@ class constraints:
             
         if not isinstance(e, constraints):
             raise Exception(
-                'Can not load constraints from file. File does not cotain a constraints!')
+                'Can not load constraints from file. File does not cotain constraints!')
             
         return e
                 
