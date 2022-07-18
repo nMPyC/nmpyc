@@ -40,7 +40,7 @@ This can be done via Git using the command
 
 ::
 
-   git clone https://gitlab.uni-bayreuth.de/bt704963/nmpyc1.git
+   git clone https://github.com/nMPyC/nmpyc
 
 Now the toolbox can be used either by importing the package according to its storage path in the Python code by adding it to the Python default path.
 To realize the letter case you can navigate to the location of the package and use
