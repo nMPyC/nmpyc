@@ -22,9 +22,9 @@ The **nMPyC** software is Python based and works therefore on any OS with a Pyth
 **nMPyC** has been developed by Jonas Schießl and Lisa Krügel under the supervision of Prof. Lars Grüne at the `Chair of Applied Mathematic <https://num.math.uni-bayreuth.de/en/index.html>`_ of University of Bayreuth. 
 **nMPyC** is a further devolpement in Python of the `Matlab code <http://numerik.mathematik.uni-bayreuth.de/~lgruene/nmpc-book/matlab_nmpc.html>`_ that was implemented for the NMPC Book from Lars Grüne and Jürgen Pannek :cite:`Gruene2017a`.
 
-.. note::
 
-   This project is under active development.
+
+
 
 
 Contents
