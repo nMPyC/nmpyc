@@ -4,7 +4,7 @@ Installation
 
 Requirements
 ^^^^^^^^^^^^^^
-The nMPyC package has the following dependencies:
+The nMPyC package is dependent on the following libraries:
 
 - `CasADi <https://web.casadi.org>`_
 - `NumPy <https://numpy.org>`_
@@ -17,7 +17,7 @@ The nMPyC package has the following dependencies:
 Installation using PIP
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The easiest way to install the nMPyC package is to use PIP. To do so, you just need to run the command 
+The easiest way to install the nMPyC package is to use PIP. To do so, you just need to run the command line
 
 ::
 
@@ -35,14 +35,14 @@ Additionally you can update the package by running
 Installation by Source
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-To install the Python package by source, the source code from `GitLab <https://gitlab.uni-bayreuth.de/bt704963/nmpyc1>`_ has to be downloaded.
+To install the Python package by source, the source code from `GitHub <https://github.com/nMPyC/nmpyc>`_ has to be downloaded.
 This can be done via Git using the command
 
 ::
 
    git clone https://github.com/nMPyC/nmpyc
 
-Now the toolbox can be used either by importing the package according to its storage path in the Python code by adding it to the Python default path.
+Now the toolbox can be used by importing the package according to its storage path in the Python code by adding it to the Python default path.
 To realize the letter case you can navigate to the location of the package and use
 
 ::
