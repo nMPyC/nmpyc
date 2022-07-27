@@ -720,9 +720,9 @@ def concatenate(arrays, axis = 0):
         
     if axis == 0:
         if casadi:
-            return cas.vertcat(*arrays)
+            return array(cas.vertcat(*arrays))
         else:
-            return np.concatenate(arrays, axis=0)
+            return array(np.concatenate(arrays, axis=0))
     elif axis == 1:
         if casadi:
             return array(cas.horzcat(*arrays))
