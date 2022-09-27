@@ -607,8 +607,8 @@ class system:
             steps = self._options['number_of_finit_elements']
             dt = self.h/steps 
             
-            A_euler = self._f[1]*dt
-            B_euler = self._f[0]*dt 
+            A_euler = self._f[0]*dt
+            B_euler = self._f[1]*dt 
               
             A = mpc.eye(self._nx)   
             B = mpc.zeros((self._nx,self._nu))
