@@ -166,7 +166,7 @@ and for a closed loop simulation
 
 .. code-block:: python
 
-   u_ol, x_ol = model.mpc(x0,N,K,discount) 
+   res = model.mpc(x0,N,K,discount) 
 
 Here `x0` is a :py:class:`nmpyc.nmpyc_array.array` which defines the initial value, `N` is the MPC horizon and the parameter `K` defines the number of MPC iterations. The parameter `discount` is optional and defines the discount factor (the default is `1`).
 
@@ -186,7 +186,7 @@ By default, the states and controls are displayed in two subplots. By passing a 
 
 .. code-block:: python
    
-   res.show('state')
+   res.plot('state')
 
 only the states are plotted. Other keywords are `control` for the control, `cost` for the stage costs, and `phase` to make a phase portrait of two states or controls. 
 Furthermore, the plots displayed in this way can be additionally adjusted by further prameters, see :py:meth:`nmpyc.result.result.plot`.
