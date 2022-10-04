@@ -80,8 +80,8 @@ This can be realized in the code as
    ubx = nmpyc.ones(4)*5
    constraints.add_bound('lower','state', lbx)
    constraints.add_bound('upper','state', ubx)
-   constraints.add_bound('lower', 'control', mpc.array([-20]))
-   constraints.add_bound('upper', 'control', mpc.array([6]))
+   constraints.add_bound('lower', 'control', nmpyc.array([-20]))
+   constraints.add_bound('upper', 'control', nmpyc.array([6]))
 
 After all components of the optimal control problem have been implemented, we can now combine them into a model and start the MPC loop.
 For this Purpose, we define the inital value
