@@ -242,10 +242,10 @@ class model:
                 'x0 must be of type array - not ' 
                 + str(type(x0)))
         
-        self.opti.init_solver(self.objective, self.system.system_discrete, 
+        self.opti.init_solver(self.objective, self.system, 
                               self.constraints, self.N)
         
-        u_ol, x_ol = self.opti.solve(x0)
+        u_ol, x_ol = self.opti.solve(self.system.t0,x0)
         
         return (u_ol, x_ol)
             
