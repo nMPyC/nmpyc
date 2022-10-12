@@ -138,7 +138,7 @@ class opti:
     def U_start(self, value):
         """array : Initial guess for the optimizer."""
 
-        if not isinstance(value, array):
+        if not isinstance(value, mpc.array):
             raise TypeError(
                 'inital guess must be of type array - not ' 
                 + str(type(value)))
