@@ -33,7 +33,7 @@ To model the payoff of the investment problem we assume th stage cost
 
 .. math::
 
-   \ell(x,u) = R(x_1) - c(x_2) - v(u)
+   \ell(x,u) = -(R(x_1) - c(x_2) - v(u))
 
 where :math:`R(x_1) = k_1 \sqrt{x_1} - x_1/(1+k_2 x_1^4)` is a revenue function of the firm with a
 convex segment due to increasing returns. :math:`c(x_2) = c_1 x_2 + c_2 x_2^2/2` denotes adjustment costs
