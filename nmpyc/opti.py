@@ -431,7 +431,7 @@ class opti:
                                      mpc.convert(cons[2]).flatten()))
                 self._u = np.hstack((self._u,
                                      mpc.convert(cons[2]).flatten()))
-                for i in range(self.N - 1):
+                for i in range(self._N - 1):
                     G = np.block([np.zeros((len(cons[0][:,0]),
                                             (i + 1)*(self._nx+self._nu))),
                                   mpc.convert(cons[0]),
@@ -578,7 +578,7 @@ class opti:
                                      mpc.convert(cons[2],'numpy').flatten()))
                 self._u = np.hstack((self._u, 
                                      np.ones(len(cons[2]))*np.inf))
-                for i in range(self.N - 1):
+                for i in range(self._N - 1):
                     G1 = block_diag(G1, G)
                     H1 = block_diag(H1, H)
                     self._l = np.hstack((self._l, 
@@ -598,7 +598,7 @@ class opti:
                                      mpc.convert(cons[2],'numpy').flatten()))
                 self._u = np.hstack((self._u, 
                                      mpc.convert(cons[2],'numpy').flatten()))
-                for i in range(self.N - 1):
+                for i in range(self._N - 1):
                     G1 = block_diag(G1, G)
                     H1 = block_diag(H1, H)
                     self._l = np.hstack((self._l, 
@@ -691,7 +691,10 @@ class opti:
         
         self._U = self._optistack.variable(self._nu, self._N)      # for control trajectory   
         self._p = self._optistack.parameter(self._nx)             # parameter for initial value
-        self._t = self._optistack.parameter(self._N+1)
+        self._t = np.arange(self._t0, 
+                            (self._t0 + (self._N+1)*self._system.h 
+                             - (self._system.h/2)), 
+                            self._system.h)
         
         if self._full_discretization:
             self._X = self._optistack.variable(self._nx, self._N + 1)     # for state trajectory
@@ -890,7 +893,7 @@ class opti:
     
     def _cons_eq_scipy(self, Z):
         t = np.arange(self._t0, 
-                      self._t0 + self.N*self._system.h, 
+                      self._t0 + self._N*self._system.h, 
                       self._system.h)
         U = np.reshape(Z[:self._N*self._nu], (self._nu, self._N))
         if self._full_discretization:
