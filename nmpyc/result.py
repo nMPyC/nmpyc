@@ -76,10 +76,10 @@ class result:
                                     show_ol = False,
                                     phase1 = None,
                                     phase2 = None,
-                                    dpi = 500,
-                                    figsize = [9.6, 7.2],
+                                    dpi = 100,
+                                    figsize = [8., 6.],
                                     usetex = True,
-                                    fontsize = 20,
+                                    fontsize = 14.,
                                     grid = True,
                                     linewidth = 2.,
                                     show_legend = True)
@@ -342,15 +342,15 @@ class result:
         |                      |                                                 |                   |
         |                      |Will be ignored if args!='phase'.                |                   |
         +----------------------+-------------------------------------------------+-------------------+
-        |dpi                   |resolution of the figure, see                    | 500               |
+        |dpi                   |resolution of the figure, see                    | 100               |
         +----------------------+-------------------------------------------------+-------------------+
-        |figsize               |The size of the figure.                          | [9.6, 7.2]        |
+        |figsize               |The size of the figure.                          | [8., 6.]          |
         |                      |                                                 |                   |
         |                      |Has the form  [width, height] in inches.         |                   |
         +----------------------+-------------------------------------------------+-------------------+
         |linewidth             |Set the line width in points.                    | 2.                |
         +----------------------+-------------------------------------------------+-------------------+
-        |fontsize              |The font size of the annotations.                | 20                |
+        |fontsize              |The font size of the annotations.                | 14.               |
         |                      |                                                 |                   |
         |                      |If the value is numeric the size will be the     |                   |
         |                      |                                                 |                   |
