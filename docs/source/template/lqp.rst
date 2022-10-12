@@ -9,7 +9,7 @@ Linear Quadratic Problem
    # Define system parameters
    nx = .. # dimension of state
    nu = .. # dimension of control
-   system_type = .. # system type: continous or discrete 
+   system_type = .. # system type: continuous or discrete 
    sampling_rate = 1. # sampling rate h (optional)
    method = 'cvodes' # integrator (optinal)
 
