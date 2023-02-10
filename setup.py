@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='nmpyc',
-    version='1.0.2',
+    version='1.0.3',
     packages=['nmpyc'],
     author='Jonas Schießl, Lisa Krügel',
     author_email='nmpyc@uni-bayreuth.de',
