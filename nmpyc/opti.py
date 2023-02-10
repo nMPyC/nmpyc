@@ -1077,9 +1077,7 @@ class opti:
                     for i in range(self._nx):
                         self._optistack.subject_to(
                             self._X[i, k + 1] == x_next[i])
-                        
-            # set timespan
-            self._optistack.set_value(self._t, t)
+            
             # set initial guess for optimization 
             self._optistack.set_initial(self._U, mpc.convert(self._U_start.A,'numpy')) 
             if self._full_discretization:
