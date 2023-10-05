@@ -873,7 +873,7 @@ class opti:
                 
         if self._objective._F is not None:
             if self._objective._type == 'NLP':
-                J += self._objective._F(t[:,self._N], X[:, self._N])
+                J += self._objective._F(t[self._N], X[:, self._N])
             else:
                 J += X[:, self._N].T@self._objective._F.A@X[:, self._N]
         

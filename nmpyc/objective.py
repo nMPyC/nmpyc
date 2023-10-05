@@ -113,7 +113,7 @@ class objective:
             if len(params) == 1:
                 F = lambda t,x : cost(x)
             elif len(params) == 2:
-                self.autonomous = False
+                self._autonomous = False
                 F = cost
             else:
                 raise ValueError(
