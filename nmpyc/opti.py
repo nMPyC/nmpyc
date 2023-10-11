@@ -126,7 +126,7 @@ class opti:
     @verbose.setter 
     def verbose(self, value):
         if isinstance(value, bool):
-            self._full_discretization = value
+            self._verbose = value
         else:
             raise TypeError(
                 'verbose must be of type boolean - not ' 
