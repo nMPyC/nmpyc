@@ -57,7 +57,7 @@ def f(x,u):
     
     return y
 
-system = nmpyc.system(f, nx, nu, system_type, sampling_rate=h, method='heun')
+system = nmpyc.system(f, nx, nu, system_type, sampling_time=h, method='heun')
 
 Q = nmpyc.diag([1e4, 1e5, 1e5])*8
 R = nmpyc.diag([10, 10, 1])
