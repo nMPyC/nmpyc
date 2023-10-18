@@ -233,38 +233,25 @@ class opti:
 
         """
         
-        if isinstance(objective, mpc.objective):
-            self._objective = objective
-        else:
-            raise TypeError(
-                'objective must be of type objective - not ' 
-                + str(type(objective)))
-        
-        if isinstance(system, mpc.system):
-            self._system = system
-        else:
-            raise TypeError(
-                'system must be of type system - not ' 
-                + str(type(system)))
-         
-        if isinstance(constraints, mpc.constraints):
-            self._constraints = constraints
-        else:
-            raise TypeError(
-                'constraints must be of type constraints - not ' 
-                + str(type(constraints)))
-        
-        if isinstance(N, int):
-            if N <= 0 : 
-                raise ValueError('MPC horizon N must be greater than zero')
-            self._N = N
-        else: 
-            raise TypeError(
-                'MPC horizon N must be of type integer - not ' + str(type(N)))
-        
+        if not isinstance(objective, mpc.objective):
+            raise TypeError("objective must be of type objective")
+
+        if not isinstance(system, mpc.system):
+            raise TypeError("system must be of type system")
+
+        if not isinstance(constraints, mpc.constraints):
+            raise TypeError("constraints must be of type constraints")
+
+        if not isinstance(N, int) or N <= 0:
+            raise ValueError("MPC horizon N must be an integer greater than zero")
+
+        self._objective = objective
+        self._system = system
+        self._constraints = constraints
+        self._N = N
         self._nx = system.nx
         self._nu = system.nu
-        
+
         self._t0 = self._system.t0
         
         if self._constraints.lower_bndx is None:
@@ -313,13 +300,13 @@ class opti:
         if self._constraints.lower_bndend.dim[0] != self._nx:
             raise ValueError(
                 'lower bound for terminal state has the wrong dimension - ' 
-                + str(self.constraints.lower_bndend.dim[0]) 
+                + str(self._constraints.lower_bndend.dim[0]) 
                 + '!=' 
                 + str(self._nx))
         if self._constraints.upper_bndend.dim[0] != self._nx:
             raise ValueError(
                 'upper bound for terminal state has the wrong dimension - ' 
-                + str(self.constraints.upper_bndend.dim[0]) 
+                + str(self._constraints.upper_bndend.dim[0]) 
                 + '!=' 
                 + str(self._nx))
         
@@ -585,7 +572,7 @@ class opti:
                                          mpc.convert(cons[2],'numpy').flatten()))
                     self._u = np.hstack((self._u, 
                                          np.ones(len(cons[2]))*np.inf))
-                H1 = np.block([H1, np.zeros(len(H1[:,0], self._nx))])
+                H1 = np.block([H1, np.zeros((len(H1[:,0]), self._nx))])
                 HH = np.vstack((HH, H1))
                 GG = np.vstack((GG, G1))
             
@@ -643,47 +630,38 @@ class opti:
             self._P = sparse.csc_matrix(RR + BB.T@QQ@BB + BB.T@N2 + N2.T@BB)
 
         
+        # Set up OSQP solver options using a dictionary
+        solver_options = {
+            'rho': 0.1,
+            'sigma': 1e-06,
+            'max_iter': self._maxiter,
+            'eps_abs': self._tol,
+            'eps_rel': self._tol,
+            'eps_prim_inf': 1e-04,
+            'eps_dual_inf': 1e-04,
+            'alpha': 1.6,
+            'linsys_solver': 'qdldl',
+            'delta': 1e-06,
+            'polish': False,
+            'polish_refine_iter': 3,
+            'verbose': self._verbose,
+            'scaled_termination': False,
+            'check_termination': 25,
+            'warm_start': True,
+            'scaling': 10,
+            'adaptive_rho': True,
+            'adaptive_rho_interval': 0,
+            'adaptive_rho_tolerance': 5,
+            'adaptive_rho_fraction': 0.4,
+            'time_limit': 0,
+        }
+
+        # Override default solver options with user-defined options
+        solver_options.update(self._options)
+
+        # Initialize the OSQP solver
         self._lqp = osqp.OSQP()
-        
-        rho = 0.1
-        sigma =  1e-06
-        max_iter = self._maxiter
-        eps_abs = self._tol
-        eps_rel = self._tol
-        eps_prim_inf = 1e-04
-        eps_dual_inf = 1e-04
-        alpha = 1.6
-        linsys_solver = 'qdldl'
-        delta = 1e-06
-        polish = False
-        polish_refine_iter = 3
-        verbose = self._verbose
-        scaled_termination = False
-        check_termination = 25
-        warm_start = True
-        scaling = 10
-        adaptive_rho = True
-        adaptive_rho_interval = 0
-        adaptive_rho_tolerance = 5
-        adaptive_rho_fraction = 0.4
-        time_limit = 0
-        
-        for key in self._options.keys():
-            locals()[key] = self._options[key]
-        
-        self._lqp.setup(P = self._P, A = self._A, l = self._l, u = self._u, 
-                       rho = rho, sigma = sigma, max_iter = max_iter,
-                       eps_abs = eps_abs, eps_rel = eps_rel, 
-                       eps_prim_inf = eps_prim_inf, eps_dual_inf = eps_dual_inf,
-                       alpha = alpha, linsys_solver = linsys_solver, delta = delta,
-                       polish = polish, polish_refine_iter = polish_refine_iter,
-                       verbose = verbose, scaled_termination = scaled_termination,
-                       check_termination = check_termination, warm_start = warm_start,
-                       scaling = scaling, adaptive_rho = adaptive_rho,
-                       adaptive_rho_interval = adaptive_rho_interval,
-                       adaptive_rho_tolerance = adaptive_rho_tolerance,
-                       adaptive_rho_fraction = adaptive_rho_fraction,
-                       time_limit = time_limit)
+        self._lqp.setup(P=self._P, A=self._A, l=self._l, u=self._u, **solver_options)
             
     def _init_casadi(self):
         
@@ -785,24 +763,15 @@ class opti:
             for i in range(cons_value.dim[0]):
                 self._optistack.subject_to(cons_value[i] >= 0)
                 
-        # set the optimizer
-        options = {}
-        options['max_iter'] = self._maxiter
+        # Set the optimizer
+        options = {'max_iter': self._maxiter}
         if self._method == 'ipopt':
-            options['sb'] = 'yes'
-            if self._verbose is False:
-                options['print_level'] = 0
-            options['acceptable_tol'] = self._tol
+            options.update({'sb': 'yes', 'print_level': 0, 'acceptable_tol': self._tol})
             options.update(self._options)
-            self._optistack.solver("ipopt", 
-                                   {'print_time': self._verbose},
-                                   options)
+            self._optistack.solver("ipopt", {'print_time': self._verbose}, options)
         elif self._method == 'sqpmethod':
-            if self._verbose is False:
-                options['print_time'] = False
-                options['print_header'] = False
-            options['tol_du'] = self._tol
-            options['tol_pr'] = self._tol
+            options.update({'print_time': self._verbose, 'print_header': self._verbose, 
+                            'tol_du': self._tol, 'tol_pr': self._tol})
             options.update(self._options)
             self._optistack.solver('sqpmethod', options)
         
@@ -1042,19 +1011,21 @@ class opti:
             UU = mpc.array((self._nu,self._N))
             XX = mpc.array((self._nx,self._N+1))
             
-            for i in range(self._N):
-                if self._full_discretization:
+            if self._full_discretization:
+                for i in range(self._N):
                     UU[:, i] = res.x[(i + 1)*self._nx + i*self._nu:
-                                    (i + 1)*self._nx + (i + 1)*self._nu]
+                                (i + 1)*self._nx + (i + 1)*self._nu]
+                for i in range(self._N+1):
                     XX[:, i] = res.x[i*self._nx+i*self._nu:
-                                    (i + 1)*self._nx+i*self._nu]
-                else:
+                                (i + 1)*self._nx+i*self._nu]
+            else:
+                for i in range(self._N):
                     UU[:, i] = res.x[i*self._nu:(i + 1)*self._nu]
-                    XX[:, 0] = self._x0
-                    for k in range(self._N):
-                        t = self._t0 + (k + 1)*self._system.h
-                        XX[:, k + 1] = self._system.system_discrete(
-                            t, XX[:, k], UU[:, k])
+                XX[:, 0] = self._x0
+                for k in range(self._N):
+                    t = self._t0 + (k + 1)*self._system.h
+                    XX[:, k + 1] = self._system.system_discrete(
+                        t, XX[:, k], UU[:, k])
           
         elif self._solver == 'casadi':
             t = np.arange(self._t0, 
@@ -1125,7 +1096,7 @@ class opti:
             res = minimize(self._J_scipy,self._Z_start, 
                            constraints=self._constraints_scipy, 
                            bounds=self._bnds, tol=self._tol, 
-                           method=self._method, options=self._options)
+                           method=self._method, options=options)
             
             if res.success == False: 
                 error = res.message
