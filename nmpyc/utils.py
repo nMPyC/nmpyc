@@ -32,103 +32,43 @@ def flat_list(t):
             
     return flat_list
 
-# def mpc_convert(func):
-#     sig = inspect.signature(func)
-#     params = sig.parameters
-#     if inspect.getargspec(func)[0][0] == 'self':
-#         if len(params) == 4:
-#             def inner(self,t,x,u):
-#                 if np.isscalar(x):
-#                     x = [[x]]
-#                 if np.isscalar(u):
-#                     u = [[u]]
-#                 x = mpc.array(x)
-#                 u = mpc.array(u)
-#                 y = func(self,t,x,u)
-#                 if np.isscalar(y):
-#                     y = [[y]]
-#                 return mpc.array(y)
-#         elif len(params) == 3:
-#             def inner(self,t,x):
-#                 if np.isscalar(x):
-#                     x = [[x]]
-#                 x = mpc.array(x)
-#                 y = func(self,t,x)
-#                 if np.isscalar(y):
-#                     y = [[y]]
-#                 return mpc.array(y)
-#     else:
-#         if len(params) == 3:
-#             def inner(t,x,u):
-#                 if np.isscalar(x):
-#                     x = [[x]]
-#                 if np.isscalar(u):
-#                     u = [[u]]
-#                 x = mpc.array(x)
-#                 u = mpc.array(u)
-#                 y = func(t,x,u)
-#                 if np.isscalar(y):
-#                     y = [[y]]
-#                 return mpc.array(y)
-#         elif len(params) == 2:
-#             def inner(t,x):
-#                 if np.isscalar(x):
-#                     x = [[x]]
-#                 x = mpc.array(x)
-#                 y = func(t,x)
-#                 if np.isscalar(y):
-#                     y = [[y]]
-#                 return mpc.array(y)
-#     return inner
-
 def mpc_convert(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        sig = inspect.signature(func)
-        params = sig.parameters
-        if inspect.getargspec(func)[0][0] == 'self':
-            if len(params) == 4:
-                def inner(self,t,x,u):
-                    if np.isscalar(x):
-                        x = [[x]]
-                    if np.isscalar(u):
-                        u = [[u]]
-                    x = mpc.array(x)
-                    u = mpc.array(u)
-                    y = func(self,t,x,u)
-                    if np.isscalar(y):
-                        y = [[y]]
-                    return mpc.array(y)
-            elif len(params) == 3:
-                def inner(self,t,x):
-                    if np.isscalar(x):
-                        x = [[x]]
-                    x = mpc.array(x)
-                    y = func(self,t,x)
-                    if np.isscalar(y):
-                        y = [[y]]
-                    return mpc.array(y)
+        # Check if the first argument is 'self' for class methods
+        is_method = (inspect.getargspec(func)[0][0] == 'self')
+
+        if is_method:
+            self_arg = args[0]
+            args = args[1:]  # Remove 'self' from the arguments list
+        
+        # Convert input arguments (x and u) to mpc.array if needed
+        converted_args = []
+        converted_args.append(args[0])
+        for arg in args[1:]:
+            if np.isscalar(arg):
+                arg = [[arg]]
+            elif isinstance(arg, np.ndarray):
+                if arg.ndim == 0:
+                    arg = [[arg.item()]]  # Convert scalar numpy array to nested list
+                else:
+                    arg = arg.tolist()  # Convert numpy array to nested list
+            converted_args.append(mpc.array(arg))
+        
+        # Call the original function with the converted arguments
+        if is_method:
+            y = func(self_arg, *converted_args, **kwargs)
         else:
-            if len(params) == 3:
-                def inner(t,x,u):
-                    if np.isscalar(x):
-                        x = [[x]]
-                    if np.isscalar(u):
-                        u = [[u]]
-                    x = mpc.array(x)
-                    u = mpc.array(u)
-                    y = func(t,x,u)
-                    if np.isscalar(y):
-                        y = [[y]]
-                    return mpc.array(y)
-            elif len(params) == 2:
-                def inner(t,x):
-                    if np.isscalar(x):
-                        x = [[x]]
-                    x = mpc.array(x)
-                    y = func(t,x)
-                    if np.isscalar(y):
-                        y = [[y]]
-                    return mpc.array(y)
-        return inner(*args, **kwargs)
+            y = func(*converted_args, **kwargs)
+
+        # Convert the output (y) to mpc.array if needed
+        if np.isscalar(y):
+            y = [[y]]
+        elif isinstance(y, np.ndarray):
+            if y.ndim == 0:
+                y = [[y.item()]]  # Convert scalar numpy array to nested list
+            else:
+                y = y.tolist()  # Convert numpy array to nested list
+        return mpc.array(y)
+
     return wrapper
