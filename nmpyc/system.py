@@ -49,7 +49,7 @@ class system:
     system_type : str, optional
         String defining if the given system dynamics are 
         discrete or continuous. The default is 'discrete'.
-    sampling_rate : float, optional
+    sampling_time : float, optional
         Sampling rate defining at which time instances the 
         dynamics are evaluated. The default is 1.
     t0 : float, optional
@@ -64,14 +64,14 @@ class system:
     """
     
     def __init__(self, f, nx, nu, system_type='discrete', 
-                 sampling_rate=1., t0=0., method='cvodes'):
+                 sampling_time=1., t0=0., method='cvodes'):
         
         self._options = {}
         self._type = 'NLP'
         
         self.f = f
         self.system_type = system_type
-        self.h = sampling_rate
+        self.h = sampling_time
         self.t0 = t0
         self.nx = nx
         self.nu = nu
@@ -178,17 +178,17 @@ class system:
         return self._h
     
     @h.setter 
-    def h(self, sampling_rate):
-        if not isinstance(sampling_rate, (float, int)):
+    def h(self, sampling_time):
+        if not isinstance(sampling_time, (float, int)):
             raise TypeError(
-                'sampling_rate must be of type integer or float - not ' 
-                + str(type(sampling_rate)))
-        if sampling_rate > 0:
-            self._h = sampling_rate
+                'sampling_time must be of type integer or float - not ' 
+                + str(type(sampling_time)))
+        if sampling_time > 0:
+            self._h = sampling_time
         else: 
             raise ValueError(
                 'sampling rate must be greter than zero - not ' 
-                + str(sampling_rate))
+                + str(sampling_time))
         
     @property 
     def t0(self):
@@ -198,7 +198,7 @@ class system:
         at time :math:`t_0`.
         The state :math:`x(t)` is evaluated at the time instances 
         :math:`t_0 + kh` during the MPC loop where :math:`h` is 
-        the :py:attr:`~sampling_rate`.
+        the :py:attr:`~sampling_time`.
         """
         return self._t0
     
@@ -333,7 +333,7 @@ class system:
     
     @classmethod
     def LQP(cls, A, B , nx, nu, system_type='discrete', 
-            sampling_rate=1., t0=0., method='euler'):
+            sampling_time=1., t0=0., method='euler'):
         """Initialize the system with linear dynamics.
         
         In this case the right hand side of the dynamics has the 
@@ -365,7 +365,7 @@ class system:
         system_type : str, optional
             String defining whether the given system dynamics are 
             discrete or continuous. The default is 'discrete'.
-        sampling_rate : float, optional
+        sampling_time : float, optional
             Sampling rate defining at which time instances the 
             dynamics are evaluated. The default is 1.
         t0 : float, optional
@@ -406,7 +406,7 @@ class system:
             raise ValueError(
                 'B has to be purely numeric, but also has symbolic entries')
         
-        lqp = cls([A,B], nx, nu, system_type, sampling_rate, t0, method)
+        lqp = cls([A,B], nx, nu, system_type, sampling_time, t0, method)
         
         return lqp
     
