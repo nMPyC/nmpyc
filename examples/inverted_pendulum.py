@@ -28,7 +28,7 @@ A = nmpyc.array([[0, 1, 0, 0],
                  [0, 0, 0, 0]])
 B = nmpyc.array([0, 1, 0, 1])
 system = nmpyc.system.LQP(A, B, nx, nu, system_type, 
-                        sampling_rate=h, method='rk4')
+                        sampling_time=h, method='rk4')
 system.set_integratorOptions(dict(number_of_finit_elements=100))
 
 Q = 2*nmpyc.eye(nx)
