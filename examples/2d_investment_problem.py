@@ -43,7 +43,7 @@ def l(x,u):
     l_ = -(R - c - v)
     return l_
 
-system = nmpyc.system(f, nx, nu, system_type, sampling_rate=h, method='heun')
+system = nmpyc.system(f, nx, nu, system_type, sampling_time=h, method='heun')
 
 objective = nmpyc.objective(l)
 
