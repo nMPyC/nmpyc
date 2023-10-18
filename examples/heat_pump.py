@@ -44,7 +44,7 @@ def l(x,u):
     return (u[0]/P_max) + (x[1]-T_ref)**2
 
 
-system = nmpyc.system(f, nx, nu, 'continuous', sampling_rate=h, method='euler')
+system = nmpyc.system(f, nx, nu, 'continuous', sampling_time=h, method='euler')
 objective = nmpyc.objective(l)
 
 constraints = nmpyc.constraints()
