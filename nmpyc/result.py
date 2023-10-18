@@ -95,7 +95,7 @@ class result:
         return self._x0.A
     
     @property 
-    def sampling_rate(self):
+    def sampling_time(self):
         """float : Sampling rate."""
         return self._h
     
@@ -105,8 +105,8 @@ class result:
         return self._N
     
     @property
-    def sucessfull_itertaions(self):
-        """int : Number of succesfull MPC iterations."""
+    def successful_itertaions(self):
+        """int : Number of successful MPC iterations."""
         return self._KK
     
     @property 
@@ -162,10 +162,10 @@ class result:
         return self._solver
     
     @property 
-    def succes(self):
-        """bool : True if the solver converged sucessfully in all MPC itertaions, 
+    def success(self):
+        """bool : True if the solver converged successfully in all MPC itertaions, 
         false if the MPC loop abort prematurely."""
-        return self._succes
+        return self._success
     
     @property 
     def error(self):
@@ -174,13 +174,13 @@ class result:
         return self._error
     
     @property 
-    def ellapsed_time(self):
-        """float : Total ellapsed time for the closed loop simulation."""
+    def elapsed_time(self):
+        """float : Total elapsed time for the closed loop simulation."""
         return self._time
     
     @property 
-    def ellapsed_time_per_itertaion(self):
-        """list of float : List containing the ellapsed time of 
+    def elapsed_time_per_itertaion(self):
+        """list of float : List containing the elapsed time of 
         every single itertaion of the closed loop simulation."""
         return self._time_ol
         
@@ -188,12 +188,12 @@ class result:
         string = ''
         string += 'solver: ' + str(self._solver) + '\n'
         string += 'success: ' + str(self._success) + '\n'
-        string += ('succesfull iterations: ' 
+        string += ('succesful iterations: ' 
                    + str(self._K) 
                    + ' of ' 
                    + str(self._KK) 
                    + '\n')
-        string += 'ellapsed time: ' + str(self._time) + '\n'
+        string += 'elapsed time: ' + str(self._time) + '\n'
         string += 'x0: ' + str(self._x0.flatten()) + '\n'
         string += 't0: ' + str(self._t0) + '\n'
         string += 'h: ' + str(self._h) + '\n'
@@ -258,7 +258,7 @@ class result:
         For more informations about the error messages take a look 
         at the documentation of the respective solver.
 
-        If the simulation was completly succesfull, the message 
+        If the simulation was completly succesful, the message 
 
         | *No error occured during the MPC-Loop*
 
@@ -361,7 +361,7 @@ class result:
         
         if self._default_kwargs['xk'] == []:
             print('Cant plot anything because there is' 
-                  + ' no successfull itertaion stored.')
+                  + ' no successful itertaion stored.')
             return
         
         for item in kwargs.keys():
@@ -435,12 +435,12 @@ class result:
                 ylabelx = r'\textbf{state}'
                 ylabelu = r'\textbf{control}'
                 xlabel = r'\textbf{time}'
-                title = r'\textbf{Closed Loop}'
+                title = r'\textbf{Closed-Loop}'
             else:
                 ylabelx = 'state'
                 ylabelu = 'control'
                 xlabel = 'time'
-                title = 'Close Loop'
+                title = 'Close-Loop'
             
             fig, (ax1, ax2) = plt.subplots(2, 1, tight_layout=True, 
                                            sharex=True, 
@@ -485,11 +485,11 @@ class result:
             if options['usetex']:
                 ylabelx = r'\textbf{state}'
                 xlabel = r'\textbf{time}'
-                title = r'\textbf{Closed Loop States}'
+                title = r'\textbf{Closed-Loop States}'
             else:
                 ylabelx = 'state'
                 xlabel = 'time'
-                title = 'Close Loop States'
+                title = 'Close-Loop States'
             
             fig, (ax1) = plt.subplots(1, 1, tight_layout=True, 
                                       figsize=options['figsize'], 
@@ -518,11 +518,11 @@ class result:
             if options['usetex']:
                 ylabelu = r'\textbf{control}'
                 xlabel = r'\textbf{time}'
-                title = r'\textbf{Closed Loop Controls}'
+                title = r'\textbf{Closed-Loop Controls}'
             else:
                 ylabelu = 'control'
                 xlabel = 'time'
-                title = 'Closed Loop Controls'
+                title = 'Closed-Loop Controls'
             
             fig, (ax1) = plt.subplots(1, 1, tight_layout = True, 
                                       figsize = options['figsize'], 
@@ -551,10 +551,10 @@ class result:
             
             if options['usetex']:
                 xlabel = r'\textbf{time}'
-                title = r'\textbf{Open Loop States}'
+                title = r'\textbf{Closed- and Open-Loop States}'
             else:
                 xlabel = 'time'
-                title = 'Open Loop States'
+                title = 'Closed- and Open-Loop States'
             
             fig, ax = plt.subplots(len(dimsx), 1, sharex=True, 
                                    tight_layout = True, 
@@ -598,10 +598,10 @@ class result:
             
             if options['usetex']:
                 xlabel = r'\textbf{time}'
-                title = r'\textbf{Open Loop States}'
+                title = r'\textbf{Closed- and Open-Loop States}'
             else:
                 xlabel = 'time'
-                title = 'Open Loop Controls'
+                title = 'Closed- and Open-Loop Controls'
             
             fig, ax = plt.subplots(len(dimsu), 1, sharex = True, 
                                    tight_layout = True, 
@@ -644,11 +644,11 @@ class result:
             if options['usetex']:
                 xlabel = r'\textbf{time}'
                 ylabel = r'$\mathbf{\ell (x,u)}$'
-                title = r'\textbf{Closed Loop Costs}'
+                title = r'\textbf{Closed-Loop Costs}'
             else:
                 xlabel = 'time'
                 ylabel = 'l(x,u)'
-                title = 'Closed Loop Costs'
+                title = 'Closed-Loop Costs'
                     
             fig, (ax1) = plt.subplots(1, 1, tight_layout = True, 
                                       figsize = options['figsize'], 
@@ -669,11 +669,11 @@ class result:
             if options['usetex']:
                 xlabel = r'\textbf{time}'
                 ylabel = r'$\mathbf{\ell (x,u)}$'
-                title = r'\textbf{Open Loop Costs}'
+                title = r'\textbf{Closed- and Open-Loop Costs}'
             else:
                 xlabel = 'time'
                 ylabel = 'l(x,u)'
-                title = 'Open Loop Costs'
+                title = 'Closed- and Open-Loop Costs'
                     
             fig, (ax1) = plt.subplots(1, 1, tight_layout = True, 
                                       figsize = options['figsize'], 
@@ -700,12 +700,12 @@ class result:
                 xlabel = r'$\mathbf{' + phase[0] + '}$'
                 ylabel = r'$\mathbf{' + phase[1] + '}$'
                 title = (r'$\mathbf{' + phase[0] + '-' + phase[1] 
-                         + '~Closed~Loop' + '~Portrait' + '}$')
+                         + '~Phase' + '~Portrait' + '}$')
             else:
                 xlabel = phase[0]
                 ylabel = phase[1]
                 title = (phase[0] + '-' + phase[1] 
-                         + ' Closed Loop' + ' Portrait')
+                         + ' Phase' + ' Portrait')
             
             if phase[0][0] == 'u' or phase[1][0] == 'u':
                 T = self._K
@@ -744,11 +744,11 @@ class result:
                 xlabel = r'$\mathbf{' + phase[0] + '}$'
                 ylabel = r'$\mathbf{' + phase[1] + '}$'
                 title = (r'$\mathbf{' + phase[0] + '-' + phase[1] 
-                         + '~Open~Loop' + '~Portrait' + '}$')
+                         + '~Phase' + '~Portrait' + '}$')
             else:
                 xlabel = phase[0]
                 ylabel = phase[1]
-                title = phase[0] + '-' + phase[1] + ' Open Loop' + ' Portrait'
+                title = phase[0] + '-' + phase[1] + ' Phase' + ' Portrait'
             
             x = []
             
