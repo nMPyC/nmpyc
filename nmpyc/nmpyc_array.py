@@ -561,44 +561,33 @@ class array:
         return y
     
     
+def _math_function(func):
+    def wrapper(*args, **kwargs):
+        new_args = []
+        convert = False
+        for arg in args:
+            if isinstance(arg, array):
+                new_args.append(arg._A)
+                convert = True
+            elif isinstance(arg, (int, float, np.ndarray, cas.MX, cas.SX, cas.DM)):
+                new_args.append(arg)
+            else:
+                raise TypeError(
+                    'input must be of type integer, float, array, numpy.ndarray, casadi.DM, casadi.SX or casadi.MX - not ' + str(type(arg)))
+
+        result = func(*new_args, **kwargs)
+
+        if convert:
+            return array(result)
+        else:
+            return result
+
+    return wrapper
+
+@_math_function
 def reshape(a, new_size):
-    """Reshape an array to a new size.
-
-    Parameters
-    ----------
-    a : array
-        .
-    new_size : tuple
-        New shape.
-
-    Returns
-    -------
-    array
-        An array instance with the new shape.
-
-    """
-    
-    if not isinstance(new_size, tuple):
-        raise TypeError(
-            'new_size must be tuple - not ' 
-            + str(type(new_size)))
-    if not isinstance(new_size[0], int) or not isinstance(new_size[1], int):
-        raise TypeError('new_size must be tuple of inegers')
-    if not len(new_size) == 2:
-        raise TypeError('new_size must be two dimensional')
-        
-    if isinstance(a, array):
-        a = a._A
-    else: 
-        raise TypeError(
-            'input paramter a must be of type array,- not ' + str(type(a)))
-            
-    if isinstance(a, np.ndarray):
-        A = np.reshape(a,new_size)
-    elif isinstance(a, (cas.MX, cas.SX, cas.DM)):
-        A = cas.reshape(a, new_size)
-    
-    return array(A)
+    """Reshape an array to a new size."""
+    return np.reshape(a, new_size)
 
 def convert(a, dtype='auto'):
     """Convert a numpy-, casadi- or nMPyC-array to another of these intances.
@@ -674,64 +663,10 @@ def convert(a, dtype='auto'):
     
     return a
 
-def concatenate(arrays, axis = 0):
-    """Join a sequence of arrays along an existing axis.
-
-    Parameters
-    ----------
-    arrays : tuple of casadi.MX, casadi.SX, casadi.DM or numpy.ndarrays
-        Sequence of arrays which will be concatenated. 
-        The arrays must have the same shape, except in the dimension 
-        corresponding to axis.
-    axis : int, optional
-        The axis along which the arrays will be joined. The default is 0.
-
-    Returns
-    -------
-    array
-        The concatenated array.
-
-    """
-    
-    casadi = False
-    
-    if not isinstance(arrays, tuple):
-        raise TypeError(
-            'arrays hmust be of type tuple - not ' + str(type(arrays)))
-        
-    if not isinstance(axis, int):
-        raise TypeError('axis must be an integer - not ' + str(type(axis)))
-    
-    array_list = []
-    for i in range(len(arrays)):
-        if isinstance(arrays[i], array):
-            array_list += [arrays[i].A]
-        else:
-            array_list += [arrays[i]]
-        if isinstance(array_list[i], (cas.MX, cas.SX, cas.DM)):
-            casadi = True
-        elif not isinstance(array_list[i], np.ndarray):
-            raise ValueError(
-                'The elements of the arrays sequence must be of type array,' + 
-                ' casadi.MX, casadi.SX, casadi.DM or numpy.ndarray - not ' 
-                + str(type(arrays[i])))
-            
-    arrays = tuple(array_list)
-        
-    if axis == 0:
-        if casadi:
-            return array(cas.vertcat(*arrays))
-        else:
-            return array(np.concatenate(arrays, axis=0))
-    elif axis == 1:
-        if casadi:
-            return array(cas.horzcat(*arrays))
-        else:
-            return array(np.concatenate(arrays, axis=1))
-    else:
-        raise ValueError(
-            'axis must be 0 (first axis) or 1 (second axis) - not ' 
-            + str(axis))
+@_math_function
+def concatenate(arrays, axis=0):
+    """Join a sequence of arrays along an existing axis."""
+    return np.concatenate(arrays, axis=axis)
     
 def eye(dim):
     """Creates an array defining the idendity.
@@ -878,539 +813,111 @@ def diag(x):
         
     return array(y)
 
+
+@_math_function
 def log(x):
     """Calculates the natural logarithm of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int,float,np.ndarray)):
-        y = np.log(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.log(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    return np.log(x)
 
-    return y
-
+@_math_function
 def exp(x):
     """Calculates the exponential of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.exp(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.exp(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    return np.exp(x)
 
-    return y
-
+@_math_function
 def sin(x):
     """Calculates the sinus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.sin(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.sin(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    return np.sin(x)
 
-    return y
-
+@_math_function
 def sinh(x):
     """Calculates the sinus hyperbolicus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.sinh(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.sinh(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    return np.sinh(x)
 
-    return y
-
+@_math_function
 def arcsin(x):
-    """Calculates the arcussinus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.arcsin(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.arcsin(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the arcus sinus of a given number or array"""
+    return np.arcsin(x)
 
-    return y
-
+@_math_function
 def arcsinh(x):
-    """Calculates the arcussinus hyperbolicus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.arcsinh(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.arcsinh(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the arcus sinus hyperbolicus of a given number or array"""
+    return np.arcsinh(x)
 
-    return y
-
+@_math_function
 def cos(x):
-    """Calculates the cosinus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.cos(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.cos(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the cosine of a given number or array"""
+    return np.cos(x)
 
-    return y
-
+@_math_function
 def cosh(x):
-    """Calculates the cosinus hyperbolicus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.cosh(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.cosh(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the cosine hyperbolicus of a given number or array"""
+    return np.cosh(x)
 
-    return y
-
+@_math_function
 def arccos(x):
-    """Calculates the arcuscosinus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.arccos(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.arccos(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the arcus cosine of a given number or array"""
+    return np.arccos(x)
 
-    return y
-
+@_math_function
 def arccosh(x):
-    """Calculates the arcuscosinus hypernolicus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.arccosh(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.arccosh(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the arcus cosine hyperbolicus of a given number or array"""
+    return np.arccosh(x)
 
-    return y
-
+@_math_function
 def tan(x):
-    """Calculates the tangens of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.tan(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.tan(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the tangent of a given number or array"""
+    return np.tan(x)
 
-    return y
-
+@_math_function
 def tanh(x):
-    """Calculates the tangens hyperblicus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.tan(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.tan(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the tangent hyperbolicus of a given number or array"""
+    return np.tanh(x)
 
-    return y
-
+@_math_function
 def arctan(x):
-    """Calculates the arcustangens of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.arctan(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.arctan(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the arcus tangent of a given number or array"""
+    return np.arctan(x)
 
-    return y
-
+@_math_function
 def arctanh(x):
-    """Calculates the arcustangens hyperbolicus of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.arctanh(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.arctanh(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    """Calculates the arcus tangent hyperbolicus of a given number or array"""
+    return np.arctanh(x)
 
-    return y
-
+@_math_function
 def sqrt(x):
     """Calculates the square root of a given number or array"""
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.sqrt(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.sqrt(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+    return np.sqrt(x)
 
-    return y
+@_math_function
+def power(x, n):
+    """Calculates the power of a given number or array"""
+    return np.power(x, n)
 
-def power(x,n):
-    """Calculates the (elementwise) n-th power of a number or array.
+@_math_function
+def matrix_power(x, n):
+    """Calculates the power of a given matrix"""
+    return np.linalg.matrix_power(x, n)
 
-    Parameters
-    ----------
-    x : int, float, numpy.ndarray, cas.MS, cas.SX or cas.DM
-        Number or array of which the n-th power should be computed.
-    n : int or float
-        Number defining the exponent.
+@_math_function
+def abs_(x):
+    """Calculates the absolute value of a given number or array"""
+    return np.abs(x)
 
-    """
-    
-    if not isinstance(n, (int, float)):
-        raise TypeError(
-            'input n must be of type integer or float - not ' 
-            + str(type(n)))
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.power(x_,n)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.power(x_,n)
-        
-    else: 
-        raise TypeError(
-            'input x must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
+@_math_function
+def norm(x, order=None):
+    """Calculates the norm of a given array"""
+    return np.linalg.norm(x, order=order)
 
-    return y
-
-def matrix_power(x,n):
-    """Raises a square matrix to the n-th power.
-
-    Parameters
-    ----------
-    x : int, float, numpy.ndarray, cas.MS, cas.SX or cas.DM
-        Number or array of which the n-th power should be computed.
-    n : int or float
-        Number defining the exponent.
-
-    """
-    
-    if not isinstance(n, (int, float)):
-        raise TypeError(
-            'input n must be of type integer or float - not ' 
-            + str(type(n)))
-    
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (np.ndarray)):
-        y = np.linalg.matrix_power(x_,n)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.mpower(x_,n)
-        
-    else: 
-        raise TypeError(
-            'input x must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
-
-    return y
-
-def abs(x):
-    """Calculates the absolute value of a number or array."""
-
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (int, float, np.ndarray)):
-        y = np.absolute(x_)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        y = cas.fabs(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type integer, float, array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' + str(type(x)))
-    
-    if isinstance(x, array):
-        y = array(y)
-
-    return y
-    
-def norm(x,order=None):
-    """Returns the norm of a vector or matrix.
-
-    Parameters
-    ----------
-    x : array, numpy.ndarray, cas.MX, cas.SX or cas.DM
-        Vector or matrix of which the norm should be calculated.
-    order : number or str, optional
-        String defining the type of the norm. 
-        Posiible values are 1, 2, 'fro' or 'inf'. 
-        The default is None.
-
-    """
-    if order is not None and order not in [1,2,'fro',inf]:
-        raise ValueError(
-            'order must be one 1,2, fro or inf - not ' 
-            + str(order))
-        
-    if isinstance(x, array):
-        x_ = x._A
-    else:
-        x_ = x
-        
-    if isinstance(x_, (np.ndarray)):
-        y = LA.norm(x_,order)
-        
-    elif isinstance(x_, (cas.MX, cas.SX, cas.DM)):
-        if order == 1:
-            y = cas.norm_1(x_)
-        elif order == 2:
-            y = cas.norm_2(x_)
-        elif order == 'fro':
-            y = cas.norm_fro(x_)
-        elif order == inf:
-            y = cas.norm_inf(x_)
-        
-    else: 
-        raise TypeError(
-            'input must be of type array, numpy.ndarray,' 
-            + ' casadi.DM, casadi.SX or casadi.MX - not ' 
-            + str(type(x)))
-
-    return y
-
+@_math_function
 def max(*args):
-    """Return the maximal value of the arguments"""
-       
-    for i in range(len(args)):
-        if isinstance(args[i], array):
-            args[i] = args[i]._A
-        if not isinstance(args[i], (int, float, 
-                                    np.ndarray, cas.MX, cas.SX, cas.DM)):
-            raise TypeError(
-                'input must be of type integer, float, array, numpy.ndarray,' 
-                + ' casadi.DM, casadi.SX or casadi.MX - not ' 
-                + str(type(args[i])))
+    """Calculates element-wise maximum of arrays"""
+    return np.maximum(*args)
 
-    return cas.fmax(*args)
-
+@_math_function
 def min(*args):
-    """Returns the minimal value of the arguments"""
-    
-    for i in range(len(args)):
-        if isinstance(args[i], array):
-            args[i] = args[i]._A
-        if not isinstance(args[i], (int, float, 
-                                    np.ndarray, cas.MX, cas.SX, cas.DM)):
-            raise TypeError(
-                'input must be of type integer, float, array, numpy.ndarray,' 
-                + ' casadi.DM, casadi.SX or casadi.MX - not ' 
-                + str(type(args[i])))
-
-    return cas.fmin(*args)
+    """Calculates element-wise minimum of arrays"""
+    return np.minimum(*args)
     
         
 if __name__ == '__main__':        
