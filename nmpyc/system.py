@@ -70,11 +70,11 @@ class system:
         self._type = 'NLP'
         
         self.f = f
+        self.nx = nx
+        self.nu = nu
         self.system_type = system_type
         self.h = sampling_time
         self.t0 = t0
-        self.nx = nx
-        self.nu = nu
         self.method = method
             
         if self._type == 'LQP' and self._system_type == 'continuous':
