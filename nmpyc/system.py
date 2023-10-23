@@ -87,6 +87,20 @@ class system:
                 B = self._f[1]
                 self._f = lambda x,u : A@x + B@u
                 self._type = 'NLP'
+
+    def _check_autonomous(self):
+        """
+        Check if the system is autonomous (no explicit time dependence).
+
+        Returns:
+        bool: True if the system is autonomous, False otherwise.
+
+        """
+        x = cas.MX.sym('x', self.nx)
+        u = cas.MX.sym('u', self.nu)
+        t = cas.MX.sym('t')
+        dxdt = self.dynamics(t, x, u)._A
+        return not cas.depends_on(dxdt, t)
                 
     @property 
     def f(self):
@@ -129,6 +143,7 @@ class system:
             raise TypeError(
                 'f must be callable or list of arrays - not ' + str(type(ff)))
         self._f = F
+        self._autonomous = self._check_autonomous()
         
     @property 
     def system_type(self):
