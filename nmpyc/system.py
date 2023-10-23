@@ -68,10 +68,9 @@ class system:
         
         self._options = {}
         self._type = 'NLP'
-        
-        self.f = f
         self.nx = nx
         self.nu = nu
+        self.f = f
         self.system_type = system_type
         self.h = sampling_time
         self.t0 = t0
