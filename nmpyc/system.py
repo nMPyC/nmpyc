@@ -98,7 +98,7 @@ class system:
         x = cas.MX.sym('x', self.nx)
         u = cas.MX.sym('u', self.nu)
         t = cas.MX.sym('t')
-        dxdt = self.dynamics(t, x, u)._A
+        dxdt = self.system(t, x, u)._A
         return not cas.depends_on(dxdt, t)
                 
     @property 
