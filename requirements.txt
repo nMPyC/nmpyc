@@ -4,6 +4,7 @@ nbsphinx
 docutils
 sphinx-copybutton
 sphinxcontrib-bibtex
+recommonmark
 casadi
 numpy
 matplotlib
