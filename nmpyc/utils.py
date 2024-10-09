@@ -36,7 +36,7 @@ def mpc_convert(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         # Check if the first argument is 'self' for class methods
-        is_method = (inspect.getargspec(func)[0][0] == 'self')
+        is_method = (inspect.getfullargspec(func)[0][0] == 'self')
 
         if is_method:
             self_arg = args[0]
