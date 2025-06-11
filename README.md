@@ -31,4 +31,27 @@ The easiest way to install the **nMPyC** package is using PIP by running
 
 This command will automatically add the package to the Python default path and install the required Python packages and their dependencies which are [CasADi](https://web.casadi.org>), [osqp](https://osqp.org/>), [NumPy](https://numpy.org>), [SciPy](https://scipy.org>), [matplotlib](https://matplotlib.org/stable/index.html) and [dill](https://dill.readthedocs.io/en/latest/dill.html).
 
+## How to Cite
+
+If you use **nMPyC** for published work please cite the following publication
+
+```
+   @Inbook{nmpyc,
+      author="Schie{\ss}l, Jonas and Kr{\"u}gel, Lisa",
+      editor="Daniilidis, Aris and Gr{\"u}ne, Lars and Haunschmied, Josef and Tragler, Gernot",
+      title="nMPyC A Python Package for Solving Optimal Control Problems via Model Predictive Control",
+      bookTitle="Model Predictive Control: Engineering Methods for Economists",
+      year="2025",
+      publisher="Springer",
+      address="Cham",
+      pages="111--133",
+      doi="10.1007/978-3-031-85256-5_5",
+      url="https://doi.org/10.1007/978-3-031-85256-5_5"
+   }
+```
+
+Please remember to properly cite other software that you might be using too if you use (e.g. CasADi, IPOPT, ...).
+
+For any specific algorithm, also consider citing the original author's paper.
+
 ***For further informations about the Python library please visit the [nMPyC Documentation](https://nmpyc.readthedocs.io/).***
